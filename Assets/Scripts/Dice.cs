@@ -6,9 +6,10 @@ public class Dice : MonoBehaviour
     public GameObject pivot;
     public GameObject player;
 
+    private float degreesPerSecond = 90;
+
     private bool isMoving = false;
-    private float angleCount = 0;
-    private float previousAngle = 0;
+    public string moveDirection = "";
     public float speed = 0.01f;
 
     // Use this for initialization
@@ -26,14 +27,76 @@ public class Dice : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        player.transform.RotateAround(pivot.transform.position, Vector3.forward * speed * Time.deltaTime, -1);
+        if (!isMoving)
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                Move("up");
+            }
+
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                Move("down");
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                Move("left");
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                Move("right");
+            }
+        }
+
+
+
+        //transform.Rotate(Vector3.up * degreesPerSecond * Time.deltaTime);
+
+
+
+        //player.transform.RotateAround(pivot.transform.position, Vector3.forward * speed * Time.deltaTime, -1);
+
+
+
 
         //player.transform.Rotate(Vector3.forward * speed * Time.deltaTime, -1);
     }
 
-    public void Move()
+    public void Move(string direction) // Direction: up, down, left, right
     {
-        previousAngle = this.transform.rotation.eulerAngles.z;
         isMoving = true;
+
+        if (direction.Equals("up"))
+        {
+            pivot.transform.position = new Vector3(transform.position.x, 0, transform.position.z + 0.5f);
+
+            player.transform.RotateAround(pivot.transform.position, Vector3.right, 90);
+            isMoving = false;
+        }
+
+        if (direction.Equals("down"))
+        {
+            pivot.transform.position = new Vector3(transform.position.x, 0, transform.position.z - 0.5f);
+
+            player.transform.RotateAround(pivot.transform.position, Vector3.right, -90);
+            isMoving = false;
+        }
+
+        if (direction.Equals("right"))
+        {
+            pivot.transform.position = new Vector3(transform.position.x + 0.5f , 0, transform.position.z);
+
+            player.transform.RotateAround(pivot.transform.position, Vector3.forward, -90);
+            isMoving = false;
+        }
+
+        if (direction.Equals("left"))
+        {
+            pivot.transform.position = new Vector3(transform.position.x - 0.5f, 0, transform.position.z);
+
+            player.transform.RotateAround(pivot.transform.position, Vector3.forward, 90);
+            isMoving = false;
+        }
     }
 }
