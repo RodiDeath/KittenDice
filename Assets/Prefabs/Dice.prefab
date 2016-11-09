@@ -11,6 +11,21 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1000012754361472}
   m_IsPrefabParent: 1
+--- !u!1 &1000012323977748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000012654165874}
+  m_Layer: 0
+  m_Name: Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000012754361472
 GameObject:
   m_ObjectHideFlags: 0
@@ -21,7 +36,8 @@ GameObject:
   - 4: {fileID: 4000010975565632}
   - 33: {fileID: 33000011294098310}
   - 23: {fileID: 23000012136008222}
-  - 65: {fileID: 65000014025820628}
+  - 95: {fileID: 95000011201255840}
+  - 114: {fileID: 114000013106611088}
   m_Layer: 0
   m_Name: Dice
   m_TagString: Untagged
@@ -35,12 +51,26 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012754361472}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 1.422, y: 0.5, z: 3.788}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 50, y: 50, z: 50}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 4000012654165874}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &4000012654165874
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012323977748}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.01, z: -0.02926}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 4000010975565632}
   m_RootOrder: 0
 --- !u!23 &23000012136008222
 MeshRenderer:
@@ -78,15 +108,38 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012754361472}
   m_Mesh: {fileID: 4300000, guid: 909193d3d402f5e49ab928052b6aaf15, type: 3}
---- !u!65 &65000014025820628
-BoxCollider:
+--- !u!95 &95000011201255840
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012754361472}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.02, y: 0.02, z: 0.02}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114000013106611088
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012754361472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3111a12beea73844e87cd4d617e463ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pivot: {fileID: 1000012323977748}
+  player: {fileID: 0}
+  auxGameObject: {fileID: 0}
+  DegresAtATime: 5
+  moveDirection: 
+  speed: 100
+  previusPosition: {x: 0, y: 0, z: 0}

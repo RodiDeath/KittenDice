@@ -3,15 +3,21 @@ using System.Collections;
 
 public class Dice : MonoBehaviour
 {
+    //ATRIBUTOS
+    //COORDENADAS
+    public int diceCoorX;
+    public int diceCoorY;
+    public int upperFace;
+    
     public GameObject pivot;
     public GameObject player;
     public GameObject auxGameObject;
 
-    public float DegresAtATime = 5; // Speed of rotation, 90 % this must be 0
-
+    public float degresAtATime = 5; // Speed of rotation, 90 % this must be 0
     private float countDegrees = 0;
-
     private bool isMoving = false;
+
+    //DIRECCION
     public string moveDirection = "";
     public float speed = 100f;
     public Vector3 previusPosition;
@@ -20,7 +26,8 @@ public class Dice : MonoBehaviour
     void Start ()
     {
         player = this.gameObject;
-
+        diceCoorX = 0;
+        diceCoorY = 0;
 
         Debug.Log(player.name);
         Debug.Log(pivot.name);
@@ -38,8 +45,8 @@ public class Dice : MonoBehaviour
                 isMoving = true;
                 moveDirection = "up";
 
-                auxGameObject.transform.position = player.transform.position;
-                auxGameObject.transform.rotation = player.transform.rotation;
+                //auxGameObject.transform.position = player.transform.position;
+                //auxGameObject.transform.rotation = player.transform.rotation;
 
                 pivot.transform.position = new Vector3(transform.position.x, 0, transform.position.z + 0.5f);
             }
@@ -49,8 +56,8 @@ public class Dice : MonoBehaviour
                 isMoving = true;
                 moveDirection = "down";
 
-                auxGameObject.transform.position = player.transform.position;
-                auxGameObject.transform.rotation = player.transform.rotation;
+                //auxGameObject.transform.position = player.transform.position;
+                //auxGameObject.transform.rotation = player.transform.rotation;
 
                 pivot.transform.position = new Vector3(transform.position.x, 0, transform.position.z - 0.5f);
             }
@@ -60,8 +67,8 @@ public class Dice : MonoBehaviour
                 isMoving = true;
                 moveDirection = "left";
 
-                auxGameObject.transform.position = player.transform.position;
-                auxGameObject.transform.rotation = player.transform.rotation;
+                //auxGameObject.transform.position = player.transform.position;
+                //auxGameObject.transform.rotation = player.transform.rotation;
 
                 pivot.transform.position = new Vector3(transform.position.x - 0.5f, 0, transform.position.z);
             }
@@ -70,8 +77,8 @@ public class Dice : MonoBehaviour
                 isMoving = true;
                 moveDirection = "right";
 
-                auxGameObject.transform.position = player.transform.position;
-                auxGameObject.transform.rotation = player.transform.rotation;
+                //auxGameObject.transform.position = player.transform.position;
+                //auxGameObject.transform.rotation = player.transform.rotation;
 
                 pivot.transform.position = new Vector3(transform.position.x + 0.5f, 0, transform.position.z);
             }
@@ -79,7 +86,7 @@ public class Dice : MonoBehaviour
 
         if (isMoving)
         {
-            if (countDegrees < (90 / DegresAtATime))
+            if (countDegrees < (90 / degresAtATime))
             {
                 countDegrees += 1;
                 Move(moveDirection);
@@ -92,25 +99,30 @@ public class Dice : MonoBehaviour
 
                 if (moveDirection.Equals("up"))
                 {
-                    auxGameObject.transform.RotateAround(pivot.transform.position, Vector3.right, 90);
+                    //auxGameObject.transform.RotateAround(pivot.transform.position, Vector3.right, 90);
+                    diceCoorY++;
+
                 }
 
                 if (moveDirection.Equals("down"))
                 {
-                    auxGameObject.transform.RotateAround(pivot.transform.position, Vector3.right, -90);
+                    //auxGameObject.transform.RotateAround(pivot.transform.position, Vector3.right, -90);
+                    diceCoorY--;
                 }
 
                 if (moveDirection.Equals("right"))
                 {
-                    auxGameObject.transform.RotateAround(pivot.transform.position, Vector3.forward, -90);
+                    //auxGameObject.transform.RotateAround(pivot.transform.position, Vector3.forward, -90);
+                    diceCoorX++;
                 }
 
                 if (moveDirection.Equals("left"))
                 {
-                    auxGameObject.transform.RotateAround(pivot.transform.position, Vector3.forward, 90);
+                    //auxGameObject.transform.RotateAround(pivot.transform.position, Vector3.forward, 90);
+                    diceCoorX--;
                 }
-
-                player.transform.position = auxGameObject.transform.position;
+                
+                this.transform.position = new Vector3(diceCoorX,this.transform.position.y,diceCoorY);
             }
         }
 
@@ -125,22 +137,47 @@ public class Dice : MonoBehaviour
     {
         if (direction.Equals("up"))
         {
-            player.transform.RotateAround(pivot.transform.position, Vector3.right * speed * Time.deltaTime, DegresAtATime);
+            player.transform.RotateAround(pivot.transform.position, Vector3.right * speed * Time.deltaTime, degresAtATime);
         }
 
         if (direction.Equals("down"))
         {
-            player.transform.RotateAround(pivot.transform.position, Vector3.right * speed * Time.deltaTime, -DegresAtATime);
+            player.transform.RotateAround(pivot.transform.position, Vector3.right * speed * Time.deltaTime, -degresAtATime);
         }
 
         if (direction.Equals("right"))
         {
-            player.transform.RotateAround(pivot.transform.position, Vector3.forward * speed * Time.deltaTime, -DegresAtATime);
+            player.transform.RotateAround(pivot.transform.position, Vector3.forward * speed * Time.deltaTime, -degresAtATime);
         }
 
         if (direction.Equals("left"))
         {
-            player.transform.RotateAround(pivot.transform.position, Vector3.forward * speed * Time.deltaTime, DegresAtATime);
+            player.transform.RotateAround(pivot.transform.position, Vector3.forward * speed * Time.deltaTime, degresAtATime);
         }
+    }
+
+    public void SetDiceCoorX(int coorX)
+    {
+        this.diceCoorX = coorX;       
+    }
+    public int GetDiceCoorX()
+    {
+        return diceCoorX;
+    }
+    public void SetDiceCoorY(int coorY)
+    {
+        this.diceCoorY = coorY;
+    }
+    public int GetDiceCoorY()
+    {
+        return diceCoorY;
+    }
+    public void SetUpperFace(int uf)
+    {
+        this.upperFace = uf;
+    }
+    public int GetUpperFace()
+    {
+        return upperFace;
     }
 }
