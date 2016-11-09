@@ -12,6 +12,7 @@ public class Dice : MonoBehaviour
     public GameObject pivot;
     public GameObject player;
     public GameObject auxGameObject;
+    public Map map; // Reference to the map (board)
 
     public float degresAtATime = 5; // Speed of rotation, 90 % this must be 0
     private float countDegrees = 0;
@@ -29,6 +30,8 @@ public class Dice : MonoBehaviour
         diceCoorX = 0;
         diceCoorY = 0;
 
+        map = FindObjectOfType<Map>(); // Reference to the map (board)
+
         Debug.Log(player.name);
         Debug.Log(pivot.name);
 
@@ -40,47 +43,94 @@ public class Dice : MonoBehaviour
     {
         if (!isMoving)
         {
+            /************************************/
+            // TEST ONLY
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                map.PrintBoard();
+            }
+            /***********************************/
+
+
+
+
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                isMoving = true;
-                moveDirection = "up";
+                // Coordinates of the destination cell
+                int xDest = this.diceCoorX + 0;
+                int yDest = this.diceCoorY + 1;
 
-                //auxGameObject.transform.position = player.transform.position;
-                //auxGameObject.transform.rotation = player.transform.rotation;
+                if (map.IsEmpty(xDest, yDest)) // If the destination cell is empty...
+                {
+                    map.RemoveDice(this);
 
-                pivot.transform.position = new Vector3(transform.position.x, 0, transform.position.z + 0.5f);
+                    isMoving = true;
+                    moveDirection = "up";
+
+                    //auxGameObject.transform.position = player.transform.position;
+                    //auxGameObject.transform.rotation = player.transform.rotation;
+
+                    pivot.transform.position = new Vector3(transform.position.x, 0, transform.position.z + 0.5f);
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                isMoving = true;
-                moveDirection = "down";
+                // Coordinates of the destination cell
+                int xDest = this.diceCoorX + 0;
+                int yDest = this.diceCoorY - 1;
 
-                //auxGameObject.transform.position = player.transform.position;
-                //auxGameObject.transform.rotation = player.transform.rotation;
+                if (map.IsEmpty(xDest, yDest)) // If the destination cell is empty...
+                {
+                    map.RemoveDice(this);
 
-                pivot.transform.position = new Vector3(transform.position.x, 0, transform.position.z - 0.5f);
+                    isMoving = true;
+                    moveDirection = "down";
+
+                    //auxGameObject.transform.position = player.transform.position;
+                    //auxGameObject.transform.rotation = player.transform.rotation;
+
+                    pivot.transform.position = new Vector3(transform.position.x, 0, transform.position.z - 0.5f);
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                isMoving = true;
-                moveDirection = "left";
+                // Coordinates of the destination cell
+                int xDest = this.diceCoorX - 1;
+                int yDest = this.diceCoorY + 0;
 
-                //auxGameObject.transform.position = player.transform.position;
-                //auxGameObject.transform.rotation = player.transform.rotation;
+                if (map.IsEmpty(xDest, yDest)) // If the destination cell is empty...
+                {
+                    map.RemoveDice(this);
 
-                pivot.transform.position = new Vector3(transform.position.x - 0.5f, 0, transform.position.z);
+                    isMoving = true;
+                    moveDirection = "left";
+
+                    //auxGameObject.transform.position = player.transform.position;
+                    //auxGameObject.transform.rotation = player.transform.rotation;
+
+                    pivot.transform.position = new Vector3(transform.position.x - 0.5f, 0, transform.position.z);
+                }
             }
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                isMoving = true;
-                moveDirection = "right";
+                // Coordinates of the destination cell
+                int xDest = this.diceCoorX + 1;
+                int yDest = this.diceCoorY + 0;
 
-                //auxGameObject.transform.position = player.transform.position;
-                //auxGameObject.transform.rotation = player.transform.rotation;
+                if (map.IsEmpty(xDest, yDest)) // If the destination cell is empty...
+                {
+                    map.RemoveDice(this);
 
-                pivot.transform.position = new Vector3(transform.position.x + 0.5f, 0, transform.position.z);
+                    isMoving = true;
+                    moveDirection = "right";
+
+                    //auxGameObject.transform.position = player.transform.position;
+                    //auxGameObject.transform.rotation = player.transform.rotation;
+
+                    pivot.transform.position = new Vector3(transform.position.x + 0.5f, 0, transform.position.z);
+                }
             }
         }
 
@@ -95,6 +145,8 @@ public class Dice : MonoBehaviour
             {
                 countDegrees = 0;
                 isMoving = false;
+
+                
 
 
                 if (moveDirection.Equals("up"))
@@ -123,6 +175,7 @@ public class Dice : MonoBehaviour
                 }
                 
                 this.transform.position = new Vector3(diceCoorX,this.transform.position.y,diceCoorY);
+                map.AddDice(this);
             }
         }
 
