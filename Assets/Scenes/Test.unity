@@ -447,6 +447,11 @@ GameObject:
   m_PrefabParentObject: {fileID: 1000012754361472, guid: 53c01df053cdb4e4f90482d86ea82c64,
     type: 2}
   m_PrefabInternal: {fileID: 1117879408}
+--- !u!4 &1978652184 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4000010975565632, guid: 53c01df053cdb4e4f90482d86ea82c64,
+    type: 2}
+  m_PrefabInternal: {fileID: 1117879408}
 --- !u!95 &1978652185
 Animator:
   serializedVersion: 3
@@ -625,9 +630,9 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2135326626}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.463}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0.01, z: -0.02926}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 1978652184}
+  m_RootOrder: 0
