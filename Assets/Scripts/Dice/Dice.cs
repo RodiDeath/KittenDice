@@ -23,12 +23,17 @@ public class Dice : MonoBehaviour
     public float speed = 100f;
     public Vector3 previusPosition;
 
+
+    void Awake()
+    {
+        diceCoorX = 0;
+        diceCoorY = 0;
+    }
+
     // Use this for initialization
     void Start ()
     {
         player = this.gameObject;
-        diceCoorX = 0;
-        diceCoorY = 0;
 
         Debug.Log(GetInstanceID());
 
