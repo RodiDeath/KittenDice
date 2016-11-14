@@ -39,12 +39,12 @@ public class PlayerController : MonoBehaviour
                 {
                     direction += Vector3.forward;
                     moveDirection = "up";
-                    diceBehind = map.GetDice(coorX, coorY + 1);
                     isMoving = true;
-                if (map.IsEmpty(coorX, coorY+1))
-                {
-                    diceBehind.MoveUp();
-                }
+
+                    if (map.IsEmpty(coorX, coorY+1))
+                    {
+                        diceBehind.MoveUp();
+                    }
                 }
 
             }
@@ -52,36 +52,49 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKey(KeyCode.S))
             {
-                if (map.IsEmpty(coorX, coorY - 1))
+                if (!map.IsOutOfBounds(coorX, coorY - 1))
                 {
                     direction -= Vector3.forward;
                     moveDirection = "down";
                     isMoving = true;
-                    diceBehind.MoveDown();
+
+                    if (map.IsEmpty(coorX, coorY - 1))
+                    {
+                       
+                        diceBehind.MoveDown();
+                    }
                 }
             }
             else
 
             if (Input.GetKey(KeyCode.A))
             {
-                if (map.IsEmpty(coorX - 1, coorY))
+                if (!map.IsOutOfBounds(coorX - 1, coorY))
                 {
                     direction -= Vector3.right;
                     moveDirection = "left";
                     isMoving = true;
-                    diceBehind.MoveLeft();
+
+                    if (map.IsEmpty(coorX - 1, coorY))
+                    {
+                        diceBehind.MoveLeft();
+                    }
                 }
             }
             else
 
             if (Input.GetKey(KeyCode.D))
             {
-                if (map.IsEmpty(coorX + 1, coorY))
+                if (!map.IsOutOfBounds(coorX + 1, coorY))
                 {
                     direction += Vector3.right;
                     moveDirection = "right";
                     isMoving = true;
-                    diceBehind.MoveRight();
+
+                    if (map.IsEmpty(coorX + 1, coorY))
+                    {
+                        diceBehind.MoveRight();
+                    }
                 }
             }
         }
@@ -100,7 +113,7 @@ public class PlayerController : MonoBehaviour
                     transform.position += direction.normalized * playerSpeed * Time.deltaTime;
                 }
             }
-            else // End of movement
+            else // End of movement of player
             {
                 isMoving = false;
 
@@ -129,6 +142,8 @@ public class PlayerController : MonoBehaviour
                     coorX--;
                     transform.position = new Vector3(coorX, transform.position.y, transform.position.z);
                 }
+
+                diceBehind = map.GetDice(coorX, coorY);
 
                 
             }
