@@ -24,4 +24,37 @@ public class FaceDetector : MonoBehaviour {
             dice.SetUpperFace(Convert.ToInt32(this.gameObject.name));
         }
     }
+
+    public void TurnDiceTo(int face) // Upperface Must be 5
+    {
+        dice = this.transform.parent.GetComponentInParent<Dice>();
+        switch (face)
+        {
+            case 1:
+                dice.transform.Rotate(Vector3.right , -90);
+                dice.SetUpperFace(face);
+                break;
+            case 2:
+                dice.transform.Rotate(Vector3.right, 180);
+                dice.SetUpperFace(face);
+                break;
+            case 3:
+                dice.transform.Rotate(Vector3.forward, -90);
+                dice.SetUpperFace(face);
+                break;
+            case 4:
+                dice.transform.Rotate(Vector3.forward, 90);
+                dice.SetUpperFace(face);
+                break;
+            case 5:
+                dice.SetUpperFace(face);
+                break;
+            case 6:
+                dice.transform.Rotate(Vector3.right, 90);
+                dice.SetUpperFace(face);
+                break;
+
+        }
+    }
+
 }

@@ -428,6 +428,7 @@ MonoBehaviour:
   moveDirection: 
   speed: 100
   previusPosition: {x: 0, y: 0, z: 0}
+  dicePrefab: {fileID: 0}
 --- !u!135 &135000010448284178
 SphereCollider:
   m_ObjectHideFlags: 1
