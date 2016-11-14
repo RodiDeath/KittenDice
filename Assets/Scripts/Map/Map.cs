@@ -3,32 +3,32 @@ using System.Collections;
 
 public class Map : MonoBehaviour
 {
-    public int[,] grid;
+    public Dice[,] grid;
     public int boardSize = 7;
 
 
 	// Use this for initialization
 	void Start ()
     {
-        grid = new int[boardSize, boardSize];
+        grid = new Dice[boardSize, boardSize];
 
         ResetBoard();
         //FillBoard();
     }
 
-    public void FillBoard() // Finds all objects of type Dice and add them to the grid
-    {
-        ResetBoard();
+    //public void FillBoard() // Finds all objects of type Dice and add them to the grid
+    //{
+    //    ResetBoard();
 
-        Dice[] diceInTable = FindObjectsOfType<Dice>();
+    //    Dice[] diceInTable = FindObjectsOfType<Dice>();
 
-        foreach (var dice in diceInTable)
-        {
-            grid[dice.GetDiceCoorX(), dice.GetDiceCoorY()] = dice.GetUpperFace();
-        }
+    //    foreach (var dice in diceInTable)
+    //    {
+    //        grid[dice.GetDiceCoorX(), dice.GetDiceCoorY()] = dice.GetUpperFace();
+    //    }
 
-        PrintBoard();
-    }
+    //    PrintBoard();
+    //}
 
     public void PrintBoard() // Prints in Console the grid (only for debug purposes)
     {
@@ -36,7 +36,7 @@ public class Map : MonoBehaviour
         {
             for (int j = 0; j < boardSize; j++)
             {
-                Debug.Log("(" + i + "," + j + ") -> " + grid[i, j]);
+                Debug.Log("(" + i + "," + j + ") -> " + grid[i, j].GetUpperFace());
             }
         }
     }
@@ -47,21 +47,31 @@ public class Map : MonoBehaviour
         {
             for (int j = 0; j < boardSize; j++)
             {
-                grid[i, j] = 0;
+                //REVISAR
+                grid[i, j] = null;
             }
         }
     }
 
     public int GetCellValue(int x, int y) // Returns the value of an especified board cell
     {
-        return grid[x, y];
+        if (grid[x, y] == null)
+        {
+            return 0;
+        }
+        else
+        {
+            return grid[x, y].GetUpperFace();
+        }
+        
     }
 
     public bool IsEmpty(int x, int y) // Returns true if the cell's value is 0 and false if it's other value or if the coordinates are out of range
     {
         if (x < boardSize && y < boardSize && x >= 0 && y >= 0)
         {
-            if (grid[x, y] == 0) return true;
+            //REVISAR
+            if (grid[x, y] == null) return true;
             else return false;
         }
         else
@@ -69,18 +79,31 @@ public class Map : MonoBehaviour
             return false;
         }
     }
+    public bool IsOutOfBounds(int x, int y)
+    {
+        if (x < boardSize && y < boardSize && x >= 0 && y >= 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
+    }
 
     public void AddDice(Dice dice) // Adds logically a dice value to the board 
     {
         if (GetCellValue(dice.GetDiceCoorX(), dice.GetDiceCoorY()) == 0)
         {
-            grid[dice.GetDiceCoorX(), dice.GetDiceCoorY()] = dice.GetUpperFace();
+            grid[dice.GetDiceCoorX(), dice.GetDiceCoorY()] = dice;
         }
     }
 
     public void RemoveDice(Dice dice) // Removes logically a dice value from the board
     {
-        grid[dice.GetDiceCoorX(), dice.GetDiceCoorY()] = 0;
+        //REVISAR
+        grid[dice.GetDiceCoorX(), dice.GetDiceCoorY()] = null;
     }
 
     public bool IsFull()
@@ -89,12 +112,17 @@ public class Map : MonoBehaviour
         {
             for (int j = 0; j < boardSize; j++)
             {
-                if (grid[i, j] == 0) return false;
+                //REVISAR
+                if (grid[i, j] == null) return false;
             }
         }
         return true;
     }
 
+    public Dice GetDice(int x, int y)
+    {
+        return grid[x, y];
+    }
     // Update is called once per frame
     void Update ()
     {

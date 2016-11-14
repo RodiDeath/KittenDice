@@ -35,13 +35,18 @@ public class PlayerController : MonoBehaviour
             direction = new Vector3(0, 0, 0);
             if (Input.GetKey(KeyCode.W))
             {
-                if (map.IsEmpty(coorX, coorY+1))
+                if (!map.IsOutOfBounds(coorX, coorY + 1))
                 {
                     direction += Vector3.forward;
                     moveDirection = "up";
+                    diceBehind = map.GetDice(coorX, coorY + 1);
                     isMoving = true;
+                if (map.IsEmpty(coorX, coorY+1))
+                {
                     diceBehind.MoveUp();
                 }
+                }
+
             }
             else
 
