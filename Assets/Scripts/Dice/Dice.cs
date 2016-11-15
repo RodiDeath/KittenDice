@@ -117,6 +117,7 @@ public class Dice : MonoBehaviour
                 
                 this.transform.position = new Vector3(diceCoorX,this.transform.position.y,diceCoorY);
                 map.AddDice(this);
+                map.LoveMeLikeYouDo();
             }
         }
 

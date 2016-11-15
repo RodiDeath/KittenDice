@@ -48,7 +48,6 @@ public class Map : MonoBehaviour
         {
             for (int j = 0; j < boardSize; j++)
             {
-                //REVISAR
                 grid[i, j] = null;
             }
         }
@@ -71,7 +70,6 @@ public class Map : MonoBehaviour
     {
         if (x < boardSize && y < boardSize && x >= 0 && y >= 0)
         {
-            //REVISAR
             if (grid[x, y] == null) return true;
             else return false;
         }
@@ -103,7 +101,6 @@ public class Map : MonoBehaviour
 
     public void RemoveDice(Dice dice) // Removes logically a dice value from the board
     {
-        //REVISAR
         grid[dice.GetDiceCoorX(), dice.GetDiceCoorY()] = null;
     }
 
@@ -113,7 +110,6 @@ public class Map : MonoBehaviour
         {
             for (int j = 0; j < boardSize; j++)
             {
-                //REVISAR
                 if (grid[i, j] == null) return false;
             }
         }
@@ -124,9 +120,44 @@ public class Map : MonoBehaviour
     {
         return grid[x, y];
     }
-    // Update is called once per frame
-    void Update ()
+
+    public void LoveMeLikeYouDo()
     {
-	
-	}
+        for (int i = 0; i < boardSize; i++)
+        {
+            for (int j = 0; j < boardSize; j++)
+            {
+                int currentUpperFace=0;
+                int currentUpperFaceUp = 0;
+                int currentUpperFaceRight = 0;
+
+
+                if (grid[i, j] == null) currentUpperFace = 0;
+                else currentUpperFace = grid[i, j].GetUpperFace();
+
+                if (grid[i+1, j] == null) currentUpperFaceUp = 0;
+                else currentUpperFaceUp = grid[i, j].GetUpperFace();
+
+                if (IsEmpty(i, j+1)) currentUpperFaceRight = 0;
+                else currentUpperFaceRight = grid[i, j].GetUpperFace();
+                
+
+                if (currentUpperFace == currentUpperFaceUp && currentUpperFaceUp!=0 && currentUpperFace!=0)
+                {
+                    Destroy(grid[i, j].gameObject);
+                    Destroy(grid[i+1, j].gameObject);
+                    RemoveDice(grid[i, j]);
+                    RemoveDice(grid[i+1, j]);
+                }
+
+                if (currentUpperFace == currentUpperFaceRight && currentUpperFaceRight != 0 && currentUpperFace != 0)
+                {
+                    Destroy(grid[i, j].gameObject);
+                    Destroy(grid[i, j+1].gameObject);
+                    RemoveDice(grid[i, j]);
+                    RemoveDice(grid[i, j+1]);
+                }
+            }
+        }
+    }
 }
