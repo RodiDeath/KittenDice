@@ -36,7 +36,8 @@ public class Map : MonoBehaviour
         {
             for (int j = 0; j < boardSize; j++)
             {
-                Debug.Log("(" + i + "," + j + ") -> " + grid[i, j].GetUpperFace());
+                if (grid[i,j] == null) Debug.Log("(" + i + "," + j + ") -> 0");
+                else Debug.Log("(" + i + "," + j + ") -> " + grid[i, j].GetUpperFace());
             }
         }
     }
