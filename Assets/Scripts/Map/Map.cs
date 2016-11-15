@@ -132,31 +132,45 @@ public class Map : MonoBehaviour
                 int currentUpperFaceRight = 0;
 
 
+
                 if (grid[i, j] == null) currentUpperFace = 0;
                 else currentUpperFace = grid[i, j].GetUpperFace();
 
-                if (grid[i+1, j] == null) currentUpperFaceUp = 0;
-                else currentUpperFaceUp = grid[i, j].GetUpperFace();
+                if (i < boardSize-1)
+                {
+                    if (grid[i + 1, j] == null) currentUpperFaceUp = 0;
+                    else currentUpperFaceUp = grid[i + 1, j].GetUpperFace();
+                }
 
-                if (IsEmpty(i, j+1)) currentUpperFaceRight = 0;
-                else currentUpperFaceRight = grid[i, j].GetUpperFace();
-                
+                if (j < boardSize-1)
+                {
+                    if (grid[i, j + 1] == null) currentUpperFaceRight = 0;
+                    else currentUpperFaceRight = grid[i, j + 1].GetUpperFace();
+                }
+
+               // Debug.Log("i: " + i + " | j: " + j);
 
                 if (currentUpperFace == currentUpperFaceUp && currentUpperFaceUp!=0 && currentUpperFace!=0)
                 {
-                    Destroy(grid[i, j].gameObject);
-                    Destroy(grid[i+1, j].gameObject);
-                    RemoveDice(grid[i, j]);
-                    RemoveDice(grid[i+1, j]);
+                    grid[i, j].gameObject.GetComponent<Renderer>().material.color = new Color(0,0,0);
+                    grid[i+1, j].gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
+                    //Destroy(grid[i, j].gameObject);
+                    //Destroy(grid[i+1, j].gameObject);
+                    //RemoveDice(grid[i, j]);
+                    //RemoveDice(grid[i+1, j]);
                 }
 
                 if (currentUpperFace == currentUpperFaceRight && currentUpperFaceRight != 0 && currentUpperFace != 0)
                 {
-                    Destroy(grid[i, j].gameObject);
-                    Destroy(grid[i, j+1].gameObject);
-                    RemoveDice(grid[i, j]);
-                    RemoveDice(grid[i, j+1]);
+                    grid[i, j].gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
+                    grid[i, j +1].gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
+                    //Destroy(grid[i, j].gameObject);
+                    //Destroy(grid[i, j+1].gameObject);
+                    //RemoveDice(grid[i, j]);
+                    //RemoveDice(grid[i, j+1]);
                 }
+
+                
             }
         }
     }
