@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
     public Map map;
     public GameObject dicePrefab;
 
+    public Transform DicesFolder;
+
 
 
 	// Use this for initialization
@@ -30,13 +32,13 @@ public class GameManager : MonoBehaviour
     {
         int y, x;
 
-        x = Random.Range(0,7);
-        y = Random.Range(0, 7);
+        x = Random.Range(0, map.boardSize);
+        y = Random.Range(0, map.boardSize);
 
         while (!map.IsEmpty(x,y) && !map.IsFull())
         {
-            x = Random.Range(0, 7);
-            y = Random.Range(0, 7);
+            x = Random.Range(0, map.boardSize);
+            y = Random.Range(0, map.boardSize);
         }
 
         if (!map.IsFull())
@@ -46,13 +48,14 @@ public class GameManager : MonoBehaviour
             newDiceScript.SetDiceCoorX(x);
             newDiceScript.SetDiceCoorY(y);
 
-            int newUpperFace = Random.Range(1,7);
+            int newUpperFace = Random.Range(1, map.boardSize);
             newDiceScript.SetUpperFace(newUpperFace);
 
             map.AddDice(newDiceScript);
 
 
             newDice.transform.GetChild(1).transform.GetChild(0).GetComponent<FaceDetector>().TurnDiceTo(newUpperFace);
+            newDice.transform.SetParent(DicesFolder);
         }
     }
 }

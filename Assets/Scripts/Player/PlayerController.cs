@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
             }
             else // End of movement of player
             {
-                isMoving = false;
+                
 
 
 
@@ -145,7 +145,9 @@ public class PlayerController : MonoBehaviour
 
                 diceBehind = map.GetDice(coorX, coorY);
 
-                
+                isMoving = false;
+
+
             }
         }
     }
