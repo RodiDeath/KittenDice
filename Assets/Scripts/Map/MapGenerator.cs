@@ -16,7 +16,6 @@ public class MapGenerator : MonoBehaviour
     {
         map = GetComponent<Map>();
         boardSize = map.boardSize;
-        Debug.Log("Size: " + boardSize);
 
         for (int i=0; i < boardSize; i++)
         {

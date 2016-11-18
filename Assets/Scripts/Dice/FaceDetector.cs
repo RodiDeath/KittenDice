@@ -20,7 +20,10 @@ public class FaceDetector : MonoBehaviour {
     {
         if (other.tag.Equals("Map"))
         {
-            dice.SetUpperFace(Convert.ToInt32(this.gameObject.name));
+            if (dice != null)
+            {
+                dice.SetUpperFace(Convert.ToInt32(this.gameObject.name));
+            }
         }
     }
 

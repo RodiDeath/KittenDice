@@ -177,6 +177,70 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!1 &666885214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 666885216}
+  - 114: {fileID: 666885215}
+  - 114: {fileID: 666885217}
+  m_Layer: 0
+  m_Name: TestLevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &666885215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 666885214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59e4673448118b74cbf6b8a40ca64fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 1865326547}
+--- !u!4 &666885216
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 666885214}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+--- !u!114 &666885217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 666885214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3111a12beea73844e87cd4d617e463ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diceCoorX: 0
+  diceCoorY: 0
+  upperFace: 0
+  pivot: {fileID: 0}
+  player: {fileID: 0}
+  auxGameObject: {fileID: 0}
+  map: {fileID: 0}
+  degresAtATime: 5
+  moveDirection: 
+  speed: 100
+  previusPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1065582555
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +321,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010975565632, guid: 53c01df053cdb4e4f90482d86ea82c64, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -15.84
       objectReference: {fileID: 0}
     - target: {fileID: 4000010975565632, guid: 53c01df053cdb4e4f90482d86ea82c64, type: 2}
       propertyPath: m_LocalRotation.x
@@ -279,11 +343,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 95000011201255840, guid: 53c01df053cdb4e4f90482d86ea82c64,
-        type: 2}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 753da8dad948f614688cd8acd0246ff3, type: 2}
     - target: {fileID: 114000013106611088, guid: 53c01df053cdb4e4f90482d86ea82c64,
         type: 2}
       propertyPath: auxGameObject
@@ -291,31 +350,18 @@ Prefab:
       objectReference: {fileID: 2077989465}
     - target: {fileID: 114000013106611088, guid: 53c01df053cdb4e4f90482d86ea82c64,
         type: 2}
-      propertyPath: dicePrefab
-      value: 
-      objectReference: {fileID: 1000012754361472, guid: 53c01df053cdb4e4f90482d86ea82c64,
-        type: 2}
-    - target: {fileID: 4000010975565632, guid: 53c01df053cdb4e4f90482d86ea82c64, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010975565632, guid: 53c01df053cdb4e4f90482d86ea82c64, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010975565632, guid: 53c01df053cdb4e4f90482d86ea82c64, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010975565632, guid: 53c01df053cdb4e4f90482d86ea82c64, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000013106611088, guid: 53c01df053cdb4e4f90482d86ea82c64,
-        type: 2}
       propertyPath: map
       value: 
       objectReference: {fileID: 1865326547}
+    - target: {fileID: 95000011201255840, guid: 53c01df053cdb4e4f90482d86ea82c64,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 753da8dad948f614688cd8acd0246ff3, type: 2}
+    - target: {fileID: 1000012754361472, guid: 53c01df053cdb4e4f90482d86ea82c64, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 53c01df053cdb4e4f90482d86ea82c64, type: 2}
   m_IsPrefabParent: 0
@@ -349,9 +395,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c28f28f56b94534eb92476eb39fa551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 2.8
+  levelManager: {fileID: 666885215}
+  playerSpeed: 2.9
   diceBehind: {fileID: 0}
-  map: {fileID: 0}
+  map: {fileID: 1865326547}
   coorX: 0
   coorY: 0
 --- !u!23 &1171440110
@@ -566,6 +613,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardSize: 7
+  dicePrefab: {fileID: 0}
+  DicesFolder: {fileID: 0}
 --- !u!114 &1197612152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -680,6 +729,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardSize: 7
+  dicePrefab: {fileID: 1000012754361472, guid: 53c01df053cdb4e4f90482d86ea82c64, type: 2}
+  DicesFolder: {fileID: 1175647974}
 --- !u!4 &1865326548
 Transform:
   m_ObjectHideFlags: 0

@@ -22,7 +22,7 @@ GameObject:
   - 33: {fileID: 33000013833618180}
   - 23: {fileID: 23000013928874674}
   - 65: {fileID: 65000010598169176}
-  - 54: {fileID: 54000010569602708}
+  - 54: {fileID: 54000014127874840}
   m_Layer: 0
   m_Name: MapUnity
   m_TagString: Map
@@ -79,7 +79,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011613710612}
   m_Mesh: {fileID: 4300000, guid: f968b646bde80f243afa78a5dd3694fe, type: 3}
---- !u!54 &54000010569602708
+--- !u!54 &54000014127874840
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

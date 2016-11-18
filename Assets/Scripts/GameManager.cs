@@ -26,8 +26,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-
-
     private void CreateRandomDice()
     {
         int y, x;
@@ -35,7 +33,7 @@ public class GameManager : MonoBehaviour
         x = Random.Range(0, map.boardSize);
         y = Random.Range(0, map.boardSize);
 
-        while (!map.IsEmpty(x,y) && !map.IsFull())
+        while (!map.IsEmpty(x, y) && !map.IsFull())
         {
             x = Random.Range(0, map.boardSize);
             y = Random.Range(0, map.boardSize);

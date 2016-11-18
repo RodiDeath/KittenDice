@@ -35,8 +35,6 @@ public class Dice : MonoBehaviour
     {
         player = this.gameObject;
 
-        Debug.Log(GetInstanceID());
-
         map = FindObjectOfType<Map>(); // Reference to the map (board)
     }
 	
@@ -117,7 +115,7 @@ public class Dice : MonoBehaviour
                 
                 this.transform.position = new Vector3(diceCoorX,this.transform.position.y,diceCoorY);
                 map.AddDice(this);
-                map.LoveMeLikeYouDo();
+                //map.LoveMeLikeYouDo();
             }
         }
 

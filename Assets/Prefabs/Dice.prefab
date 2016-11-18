@@ -106,7 +106,7 @@ GameObject:
   - 114: {fileID: 114000013106611088}
   m_Layer: 0
   m_Name: Dice
-  m_TagString: Untagged
+  m_TagString: Dice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -168,10 +168,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012754361472}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 50, y: 50, z: 50}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_Children:
   - {fileID: 4000012654165874}
   - {fileID: 4000012425205358}
@@ -424,11 +424,10 @@ MonoBehaviour:
   player: {fileID: 0}
   auxGameObject: {fileID: 0}
   map: {fileID: 0}
-  degresAtATime: 5
+  degresAtATime: 3
   moveDirection: 
   speed: 100
   previusPosition: {x: 0, y: 0, z: 0}
-  dicePrefab: {fileID: 0}
 --- !u!135 &135000010448284178
 SphereCollider:
   m_ObjectHideFlags: 1

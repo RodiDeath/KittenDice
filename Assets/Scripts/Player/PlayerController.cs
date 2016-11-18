@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
+    public LevelManager levelManager;
     public float playerSpeed = 0.1f;
     private Vector3 direction = new Vector3(0, 0, 0);
 
@@ -19,18 +20,31 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        
         // TEST ONLY
-        diceBehind = FindObjectOfType<Dice>();
         map = FindObjectOfType<Map>();
+
+        diceBehind = map.GetDice(levelManager.GetStartPositionX(), levelManager.GetStartPositionY());
 
         coorX = diceBehind.GetDiceCoorX();
         coorY = diceBehind.GetDiceCoorY();
+        transform.position = new Vector3(coorX, transform.position.y, coorY);
     }
+
+    //public void InitializePlayer()
+    //{
+    //    map = FindObjectOfType<Map>();
+    //    diceBehind = map.GetDice(levelManager.GetStartPositionX(), levelManager.GetStartPositionY());
+
+    //    coorX = diceBehind.GetDiceCoorX();
+    //    coorY = diceBehind.GetDiceCoorY();
+    //    transform.position = new Vector3(coorX, transform.position.y, coorY);
+    //}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (!isMoving)
+        if (!isMoving && !diceBehind.GetIsMoving())
         {
             direction = new Vector3(0, 0, 0);
             if (Input.GetKey(KeyCode.W))

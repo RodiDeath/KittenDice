@@ -6,12 +6,21 @@ public class Map : MonoBehaviour
     public Dice[,] grid;
     public int boardSize = 7;
 
+    public GameObject dicePrefab;
 
-	// Use this for initialization
-	void Start ()
+    public Transform DicesFolder;
+
+
+    // Use this for initialization
+    void Start ()
+    {
+        dicePrefab = GameObject.FindWithTag("Dice");
+    }
+
+    void Awake()
     {
         grid = new Dice[boardSize, boardSize];
-
+        dicePrefab = GameObject.FindWithTag("Dice");
         ResetBoard();
         //FillBoard();
     }
@@ -42,13 +51,16 @@ public class Map : MonoBehaviour
         }
     }
 
-    private void ResetBoard() // Resets the board, all the cells to value 0
+    public void ResetBoard() // Resets the board, all the cells to value 0
     {
         for (int i = 0; i < boardSize; i++)
         {
             for (int j = 0; j < boardSize; j++)
             {
-                grid[i, j] = null;
+                if (grid[i, j] != null)
+                {
+                    grid[i, j] = null;
+                }
             }
         }
     }
@@ -96,6 +108,7 @@ public class Map : MonoBehaviour
         if (GetCellValue(dice.GetDiceCoorX(), dice.GetDiceCoorY()) == 0)
         {
             grid[dice.GetDiceCoorX(), dice.GetDiceCoorY()] = dice;
+            LoveMeLikeYouDo();
         }
     }
 
@@ -119,6 +132,22 @@ public class Map : MonoBehaviour
     public Dice GetDice(int x, int y)
     {
         return grid[x, y];
+    }
+
+    public void CreateDice(Dice dice)
+    {
+        GameObject newDice = Instantiate(dicePrefab, new Vector3(dice.GetDiceCoorX(), 0.5f, dice.GetDiceCoorY()), Quaternion.identity) as GameObject;
+        Dice newDiceScript = newDice.GetComponent<Dice>();
+        newDiceScript.SetDiceCoorX(dice.GetDiceCoorX());
+        newDiceScript.SetDiceCoorY(dice.GetDiceCoorY());
+        
+        newDiceScript.SetUpperFace(dice.GetUpperFace());
+
+        AddDice(newDiceScript);
+
+
+        newDice.transform.GetChild(1).transform.GetChild(0).GetComponent<FaceDetector>().TurnDiceTo(dice.GetUpperFace());
+        newDice.transform.SetParent(DicesFolder);
     }
 
     public void LoveMeLikeYouDo()
