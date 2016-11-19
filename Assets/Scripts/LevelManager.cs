@@ -97,7 +97,7 @@ public class LevelManager : MonoBehaviour
 
             
         }
-        map.LoveMeLikeYouDo();
+        //map.LoveMeLikeYouDo();
 
     }
 	

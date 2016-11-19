@@ -424,7 +424,7 @@ MonoBehaviour:
   player: {fileID: 0}
   auxGameObject: {fileID: 0}
   map: {fileID: 0}
-  degresAtATime: 3
+  degresAtATime: 5
   moveDirection: 
   speed: 100
   previusPosition: {x: 0, y: 0, z: 0}

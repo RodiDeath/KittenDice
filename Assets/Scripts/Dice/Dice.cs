@@ -8,6 +8,8 @@ public class Dice : MonoBehaviour
     public int diceCoorX;
     public int diceCoorY;
     public int upperFace;
+
+    public bool active;
     
     public GameObject pivot;
     public GameObject player;
@@ -119,6 +121,12 @@ public class Dice : MonoBehaviour
             }
         }
 
+    }
+
+    public void Activate()
+    {
+        active = true;
+        gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
     }
 
     #region MOVEMENT
@@ -267,4 +275,7 @@ public class Dice : MonoBehaviour
     {
         return upperFace;
     }
+
+    public bool GetActive() { return this.active; }
+    public void SetActive(bool active) { this.active = active; }
 }

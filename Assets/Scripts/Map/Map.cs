@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Map : MonoBehaviour
 {
@@ -90,6 +91,7 @@ public class Map : MonoBehaviour
             return false;
         }
     }
+
     public bool IsOutOfBounds(int x, int y)
     {
         if (x < boardSize && y < boardSize && x >= 0 && y >= 0)
@@ -108,7 +110,9 @@ public class Map : MonoBehaviour
         if (GetCellValue(dice.GetDiceCoorX(), dice.GetDiceCoorY()) == 0)
         {
             grid[dice.GetDiceCoorX(), dice.GetDiceCoorY()] = dice;
-            LoveMeLikeYouDo();
+            //LoveMeLikeYouDo();
+            DetectEquals(dice);
+
         }
     }
 
@@ -150,56 +154,136 @@ public class Map : MonoBehaviour
         newDice.transform.SetParent(DicesFolder);
     }
 
-    public void LoveMeLikeYouDo()
-    {
-        for (int i = 0; i < boardSize; i++)
-        {
-            for (int j = 0; j < boardSize; j++)
-            {
-                int currentUpperFace=0;
-                int currentUpperFaceUp = 0;
-                int currentUpperFaceRight = 0;
+    //public void LoveMeLikeYouDo()
+    //{
+    //    for (int i = 0; i < boardSize; i++)
+    //    {
+    //        for (int j = 0; j < boardSize; j++)
+    //        {
+    //            int currentUpperFace=0;
+    //            int currentUpperFaceUp = 0;
+    //            int currentUpperFaceRight = 0;
 
 
 
-                if (grid[i, j] == null) currentUpperFace = 0;
-                else currentUpperFace = grid[i, j].GetUpperFace();
+    //            if (grid[i, j] == null) currentUpperFace = 0;
+    //            else currentUpperFace = grid[i, j].GetUpperFace();
 
-                if (i < boardSize-1)
-                {
-                    if (grid[i + 1, j] == null) currentUpperFaceUp = 0;
-                    else currentUpperFaceUp = grid[i + 1, j].GetUpperFace();
-                }
+    //            if (i < boardSize-1)
+    //            {
+    //                if (grid[i + 1, j] == null) currentUpperFaceUp = 0;
+    //                else currentUpperFaceUp = grid[i + 1, j].GetUpperFace();
+    //            }
 
-                if (j < boardSize-1)
-                {
-                    if (grid[i, j + 1] == null) currentUpperFaceRight = 0;
-                    else currentUpperFaceRight = grid[i, j + 1].GetUpperFace();
-                }
+    //            if (j < boardSize-1)
+    //            {
+    //                if (grid[i, j + 1] == null) currentUpperFaceRight = 0;
+    //                else currentUpperFaceRight = grid[i, j + 1].GetUpperFace();
+    //            }
 
-               // Debug.Log("i: " + i + " | j: " + j);
+    //           // Debug.Log("i: " + i + " | j: " + j);
 
-                if (currentUpperFace == currentUpperFaceUp && currentUpperFaceUp!=0 && currentUpperFace!=0)
-                {
-                    grid[i, j].gameObject.GetComponent<Renderer>().material.color = new Color(0,0,0);
-                    grid[i+1, j].gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
-                    //Destroy(grid[i, j].gameObject);
-                    //Destroy(grid[i+1, j].gameObject);
-                    //RemoveDice(grid[i, j]);
-                    //RemoveDice(grid[i+1, j]);
-                }
+    //            if (currentUpperFace == currentUpperFaceUp && currentUpperFaceUp!=0 && currentUpperFace!=0)
+    //            {
+    //                grid[i, j].gameObject.GetComponent<Renderer>().material.color = new Color(0,0,0);
+    //                grid[i+1, j].gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
+    //                //Destroy(grid[i, j].gameObject);
+    //                //Destroy(grid[i+1, j].gameObject);
+    //                //RemoveDice(grid[i, j]);
+    //                //RemoveDice(grid[i+1, j]);
+    //            }
 
-                if (currentUpperFace == currentUpperFaceRight && currentUpperFaceRight != 0 && currentUpperFace != 0)
-                {
-                    grid[i, j].gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
-                    grid[i, j +1].gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
-                    //Destroy(grid[i, j].gameObject);
-                    //Destroy(grid[i, j+1].gameObject);
-                    //RemoveDice(grid[i, j]);
-                    //RemoveDice(grid[i, j+1]);
-                }
+    //            if (currentUpperFace == currentUpperFaceRight && currentUpperFaceRight != 0 && currentUpperFace != 0)
+    //            {
+    //                grid[i, j].gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
+    //                grid[i, j +1].gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
+    //                //Destroy(grid[i, j].gameObject);
+    //                //Destroy(grid[i, j+1].gameObject);
+    //                //RemoveDice(grid[i, j]);
+    //                //RemoveDice(grid[i, j+1]);
+    //            }
 
                 
+    //        }
+    //    }
+    //}
+
+    public void DetectEquals(Dice originDice)
+    {
+        List<Dice> diceList = new List<Dice>();
+        List<Dice> diceListAux = new List<Dice>();
+
+        diceList.Add(originDice);
+
+        for (int i = 0; i < diceList.Count; i++)
+        {
+            DetectNearEquals(diceList[i], diceList);
+        }
+
+        Debug.Log("Hay " + diceList.Count + " dados de cara " + originDice.GetUpperFace());
+
+        if (originDice.GetUpperFace() == 1 && diceList.Count >= 2)
+        {
+            foreach (var dice in diceList)
+            {
+                dice.Activate();
+            }
+        }
+        else
+        if ((diceList.Count >= originDice.GetUpperFace()) && (originDice.GetUpperFace() != 1))
+        {
+            foreach (var dice in diceList)
+            {
+                dice.Activate();
+            }
+        }
+
+        
+    }
+
+    private void DetectNearEquals(Dice originDice, List<Dice> diceList)
+    {
+        if (!IsEmpty(originDice.GetDiceCoorX() - 1, originDice.GetDiceCoorY()) &&
+                    !IsOutOfBounds(originDice.GetDiceCoorX() - 1, originDice.GetDiceCoorY())) // Check Left Cell
+        {
+            Dice letfDice = GetDice(originDice.GetDiceCoorX() - 1, originDice.GetDiceCoorY());
+
+            if (letfDice.GetUpperFace() == originDice.GetUpperFace())
+            {
+                if (!diceList.Contains(letfDice)) diceList.Add(letfDice);
+            }
+        }
+
+        if (!IsEmpty(originDice.GetDiceCoorX() + 1, originDice.GetDiceCoorY()) &&
+            !IsOutOfBounds(originDice.GetDiceCoorX() + 1, originDice.GetDiceCoorY())) // Check Right Cell
+        {
+            Dice rightDice = GetDice(originDice.GetDiceCoorX() + 1, originDice.GetDiceCoorY());
+
+            if (rightDice.GetUpperFace() == originDice.GetUpperFace())
+            {
+                if (!diceList.Contains(rightDice)) diceList.Add(rightDice);
+            }
+        }
+
+        if (!IsEmpty(originDice.GetDiceCoorX(), originDice.GetDiceCoorY() + 1) &&
+            !IsOutOfBounds(originDice.GetDiceCoorX(), originDice.GetDiceCoorY() + 1)) // Check Up Cell
+        {
+            Dice upDice = GetDice(originDice.GetDiceCoorX(), originDice.GetDiceCoorY() + 1);
+
+            if (upDice.GetUpperFace() == originDice.GetUpperFace())
+            {
+                if (!diceList.Contains(upDice)) diceList.Add(upDice);
+            }
+        }
+
+        if (!IsEmpty(originDice.GetDiceCoorX(), originDice.GetDiceCoorY() - 1) &&
+            !IsOutOfBounds(originDice.GetDiceCoorX(), originDice.GetDiceCoorY() - 1)) // Check Down Cell
+        {
+            Dice downDice = GetDice(originDice.GetDiceCoorX(), originDice.GetDiceCoorY() - 1);
+
+            if (downDice.GetUpperFace() == originDice.GetUpperFace())
+            {
+                if (!diceList.Contains(downDice)) diceList.Add(downDice);
             }
         }
     }
