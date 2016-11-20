@@ -169,7 +169,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012754361472}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: -15.84}
   m_LocalScale: {x: 50, y: 50, z: 50}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_Children:
@@ -332,7 +332,7 @@ Animator:
   m_GameObject: {fileID: 1000012754361472}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cd5a4cd475ae5db44a3998b64155ad7d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -420,6 +420,7 @@ MonoBehaviour:
   diceCoorX: 0
   diceCoorY: 0
   upperFace: 0
+  active: 0
   pivot: {fileID: 1000012323977748}
   player: {fileID: 0}
   auxGameObject: {fileID: 0}

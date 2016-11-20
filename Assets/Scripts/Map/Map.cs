@@ -220,7 +220,7 @@ public class Map : MonoBehaviour
             DetectNearEquals(diceList[i], diceList);
         }
 
-        Debug.Log("Hay " + diceList.Count + " dados de cara " + originDice.GetUpperFace());
+        //Debug.Log("Hay " + diceList.Count + " dados de cara " + originDice.GetUpperFace());
 
         if (originDice.GetUpperFace() == 1 && diceList.Count >= 2)
         {

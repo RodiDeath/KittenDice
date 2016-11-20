@@ -126,7 +126,10 @@ public class Dice : MonoBehaviour
     public void Activate()
     {
         active = true;
-        gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
+        Material redSkin = (Material) Resources.Load("Materials/UVsDiceProRed") as Material;
+        gameObject.GetComponent<Renderer>().material = redSkin;
+
+        GetComponent<Animator>().SetTrigger("Activated");
     }
 
     #region MOVEMENT
