@@ -47,11 +47,13 @@ public class GameManager : MonoBehaviour
             newDiceScript.SetDiceCoorX(x);
             newDiceScript.SetDiceCoorY(y);
 
+            int newUpperFace = Random.Range(1, 7);
             newDiceScript.SetUpperFace(newUpperFace);
 
             map.AddDice(newDiceScript);
 
 
+            newDice.transform.GetChild(1).transform.GetChild(0).GetComponent<FaceDetector>().TurnDiceTo(newUpperFace, Random.Range(1, 7));
             newDice.transform.SetParent(DicesFolder);
         }
     }
