@@ -6,8 +6,18 @@ public class LevelManager : MonoBehaviour
 {
     public Map map;
     TextAsset levelData;
+    TextAsset levelFrontFaces;
     Dice dice;
-    int startPositionX = 0, startPositionY = 0;
+
+    int startPositionX = 0, startPositionY = 0; // Start Position of the player
+    public float time = 0.0f; // Time to finish the level
+    public float timerCount = 0.0f;
+    public int movements = 0; // Movements to finish the level
+    public string levelType = ""; // puzzle, survival, ...
+    public string levelName = ""; // Name or number of the level
+
+    bool timerActivated = false;
+    
 
     // Use this for initialization
     void Start ()
@@ -19,6 +29,7 @@ public class LevelManager : MonoBehaviour
     public void LoadLevel(int lvl)
     {
         map.ResetBoard(); // Resets the map to all null
+        levelName = "Level " + lvl;
 
         string levelPath = "Levels/7x7/Level" + lvl; // Path of the txt level file
         levelData = (TextAsset)Resources.Load(levelPath, typeof(TextAsset)); // Stores the txt file in a TextAsset variable
@@ -89,10 +100,19 @@ public class LevelManager : MonoBehaviour
             i++;
             j = 0;
 
-            if (i == levelLines.Length) // Last (First after reversing) line of the txt where is stored the start position
+            if (i == levelLines.Length) // Last (First after reversing) line of the txt where is stored the leven information
             {
-                startPositionX = (int)Char.GetNumericValue(line.ToCharArray()[0]);
-                startPositionY = (int)Char.GetNumericValue(line.ToCharArray()[1]);
+                string[] levelDataString = line.Split('*');
+
+                //startPositionX = (int)Char.GetNumericValue(line.ToCharArray()[0]);
+                //startPositionY = (int)Char.GetNumericValue(line.ToCharArray()[1]);
+
+                startPositionX = Convert.ToInt32(levelDataString[0]);
+                startPositionY = Convert.ToInt32(levelDataString[1]);
+                levelType = levelDataString[2];
+                time = float.Parse(levelDataString[3]);
+                timerCount = time;
+                movements = Convert.ToInt32(levelDataString[4]);
             }
 
             
@@ -104,8 +124,15 @@ public class LevelManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-	
+        if (timerActivated)
+        {
+            timerCount -= Time.deltaTime;
+        }
 	}
+
+    public void StartTimer() { timerActivated = true; }
+    public void StopTimer() { timerActivated = false; }
+    public void ResetTimer() { timerCount = time; }
 
     public int GetStartPositionX()
     {

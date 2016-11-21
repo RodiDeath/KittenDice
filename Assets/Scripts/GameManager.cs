@@ -17,43 +17,43 @@ public class GameManager : MonoBehaviour
     }
 	
 	// Update is called once per frame
-	void Update ()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            CreateRandomDice();
-        }
+	//void Update ()
+ //   {
+ //       if (Input.GetKeyDown(KeyCode.I))
+ //       {
+ //           CreateRandomDice();
+ //       }
 
-    }
+ //   }
 
-    private void CreateRandomDice()
-    {
-        int y, x;
+ //   private void CreateRandomDice()
+ //   {
+ //       int y, x;
 
-        x = Random.Range(0, map.boardSize);
-        y = Random.Range(0, map.boardSize);
+ //       x = Random.Range(0, map.boardSize);
+ //       y = Random.Range(0, map.boardSize);
 
-        while (!map.IsEmpty(x, y) && !map.IsFull())
-        {
-            x = Random.Range(0, map.boardSize);
-            y = Random.Range(0, map.boardSize);
-        }
+ //       while (!map.IsEmpty(x, y) && !map.IsFull())
+ //       {
+ //           x = Random.Range(0, map.boardSize);
+ //           y = Random.Range(0, map.boardSize);
+ //       }
 
-        if (!map.IsFull())
-        {
-            GameObject newDice = Instantiate(dicePrefab, new Vector3(x, 0.5f, y), Quaternion.identity) as GameObject;
-            Dice newDiceScript = newDice.GetComponent<Dice>();
-            newDiceScript.SetDiceCoorX(x);
-            newDiceScript.SetDiceCoorY(y);
+ //       if (!map.IsFull())
+ //       {
+ //           GameObject newDice = Instantiate(dicePrefab, new Vector3(x, 0.5f, y), Quaternion.identity) as GameObject;
+ //           Dice newDiceScript = newDice.GetComponent<Dice>();
+ //           newDiceScript.SetDiceCoorX(x);
+ //           newDiceScript.SetDiceCoorY(y);
 
-            int newUpperFace = Random.Range(1, map.boardSize);
-            newDiceScript.SetUpperFace(newUpperFace);
+ //           int newUpperFace = Random.Range(1, map.boardSize);
+ //           newDiceScript.SetUpperFace(newUpperFace);
 
-            map.AddDice(newDiceScript);
+ //           map.AddDice(newDiceScript);
 
 
-            newDice.transform.GetChild(1).transform.GetChild(0).GetComponent<FaceDetector>().TurnDiceTo(newUpperFace);
-            newDice.transform.SetParent(DicesFolder);
-        }
-    }
+ //           newDice.transform.GetChild(1).transform.GetChild(0).GetComponent<FaceDetector>().TurnDiceTo(newUpperFace);
+ //           newDice.transform.SetParent(DicesFolder);
+ //       }
+ //   }
 }

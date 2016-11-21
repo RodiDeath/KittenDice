@@ -8,6 +8,7 @@ public class Dice : MonoBehaviour
     public int diceCoorX;
     public int diceCoorY;
     public int upperFace;
+    public int frontFace;
 
     public bool active;
     
@@ -277,6 +278,14 @@ public class Dice : MonoBehaviour
     public int GetUpperFace()
     {
         return upperFace;
+    }
+    public void SetFrontFace(int ff)
+    {
+        this.frontFace = ff;
+    }
+    public int GetFrontFace()
+    {
+        return frontFace;
     }
 
     public bool GetActive() { return this.active; }

@@ -146,11 +146,12 @@ public class Map : MonoBehaviour
         newDiceScript.SetDiceCoorY(dice.GetDiceCoorY());
         
         newDiceScript.SetUpperFace(dice.GetUpperFace());
+        newDiceScript.SetFrontFace(dice.GetFrontFace());
 
         AddDice(newDiceScript);
 
 
-        newDice.transform.GetChild(1).transform.GetChild(0).GetComponent<FaceDetector>().TurnDiceTo(dice.GetUpperFace());
+        newDice.transform.GetChild(1).transform.GetChild(0).GetComponent<FaceDetector>().TurnDiceTo(dice.GetUpperFace(), dice.GetFrontFace());
         newDice.transform.SetParent(DicesFolder);
     }
 
@@ -211,7 +212,6 @@ public class Map : MonoBehaviour
     public void DetectEquals(Dice originDice)
     {
         List<Dice> diceList = new List<Dice>();
-        List<Dice> diceListAux = new List<Dice>();
 
         diceList.Add(originDice);
 

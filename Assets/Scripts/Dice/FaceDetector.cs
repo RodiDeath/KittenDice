@@ -27,7 +27,7 @@ public class FaceDetector : MonoBehaviour {
         }
     }
 
-    public void TurnDiceTo(int face) // Upperface Must be 5
+    public void TurnDiceTo(int face, int frontFace) // Upperface Must be 5 and frontFace must be 6 on the prefab
     {
         dice = this.transform.parent.GetComponentInParent<Dice>();
         switch (face)
