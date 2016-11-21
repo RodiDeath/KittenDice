@@ -15,13 +15,13 @@ public class Map : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        dicePrefab = GameObject.FindWithTag("Dice");
+        //dicePrefab = GameObject.FindWithTag("Dice");
     }
 
     void Awake()
     {
         grid = new Dice[boardSize, boardSize];
-        dicePrefab = GameObject.FindWithTag("Dice");
+        //dicePrefab = GameObject.FindWithTag("Dice");
         ResetBoard();
         //FillBoard();
     }
@@ -227,6 +227,7 @@ public class Map : MonoBehaviour
             foreach (var dice in diceList)
             {
                 dice.Activate();
+                dice.ResetTimerExplosion();
             }
         }
         else
@@ -235,6 +236,7 @@ public class Map : MonoBehaviour
             foreach (var dice in diceList)
             {
                 dice.Activate();
+                dice.ResetTimerExplosion();
             }
         }
 

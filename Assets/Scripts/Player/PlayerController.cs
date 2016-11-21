@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private bool isMoving = false;
     private string moveDirection = "";
 
+    public bool isDead = false;
+
 
     // Use this for initialization
     void Start ()
@@ -44,124 +46,140 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (!isMoving && !diceBehind.GetIsMoving())
+        if (diceBehind == null && !isDead)
         {
-            direction = new Vector3(0, 0, 0);
-            if (Input.GetKey(KeyCode.W))
+            if (diceBehind == null)
             {
-                if (!map.IsOutOfBounds(coorX, coorY + 1))
-                {
-                    direction += Vector3.forward;
-                    moveDirection = "up";
-                    isMoving = true;
+                isDead = true;
+                GetComponent<Renderer>().material.color = Color.red;
 
-                    if (map.IsEmpty(coorX, coorY+1))
-                    {
-                        diceBehind.MoveUp();
-                    }
-                }
-
-            }
-            else
-
-            if (Input.GetKey(KeyCode.S))
-            {
-                if (!map.IsOutOfBounds(coorX, coorY - 1))
-                {
-                    direction -= Vector3.forward;
-                    moveDirection = "down";
-                    isMoving = true;
-
-                    if (map.IsEmpty(coorX, coorY - 1))
-                    {
-                       
-                        diceBehind.MoveDown();
-                    }
-                }
-            }
-            else
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                if (!map.IsOutOfBounds(coorX - 1, coorY))
-                {
-                    direction -= Vector3.right;
-                    moveDirection = "left";
-                    isMoving = true;
-
-                    if (map.IsEmpty(coorX - 1, coorY))
-                    {
-                        diceBehind.MoveLeft();
-                    }
-                }
-            }
-            else
-
-            if (Input.GetKey(KeyCode.D))
-            {
-                if (!map.IsOutOfBounds(coorX + 1, coorY))
-                {
-                    direction += Vector3.right;
-                    moveDirection = "right";
-                    isMoving = true;
-
-                    if (map.IsEmpty(coorX + 1, coorY))
-                    {
-                        diceBehind.MoveRight();
-                    }
-                }
+                levelManager.PlayerDied();
             }
         }
 
 
-        if (isMoving)
+        if (!isDead)
         {
-            if ((moveDirection.Equals("right") && transform.position.x <= coorX+1) ||
-                (moveDirection.Equals("left") && transform.position.x >= coorX - 1) ||
-                (moveDirection.Equals("up") && transform.position.z <= coorY + 1) ||
-                (moveDirection.Equals("down") && transform.position.z >= coorY - 1)
-                ) // During movement
+
+            if (!isMoving && !diceBehind.GetIsMoving())
             {
-                if (direction != Vector3.zero)
+                direction = new Vector3(0, 0, 0);
+                if (Input.GetKey(KeyCode.W))
                 {
-                    transform.position += direction.normalized * playerSpeed * Time.deltaTime;
+                    if (!map.IsOutOfBounds(coorX, coorY + 1))
+                    {
+                        direction += Vector3.forward;
+                        moveDirection = "up";
+                        isMoving = true;
+
+                        if (map.IsEmpty(coorX, coorY + 1))
+                        {
+                            diceBehind.MoveUp();
+                        }
+                    }
+
+                }
+                else
+
+                if (Input.GetKey(KeyCode.S))
+                {
+                    if (!map.IsOutOfBounds(coorX, coorY - 1))
+                    {
+                        direction -= Vector3.forward;
+                        moveDirection = "down";
+                        isMoving = true;
+
+                        if (map.IsEmpty(coorX, coorY - 1))
+                        {
+
+                            diceBehind.MoveDown();
+                        }
+                    }
+                }
+                else
+
+                if (Input.GetKey(KeyCode.A))
+                {
+                    if (!map.IsOutOfBounds(coorX - 1, coorY))
+                    {
+                        direction -= Vector3.right;
+                        moveDirection = "left";
+                        isMoving = true;
+
+                        if (map.IsEmpty(coorX - 1, coorY))
+                        {
+                            diceBehind.MoveLeft();
+                        }
+                    }
+                }
+                else
+
+                if (Input.GetKey(KeyCode.D))
+                {
+                    if (!map.IsOutOfBounds(coorX + 1, coorY))
+                    {
+                        direction += Vector3.right;
+                        moveDirection = "right";
+                        isMoving = true;
+
+                        if (map.IsEmpty(coorX + 1, coorY))
+                        {
+                            diceBehind.MoveRight();
+                        }
+                    }
                 }
             }
-            else // End of movement of player
+
+
+            if (isMoving)
             {
-                
-
-
-
-                if (moveDirection.Equals("up"))
+                if ((moveDirection.Equals("right") && transform.position.x <= coorX + 1) ||
+                    (moveDirection.Equals("left") && transform.position.x >= coorX - 1) ||
+                    (moveDirection.Equals("up") && transform.position.z <= coorY + 1) ||
+                    (moveDirection.Equals("down") && transform.position.z >= coorY - 1)
+                    ) // During movement
                 {
-                    coorY++;
-                    transform.position = new Vector3(transform.position.x, transform.position.y, coorY);
+                    if (direction != Vector3.zero)
+                    {
+                        transform.position += direction.normalized * playerSpeed * Time.deltaTime;
+                    }
                 }
-
-                if (moveDirection.Equals("down"))
+                else // End of movement of player
                 {
-                    coorY--;
-                    transform.position = new Vector3(transform.position.x, transform.position.y, coorY);
+
+
+
+
+                    if (moveDirection.Equals("up"))
+                    {
+                        coorY++;
+                        transform.position = new Vector3(transform.position.x, transform.position.y, coorY);
+                    }
+
+                    if (moveDirection.Equals("down"))
+                    {
+                        coorY--;
+                        transform.position = new Vector3(transform.position.x, transform.position.y, coorY);
+                    }
+
+                    if (moveDirection.Equals("right"))
+                    {
+                        coorX++;
+                        transform.position = new Vector3(coorX, transform.position.y, transform.position.z);
+                    }
+
+                    if (moveDirection.Equals("left"))
+                    {
+                        coorX--;
+                        transform.position = new Vector3(coorX, transform.position.y, transform.position.z);
+                    }
+
+                    diceBehind = map.GetDice(coorX, coorY);
+
+                    isMoving = false;
+
+
                 }
-
-                if (moveDirection.Equals("right"))
-                {
-                    coorX++;
-                    transform.position = new Vector3(coorX, transform.position.y, transform.position.z);
-                }
-
-                if (moveDirection.Equals("left"))
-                {
-                    coorX--;
-                    transform.position = new Vector3(coorX, transform.position.y, transform.position.z);
-                }
-
-                diceBehind = map.GetDice(coorX, coorY);
-
-                isMoving = false;
-
-
             }
         }
     }

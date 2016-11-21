@@ -11,6 +11,8 @@ public class Dice : MonoBehaviour
     public int frontFace = -1;
 
     public bool active;
+    public float timerExplosion;
+    private int animationSpeed = 0;
     
     public GameObject pivot;
     public GameObject player;
@@ -44,36 +46,16 @@ public class Dice : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (!isMoving)
+        if (active)
         {
-            /************************************/
-            // TEST ONLY
-            if (Input.GetKey(KeyCode.Space))
+            timerExplosion -= Time.deltaTime;
+
+            if (timerExplosion <= 0)
             {
-                map.PrintBoard();
+                Destroy(this.gameObject);
             }
-            /***********************************/
 
-
-
-            //if (Input.GetKey(KeyCode.UpArrow))
-            //{
-            //    MoveUp();
-            //}
-
-            //if (Input.GetKey(KeyCode.DownArrow))
-            //{
-            //    MoveDown();
-            //}
-
-            //if (Input.GetKey(KeyCode.LeftArrow))
-            //{
-            //    MoveLeft();
-            //}
-            //if (Input.GetKey(KeyCode.RightArrow))
-            //{
-            //    MoveRight();
-            //}
+            GetComponent<Animator>().speed = ((4 * animationSpeed) - timerExplosion) / 2;
         }
 
         if (isMoving)
@@ -131,6 +113,13 @@ public class Dice : MonoBehaviour
         gameObject.GetComponent<Renderer>().material = redSkin;
 
         GetComponent<Animator>().SetTrigger("Activated");
+        animationSpeed = upperFace;
+    }
+
+    public void ResetTimerExplosion()
+    {
+        timerExplosion = timerExplosion = 4 * upperFace;
+        animationSpeed = upperFace;
     }
 
     #region MOVEMENT
@@ -274,6 +263,10 @@ public class Dice : MonoBehaviour
     public void SetUpperFace(int uf)
     {
         this.upperFace = uf;
+        if (!active)
+        {
+            timerExplosion = 4 * uf;
+        }
     }
     public int GetUpperFace()
     {

@@ -240,6 +240,7 @@ MonoBehaviour:
   upperFace: 0
   frontFace: 0
   active: 0
+  timerExplosion: 0
   pivot: {fileID: 0}
   player: {fileID: 0}
   auxGameObject: {fileID: 0}
@@ -368,6 +369,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012754361472, guid: 53c01df053cdb4e4f90482d86ea82c64, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 53c01df053cdb4e4f90482d86ea82c64, type: 2}
   m_IsPrefabParent: 0
@@ -407,6 +412,7 @@ MonoBehaviour:
   map: {fileID: 1865326547}
   coorX: 0
   coorY: 0
+  isDead: 0
 --- !u!23 &1171440110
 MeshRenderer:
   m_ObjectHideFlags: 0

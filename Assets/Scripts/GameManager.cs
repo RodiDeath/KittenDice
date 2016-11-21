@@ -25,6 +25,16 @@ public class GameManager : MonoBehaviour
             CreateRandomDice();
         }
 
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    FindObjectOfType<MapGenerator>().CleanMap();
+        //}
+
+        //if (Input.GetKeyDown(KeyCode.O))
+        //{
+        //    FindObjectOfType<MapGenerator>().CreateMap();
+        //}
+
     }
 
     private void CreateRandomDice()

@@ -145,6 +145,11 @@ public class LevelManager : MonoBehaviour
         }
 	}
 
+    public void PlayerDied()
+    {
+        Debug.Log("Game Over - Lost");
+    }
+
     public void StartTimer() { timerActivated = true; }
     public void StopTimer() { timerActivated = false; }
     public void ResetTimer() { timerCount = time; }
