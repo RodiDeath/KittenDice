@@ -8,7 +8,7 @@ public class Dice : MonoBehaviour
     public int diceCoorX;
     public int diceCoorY;
     public int upperFace;
-    public int frontFace;
+    public int frontFace = -1;
 
     public bool active;
     

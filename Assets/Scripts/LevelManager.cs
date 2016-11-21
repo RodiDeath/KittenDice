@@ -33,13 +33,19 @@ public class LevelManager : MonoBehaviour
 
         string levelPath = "Levels/7x7/Level" + lvl; // Path of the txt level file
         levelData = (TextAsset)Resources.Load(levelPath, typeof(TextAsset)); // Stores the txt file in a TextAsset variable
-        
+
+        string levelPathFrontFaces = "Levels/7x7/Level" + lvl + "FrontFaces"; // Path of the txt level front faces file
+        levelFrontFaces = (TextAsset)Resources.Load(levelPathFrontFaces, typeof(TextAsset)); // Stores the txt file in a TextAsset variable
+
 
         string[] splitFile = new string[] { "\r\n", "\r", "\n" }; // Set the split parameter (\r\n -> New Line)
         string[] levelLines = levelData.text.Split(splitFile, System.StringSplitOptions.None); // Stores in a string[] all the txt lines separately (the séparation)
+        
+        string[] frontFacesLines = levelFrontFaces.text.Split(splitFile, System.StringSplitOptions.None);
 
 
         Array.Reverse(levelLines); // Inverts the array because china
+        Array.Reverse(frontFacesLines); // Inverts the array because china
 
 
         int i = 0;
@@ -84,9 +90,18 @@ public class LevelManager : MonoBehaviour
                             dice.SetUpperFace(6);
                             break;
                     }
+                    
 
                     if (dice != null)
                     {
+                        //dice.SetFrontFace(frontFacesLines[j][i]);
+                        try
+                        {
+                            dice.SetFrontFace((int)Char.GetNumericValue(frontFacesLines[i].ToCharArray()[j]));
+                        }
+                        catch { }
+                        
+
                         dice.SetDiceCoorX(j);
                         dice.SetDiceCoorY(i);
                         map.CreateDice(dice);
