@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
         
         // TEST ONLY
         map = FindObjectOfType<Map>();
+        
 
         diceBehind = map.GetDice(levelManager.GetStartPositionX(), levelManager.GetStartPositionY());
 
@@ -48,35 +49,7 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (map.AllDicesActivated())
-        {
-            if (!willWin) Debug.Log("Will win...");
-            willWin = true;
-        }
-
-        
-
-        if (diceBehind == null && !isDead)
-        {
-            if (willWin)
-            {
-                if (map.GetDiceCount() == 0 && !hasWinned)
-                {
-                    hasWinned = true;
-                    levelManager.PlayerWins();
-                }
-            }
-            else
-            if (diceBehind == null)
-            {
-                
-                isDead = true;
-                GetComponent<Renderer>().material.color = Color.red;
-
-                levelManager.PlayerDied();
-            }
-        }
-
+        CheckWinLose();
 
         if (!isDead && !hasWinned && !willWin)
         {
@@ -204,6 +177,40 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void CheckWinLose()
+    {
+        if (map.AllDicesActivated())
+        {
+            if (!willWin) Debug.Log("Will win...");
+            willWin = true;
+            levelManager.PlayerWillWin();
+        }
+
+
+
+        if (diceBehind == null && !isDead)
+        {
+            if (willWin)
+            {
+                if (map.GetDiceCount() == 0 && !hasWinned)
+                {
+                    hasWinned = true;
+                    levelManager.PlayerWins();
+                }
+            }
+            else
+            if (diceBehind == null)
+            {
+
+                isDead = true;
+                GetComponent<Renderer>().material.color = Color.red;
+
+                levelManager.PlayerDied();
+            }
+        }
+    }
+
     public void SetIsDead(bool isd) { isDead = isd; }
     public bool GetIsDead() { return isDead; }
+    public bool GetWillWin() { return willWin; }
 }

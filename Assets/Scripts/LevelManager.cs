@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System;
-
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -8,23 +8,32 @@ public class LevelManager : MonoBehaviour
     TextAsset levelData;
     TextAsset levelFrontFaces;
     Dice dice;
+    public PlayerController player;
+    private bool playerWillWin = false;
 
     int startPositionX = 0, startPositionY = 0; // Start Position of the player
     public float time = 0.0f; // Time to finish the level
     public float timerCount = 0.0f;
     public int movements = 0; // Movements to finish the level
+    int movesCount = 0;
     public string levelType = ""; // puzzle, survival, ...
     public string levelName = ""; // Name or number of the level
 
     bool timerActivated = false;
-    
+
+    // UI
+    public Text textTime;
+    public Text textMoves;
 
     // Use this for initialization
     void Start ()
     {
         dice = GetComponent<Dice>();
         LoadLevel(1);
-	}
+        textTime.text = timerCount.ToString("0");
+        textMoves.text = movements.ToString();
+        StartTimer();
+    }
 
     public void LoadLevel(int lvl)
     {
@@ -128,6 +137,7 @@ public class LevelManager : MonoBehaviour
                 time = float.Parse(levelDataString[3]);
                 timerCount = time;
                 movements = Convert.ToInt32(levelDataString[4]);
+                movesCount = movements;
             }
 
             
@@ -142,17 +152,52 @@ public class LevelManager : MonoBehaviour
         if (timerActivated)
         {
             timerCount -= Time.deltaTime;
+            textTime.text = timerCount.ToString("0");
+
+            if (timerCount <= 0)
+            {
+                player.SetIsDead(true);
+                PlayerDied();
+                ResetTimer();
+                StopTimer();
+            }
         }
 	}
+
+    public void PlayerWillWin()
+    {
+        StopTimer();
+    }
 
     public void PlayerDied()
     {
         Debug.Log("Game Over - Lost");
+        StopTimer();
     }
 
     public void PlayerWins()
     {
         Debug.Log("GameOver - Win");
+        StopTimer();
+    }
+
+    public bool PlayerMovedDice()
+    {
+        movesCount--;
+        textMoves.text = movesCount.ToString();
+        if (movesCount <= 0)
+        {
+            player.CheckWinLose();
+
+            if (!player.GetWillWin())
+            {
+                PlayerDied();
+                player.SetIsDead(true);
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public void StartTimer() { timerActivated = true; }

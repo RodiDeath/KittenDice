@@ -18,6 +18,7 @@ public class Dice : MonoBehaviour
     public GameObject player;
     public GameObject auxGameObject;
     public Map map; // Reference to the map (board)
+    public LevelManager levelManager;
 
     public float degresAtATime = 5; // Speed of rotation, 90 % this must be 0
     private float countDegrees = 0;
@@ -41,6 +42,7 @@ public class Dice : MonoBehaviour
         player = this.gameObject;
 
         map = FindObjectOfType<Map>(); // Reference to the map (board)
+        levelManager = FindObjectOfType<LevelManager>();
     }
 	
 	// Update is called once per frame
@@ -69,9 +71,9 @@ public class Dice : MonoBehaviour
             }
             else // End of movement
             {
+                
                 countDegrees = 0;
                 isMoving = false;
-
                 
 
 
@@ -102,6 +104,9 @@ public class Dice : MonoBehaviour
                 
                 this.transform.position = new Vector3(diceCoorX,this.transform.position.y,diceCoorY);
                 map.AddDice(this);
+
+
+                levelManager.PlayerMovedDice();
                 //map.LoveMeLikeYouDo();
             }
         }
