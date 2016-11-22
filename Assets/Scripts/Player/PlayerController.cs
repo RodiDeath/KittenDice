@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private string moveDirection = "";
 
     public bool isDead = false;
+    public bool hasWinned = false;
+    public bool willWin = false;
 
 
     // Use this for initialization
@@ -46,10 +48,28 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        if (map.AllDicesActivated())
+        {
+            if (!willWin) Debug.Log("Will win...");
+            willWin = true;
+        }
+
+        
+
         if (diceBehind == null && !isDead)
         {
+            if (willWin)
+            {
+                if (map.GetDiceCount() == 0 && !hasWinned)
+                {
+                    hasWinned = true;
+                    levelManager.PlayerWins();
+                }
+            }
+            else
             if (diceBehind == null)
             {
+                
                 isDead = true;
                 GetComponent<Renderer>().material.color = Color.red;
 
@@ -58,7 +78,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (!isDead)
+        if (!isDead && !hasWinned && !willWin)
         {
 
             if (!isMoving && !diceBehind.GetIsMoving())
@@ -183,4 +203,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    public void SetIsDead(bool isd) { isDead = isd; }
+    public bool GetIsDead() { return isDead; }
 }

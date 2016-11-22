@@ -11,6 +11,9 @@ public class Map : MonoBehaviour
 
     public Transform DicesFolder;
 
+    public int diceCount = 0;
+    public int diceActivatedCount = 0;
+
 
     // Use this for initialization
     void Start ()
@@ -64,6 +67,9 @@ public class Map : MonoBehaviour
                 }
             }
         }
+
+        diceCount = 0;
+        diceActivatedCount = 0;
     }
 
     public int GetCellValue(int x, int y) // Returns the value of an especified board cell
@@ -112,6 +118,7 @@ public class Map : MonoBehaviour
             grid[dice.GetDiceCoorX(), dice.GetDiceCoorY()] = dice;
             //LoveMeLikeYouDo();
             DetectEquals(dice);
+            diceCount++;
 
         }
     }
@@ -119,6 +126,7 @@ public class Map : MonoBehaviour
     public void RemoveDice(Dice dice) // Removes logically a dice value from the board
     {
         grid[dice.GetDiceCoorX(), dice.GetDiceCoorY()] = null;
+        diceCount--;
     }
 
     public bool IsFull()
@@ -288,5 +296,17 @@ public class Map : MonoBehaviour
                 if (!diceList.Contains(downDice)) diceList.Add(downDice);
             }
         }
+    }
+
+
+    public int GetDiceCount() { return diceCount; }
+    public void SetDiceCount(int count) { diceCount = count; }
+    public void DiceActivated() { diceActivatedCount++; }
+    public void DiceDestroyed() { diceActivatedCount--; }
+
+    public bool AllDicesActivated()
+    {
+        if (diceActivatedCount >= diceCount) return true;
+        else return false;
     }
 }

@@ -52,6 +52,8 @@ public class Dice : MonoBehaviour
 
             if (timerExplosion <= 0)
             {
+                map.RemoveDice(this);
+                map.DiceDestroyed();
                 Destroy(this.gameObject);
             }
 
@@ -108,17 +110,20 @@ public class Dice : MonoBehaviour
 
     public void Activate()
     {
+        if (!active) map.DiceActivated();
+
         active = true;
         Material redSkin = (Material) Resources.Load("Materials/UVsDiceProRed") as Material;
         gameObject.GetComponent<Renderer>().material = redSkin;
 
         GetComponent<Animator>().SetTrigger("Activated");
         animationSpeed = upperFace;
+        
     }
 
     public void ResetTimerExplosion()
     {
-        timerExplosion = timerExplosion = 4 * upperFace;
+        timerExplosion = 4 * upperFace;
         animationSpeed = upperFace;
     }
 

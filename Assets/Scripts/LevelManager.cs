@@ -150,6 +150,11 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Game Over - Lost");
     }
 
+    public void PlayerWins()
+    {
+        Debug.Log("GameOver - Win");
+    }
+
     public void StartTimer() { timerActivated = true; }
     public void StopTimer() { timerActivated = false; }
     public void ResetTimer() { timerCount = time; }
