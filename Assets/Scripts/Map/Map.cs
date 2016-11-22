@@ -63,6 +63,7 @@ public class Map : MonoBehaviour
             {
                 if (grid[i, j] != null)
                 {
+                    Destroy(grid[i, j].gameObject);
                     grid[i, j] = null;
                 }
             }

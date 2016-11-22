@@ -122,59 +122,60 @@ public class PlayerController : MonoBehaviour
                     }
                 }
             }
+        }
 
 
-            if (isMoving)
+        if (isMoving)
+        {
+            if ((moveDirection.Equals("right") && transform.position.x <= coorX + 1) ||
+                (moveDirection.Equals("left") && transform.position.x >= coorX - 1) ||
+                (moveDirection.Equals("up") && transform.position.z <= coorY + 1) ||
+                (moveDirection.Equals("down") && transform.position.z >= coorY - 1)
+                ) // During movement
             {
-                if ((moveDirection.Equals("right") && transform.position.x <= coorX + 1) ||
-                    (moveDirection.Equals("left") && transform.position.x >= coorX - 1) ||
-                    (moveDirection.Equals("up") && transform.position.z <= coorY + 1) ||
-                    (moveDirection.Equals("down") && transform.position.z >= coorY - 1)
-                    ) // During movement
+                if (direction != Vector3.zero)
                 {
-                    if (direction != Vector3.zero)
-                    {
-                        transform.position += direction.normalized * playerSpeed * Time.deltaTime;
-                    }
-                }
-                else // End of movement of player
-                {
-
-
-
-
-                    if (moveDirection.Equals("up"))
-                    {
-                        coorY++;
-                        transform.position = new Vector3(transform.position.x, transform.position.y, coorY);
-                    }
-
-                    if (moveDirection.Equals("down"))
-                    {
-                        coorY--;
-                        transform.position = new Vector3(transform.position.x, transform.position.y, coorY);
-                    }
-
-                    if (moveDirection.Equals("right"))
-                    {
-                        coorX++;
-                        transform.position = new Vector3(coorX, transform.position.y, transform.position.z);
-                    }
-
-                    if (moveDirection.Equals("left"))
-                    {
-                        coorX--;
-                        transform.position = new Vector3(coorX, transform.position.y, transform.position.z);
-                    }
-
-                    diceBehind = map.GetDice(coorX, coorY);
-
-                    isMoving = false;
-
-
+                    transform.position += direction.normalized * playerSpeed * Time.deltaTime;
                 }
             }
+            else // End of movement of player
+            {
+
+
+
+
+                if (moveDirection.Equals("up"))
+                {
+                    coorY++;
+                    transform.position = new Vector3(transform.position.x, transform.position.y, coorY);
+                }
+
+                if (moveDirection.Equals("down"))
+                {
+                    coorY--;
+                    transform.position = new Vector3(transform.position.x, transform.position.y, coorY);
+                }
+
+                if (moveDirection.Equals("right"))
+                {
+                    coorX++;
+                    transform.position = new Vector3(coorX, transform.position.y, transform.position.z);
+                }
+
+                if (moveDirection.Equals("left"))
+                {
+                    coorX--;
+                    transform.position = new Vector3(coorX, transform.position.y, transform.position.z);
+                }
+
+                diceBehind = map.GetDice(coorX, coorY);
+
+                isMoving = false;
+
+
+            }
         }
+        
     }
 
     public void CheckWinLose()
@@ -210,7 +211,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void MoveTo(int x, int y)
+    {
+        coorX = x;
+        coorY = y;
+
+        transform.position = new Vector3(coorX, transform.position.y, coorY);
+        diceBehind = map.GetDice(x,y);
+    }
+
     public void SetIsDead(bool isd) { isDead = isd; }
     public bool GetIsDead() { return isDead; }
     public bool GetWillWin() { return willWin; }
+    public void SetWillWin(bool ww) { willWin = ww; }
+    public void SetHasWinned(bool hw) { hasWinned = hw; }
 }

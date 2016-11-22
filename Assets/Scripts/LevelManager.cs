@@ -138,6 +138,16 @@ public class LevelManager : MonoBehaviour
                 timerCount = time;
                 movements = Convert.ToInt32(levelDataString[4]);
                 movesCount = movements;
+
+                player.MoveTo(startPositionX, startPositionY);
+                textTime.text = timerCount.ToString("0");
+                textMoves.text = movesCount.ToString();
+                player.SetIsDead(false);
+                player.SetHasWinned(false);
+                player.SetWillWin(false);
+
+                StartTimer();
+
             }
 
             
@@ -161,6 +171,12 @@ public class LevelManager : MonoBehaviour
                 ResetTimer();
                 StopTimer();
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            
+            LoadLevel(1);
         }
 	}
 
