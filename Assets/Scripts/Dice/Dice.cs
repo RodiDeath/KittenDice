@@ -74,8 +74,8 @@ public class Dice : MonoBehaviour
                 
                 countDegrees = 0;
                 isMoving = false;
-                
 
+                map.RemoveDice(this);
 
                 if (moveDirection.Equals("up"))
                 {
@@ -115,6 +115,7 @@ public class Dice : MonoBehaviour
 
     public void Activate()
     {
+        map = FindObjectOfType<Map>();
         if (!active) map.DiceActivated();
 
         active = true;
@@ -144,7 +145,7 @@ public class Dice : MonoBehaviour
 
             if (map.IsEmpty(xDest, yDest)) // If the destination cell is empty...
             {
-                map.RemoveDice(this);
+                //map.RemoveDice(this);
 
                 isMoving = true;
                 moveDirection = "right";
@@ -167,7 +168,7 @@ public class Dice : MonoBehaviour
 
             if (map.IsEmpty(xDest, yDest)) // If the destination cell is empty...
             {
-                map.RemoveDice(this);
+                //map.RemoveDice(this);
 
                 isMoving = true;
                 moveDirection = "left";
@@ -190,7 +191,7 @@ public class Dice : MonoBehaviour
 
             if (map.IsEmpty(xDest, yDest)) // If the destination cell is empty...
             {
-                map.RemoveDice(this);
+                //map.RemoveDice(this);
 
                 isMoving = true;
                 moveDirection = "down";
@@ -213,7 +214,7 @@ public class Dice : MonoBehaviour
 
             if (map.IsEmpty(xDest, yDest)) // If the destination cell is empty...
             {
-                map.RemoveDice(this);
+                //map.RemoveDice(this);
 
                 isMoving = true;
                 moveDirection = "up";

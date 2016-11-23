@@ -18,12 +18,14 @@ public class LevelManager : MonoBehaviour
     int movesCount = 0;
     public string levelType = ""; // puzzle, survival, ...
     public string levelName = ""; // Name or number of the level
+    public int levelNumber = 1;
 
     bool timerActivated = false;
 
     // UI
     public Text textTime;
     public Text textMoves;
+    public Text textLevelName;
 
     // Use this for initialization
     void Start ()
@@ -39,6 +41,9 @@ public class LevelManager : MonoBehaviour
     {
         map.ResetBoard(); // Resets the map to all null
         levelName = "Level " + lvl;
+        levelNumber = lvl;
+
+        textLevelName.text = levelName.ToString();
 
         string levelPath = "Levels/7x7/Level" + lvl; // Path of the txt level file
         levelData = (TextAsset)Resources.Load(levelPath, typeof(TextAsset)); // Stores the txt file in a TextAsset variable
@@ -155,6 +160,8 @@ public class LevelManager : MonoBehaviour
         //map.LoveMeLikeYouDo();
 
     }
+
+    
 	
 	// Update is called once per frame
 	void Update ()
@@ -173,12 +180,21 @@ public class LevelManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            
             LoadLevel(1);
         }
-	}
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            LoadNextLevel();
+        }
+    }
+
+    public void LoadNextLevel()
+    {
+        LoadLevel(levelNumber + 1);
+    }
 
     public void PlayerWillWin()
     {

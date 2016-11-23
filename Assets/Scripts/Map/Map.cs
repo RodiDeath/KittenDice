@@ -157,11 +157,13 @@ public class Map : MonoBehaviour
         newDiceScript.SetUpperFace(dice.GetUpperFace());
         newDiceScript.SetFrontFace(dice.GetFrontFace());
 
-        AddDice(newDiceScript);
+        //AddDice(newDiceScript);
 
 
         newDice.transform.GetChild(1).transform.GetChild(0).GetComponent<FaceDetector>().TurnDiceTo(dice.GetUpperFace(), dice.GetFrontFace());
         newDice.transform.SetParent(DicesFolder);
+
+        AddDice(newDiceScript);
     }
 
     //public void LoveMeLikeYouDo()
