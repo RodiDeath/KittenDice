@@ -3,22 +3,31 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-    public LevelManager levelManager;
-    public float playerSpeed = 0.1f;
+    [SerializeField]
+    private LevelManager levelManager;
+    [SerializeField]
+    private float playerSpeed = 0.1f;
     private Vector3 direction = new Vector3(0, 0, 0);
 
-    public Dice diceBehind;
-    public Map map;
+    [SerializeField]
+    private Dice diceBehind;
 
-    public int coorX, coorY;
+    [SerializeField]
+    private Map map;
+
+    [SerializeField]
+    private int coorX, coorY;
     private int destX, destY;
 
     private bool isMoving = false;
     private string moveDirection = "";
 
-    public bool isDead = false;
-    public bool hasWinned = false;
-    public bool willWin = false;
+    [SerializeField]
+    private bool isDead = false;
+    [SerializeField]
+    private bool hasWinned = false;
+    [SerializeField]
+    private bool willWin = false;
 
 
     // Use this for initialization
@@ -35,16 +44,6 @@ public class PlayerController : MonoBehaviour
         coorY = diceBehind.GetDiceCoorY();
         transform.position = new Vector3(coorX, transform.position.y, coorY);
     }
-
-    //public void InitializePlayer()
-    //{
-    //    map = FindObjectOfType<Map>();
-    //    diceBehind = map.GetDice(levelManager.GetStartPositionX(), levelManager.GetStartPositionY());
-
-    //    coorX = diceBehind.GetDiceCoorX();
-    //    coorY = diceBehind.GetDiceCoorY();
-    //    transform.position = new Vector3(coorX, transform.position.y, coorY);
-    //}
 	
 	// Update is called once per frame
 	void Update ()

@@ -4,44 +4,26 @@ using System.Collections.Generic;
 
 public class Map : MonoBehaviour
 {
-    public Dice[,] grid;
-    public int boardSize = 7;
+    private Dice[,] grid;
+    [SerializeField]
+    private int boardSize = 7;
 
-    public GameObject dicePrefab;
+    [SerializeField]
+    private GameObject dicePrefab;
 
-    public Transform DicesFolder;
+    [SerializeField]
+    private Transform DicesFolder;
 
-    public int diceCount = 0;
-    public int diceActivatedCount = 0;
-
-
-    // Use this for initialization
-    void Start ()
-    {
-        //dicePrefab = GameObject.FindWithTag("Dice");
-    }
+    [SerializeField]
+    private int diceCount = 0;
+    [SerializeField]
+    private int diceActivatedCount = 0;
 
     void Awake()
     {
         grid = new Dice[boardSize, boardSize];
-        //dicePrefab = GameObject.FindWithTag("Dice");
         ResetBoard();
-        //FillBoard();
     }
-
-    //public void FillBoard() // Finds all objects of type Dice and add them to the grid
-    //{
-    //    ResetBoard();
-
-    //    Dice[] diceInTable = FindObjectsOfType<Dice>();
-
-    //    foreach (var dice in diceInTable)
-    //    {
-    //        grid[dice.GetDiceCoorX(), dice.GetDiceCoorY()] = dice.GetUpperFace();
-    //    }
-
-    //    PrintBoard();
-    //}
 
     public void PrintBoard() // Prints in Console the grid (only for debug purposes)
     {
@@ -117,7 +99,6 @@ public class Map : MonoBehaviour
         if (GetCellValue(dice.GetDiceCoorX(), dice.GetDiceCoorY()) == 0)
         {
             grid[dice.GetDiceCoorX(), dice.GetDiceCoorY()] = dice;
-            //LoveMeLikeYouDo();
             DetectEquals(dice);
             diceCount++;
 
@@ -157,68 +138,11 @@ public class Map : MonoBehaviour
         newDiceScript.SetUpperFace(dice.GetUpperFace());
         newDiceScript.SetFrontFace(dice.GetFrontFace());
 
-        //AddDice(newDiceScript);
-
-
         newDice.transform.GetChild(1).transform.GetChild(0).GetComponent<FaceDetector>().TurnDiceTo(dice.GetUpperFace(), dice.GetFrontFace());
         newDice.transform.SetParent(DicesFolder);
 
         AddDice(newDiceScript);
     }
-
-    //public void LoveMeLikeYouDo()
-    //{
-    //    for (int i = 0; i < boardSize; i++)
-    //    {
-    //        for (int j = 0; j < boardSize; j++)
-    //        {
-    //            int currentUpperFace=0;
-    //            int currentUpperFaceUp = 0;
-    //            int currentUpperFaceRight = 0;
-
-
-
-    //            if (grid[i, j] == null) currentUpperFace = 0;
-    //            else currentUpperFace = grid[i, j].GetUpperFace();
-
-    //            if (i < boardSize-1)
-    //            {
-    //                if (grid[i + 1, j] == null) currentUpperFaceUp = 0;
-    //                else currentUpperFaceUp = grid[i + 1, j].GetUpperFace();
-    //            }
-
-    //            if (j < boardSize-1)
-    //            {
-    //                if (grid[i, j + 1] == null) currentUpperFaceRight = 0;
-    //                else currentUpperFaceRight = grid[i, j + 1].GetUpperFace();
-    //            }
-
-    //           // Debug.Log("i: " + i + " | j: " + j);
-
-    //            if (currentUpperFace == currentUpperFaceUp && currentUpperFaceUp!=0 && currentUpperFace!=0)
-    //            {
-    //                grid[i, j].gameObject.GetComponent<Renderer>().material.color = new Color(0,0,0);
-    //                grid[i+1, j].gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
-    //                //Destroy(grid[i, j].gameObject);
-    //                //Destroy(grid[i+1, j].gameObject);
-    //                //RemoveDice(grid[i, j]);
-    //                //RemoveDice(grid[i+1, j]);
-    //            }
-
-    //            if (currentUpperFace == currentUpperFaceRight && currentUpperFaceRight != 0 && currentUpperFace != 0)
-    //            {
-    //                grid[i, j].gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
-    //                grid[i, j +1].gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
-    //                //Destroy(grid[i, j].gameObject);
-    //                //Destroy(grid[i, j+1].gameObject);
-    //                //RemoveDice(grid[i, j]);
-    //                //RemoveDice(grid[i, j+1]);
-    //            }
-
-                
-    //        }
-    //    }
-    //}
 
     public void DetectEquals(Dice originDice)
     {
@@ -230,8 +154,6 @@ public class Map : MonoBehaviour
         {
             DetectNearEquals(diceList[i], diceList);
         }
-
-        //Debug.Log("Hay " + diceList.Count + " dados de cara " + originDice.GetUpperFace());
 
         if (originDice.GetUpperFace() == 1 && diceList.Count >= 2)
         {
@@ -306,6 +228,8 @@ public class Map : MonoBehaviour
     public void SetDiceCount(int count) { diceCount = count; }
     public void DiceActivated() { diceActivatedCount++; }
     public void DiceDestroyed() { diceActivatedCount--; }
+    public int GetBoardSize() { return boardSize; }
+    public void SetBoardSize(int bs) { boardSize = bs; }
 
     public bool AllDicesActivated()
     {

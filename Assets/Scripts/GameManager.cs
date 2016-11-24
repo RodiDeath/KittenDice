@@ -3,18 +3,14 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
-    public Map map;
-    public GameObject dicePrefab;
+    [SerializeField]
+    private Map map;
+    [SerializeField]
+    private GameObject dicePrefab;
 
-    public Transform DicesFolder;
+    [SerializeField]
+    private Transform DicesFolder;
 
-
-
-	// Use this for initialization
-	void Start ()
-    {
-       
-    }
 
    // Update is called once per frame
 
@@ -41,13 +37,13 @@ public class GameManager : MonoBehaviour
     {
         int y, x;
 
-        x = Random.Range(0, map.boardSize);
-        y = Random.Range(0, map.boardSize);
+        x = Random.Range(0, map.GetBoardSize());
+        y = Random.Range(0, map.GetBoardSize());
 
         while (!map.IsEmpty(x, y) && !map.IsFull())
         {
-            x = Random.Range(0, map.boardSize);
-            y = Random.Range(0, map.boardSize);
+            x = Random.Range(0, map.GetBoardSize());
+            y = Random.Range(0, map.GetBoardSize());
         }
 
         if (!map.IsFull())

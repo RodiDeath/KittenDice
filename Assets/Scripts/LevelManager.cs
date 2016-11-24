@@ -4,28 +4,41 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    public Map map;
-    TextAsset levelData;
-    TextAsset levelFrontFaces;
-    Dice dice;
-    public PlayerController player;
+    [SerializeField]
+    private Map map;
+    private TextAsset levelData;
+    private TextAsset levelFrontFaces;
+    private Dice dice;
+    [SerializeField]
+    private PlayerController player;
     private bool playerWillWin = false;
 
-    int startPositionX = 0, startPositionY = 0; // Start Position of the player
-    public float time = 0.0f; // Time to finish the level
-    public float timerCount = 0.0f;
-    public int movements = 0; // Movements to finish the level
-    int movesCount = 0;
-    public string levelType = ""; // puzzle, survival, ...
-    public string levelName = ""; // Name or number of the level
-    public int levelNumber = 1;
+    private int startPositionX = 0, startPositionY = 0; // Start Position of the player
 
-    bool timerActivated = false;
+    [SerializeField]
+    private float time = 0.0f; // Time to finish the level
+    [SerializeField]
+    private float timerCount = 0.0f;
+    [SerializeField]
+    private int movements = 0; // Movements to finish the level
+    [SerializeField]
+    private int movesCount = 0;
+    [SerializeField]
+    private string levelType = ""; // puzzle, survival, ...
+    [SerializeField]
+    private string levelName = ""; // Name or number of the level
+    [SerializeField]
+    private int levelNumber = 1;
+
+    private bool timerActivated = false;
 
     // UI
-    public Text textTime;
-    public Text textMoves;
-    public Text textLevelName;
+    [SerializeField]
+    private Text textTime;
+    [SerializeField]
+    private Text textMoves;
+    [SerializeField]
+    private Text textLevelName;
 
     // Use this for initialization
     void Start ()
@@ -70,8 +83,6 @@ public class LevelManager : MonoBehaviour
             {
                 if (i < levelLines.Length -1)
                 {
-
-                    //dice = gameObject.AddComponent<Dice>();
                     dice = GetComponent<Dice>();
 
                     switch (car)
@@ -108,7 +119,6 @@ public class LevelManager : MonoBehaviour
 
                     if (dice != null)
                     {
-                        //dice.SetFrontFace(frontFacesLines[j][i]);
                         try
                         {
                             dice.SetFrontFace((int)Char.GetNumericValue(frontFacesLines[i].ToCharArray()[j]));
@@ -120,8 +130,6 @@ public class LevelManager : MonoBehaviour
                         dice.SetDiceCoorY(i);
                         map.CreateDice(dice);
                     }
-
-                    //Destroy(gameObject.GetComponent<Dice>());
                     j++;
                 }
 
@@ -132,9 +140,6 @@ public class LevelManager : MonoBehaviour
             if (i == levelLines.Length) // Last (First after reversing) line of the txt where is stored the leven information
             {
                 string[] levelDataString = line.Split('*');
-
-                //startPositionX = (int)Char.GetNumericValue(line.ToCharArray()[0]);
-                //startPositionY = (int)Char.GetNumericValue(line.ToCharArray()[1]);
 
                 startPositionX = Convert.ToInt32(levelDataString[0]);
                 startPositionY = Convert.ToInt32(levelDataString[1]);
@@ -154,11 +159,7 @@ public class LevelManager : MonoBehaviour
                 StartTimer();
 
             }
-
-            
         }
-        //map.LoveMeLikeYouDo();
-
     }
 
     
@@ -245,4 +246,6 @@ public class LevelManager : MonoBehaviour
     {
         return startPositionY;
     }
+
+    public int GetLevelNumber() { return levelNumber; }
 }

@@ -5,29 +5,42 @@ public class Dice : MonoBehaviour
 {
     //ATRIBUTOS
     //COORDENADAS
-    public int diceCoorX;
-    public int diceCoorY;
-    public int upperFace;
-    public int frontFace = -1;
+    [SerializeField]
+    private int diceCoorX;
+    [SerializeField]
+    private int diceCoorY;
+    [SerializeField]
+    private int upperFace;
+    [SerializeField]
+    private int frontFace = -1;
 
-    public bool active;
-    public float timerExplosion;
+    [SerializeField]
+    private bool active;
+    [SerializeField]
+    private float timerExplosion;
+    [SerializeField]
     private int animationSpeed = 0;
-    
-    public GameObject pivot;
-    public GameObject player;
-    public GameObject auxGameObject;
-    public Map map; // Reference to the map (board)
-    public LevelManager levelManager;
 
-    public float degresAtATime = 5; // Speed of rotation, 90 % this must be 0
+    [SerializeField]
+    private GameObject pivot;
+    [SerializeField]
+    private GameObject player;
+    [SerializeField]
+    private GameObject auxGameObject;
+    [SerializeField]
+    private Map map; // Reference to the map (board)
+    [SerializeField]
+    private LevelManager levelManager;
+
+    [SerializeField]
+    private float degresAtATime = 5; // Speed of rotation, 90 % this must be 0
     private float countDegrees = 0;
     private bool isMoving = false;
 
     //DIRECCION
-    public string moveDirection = "";
-    public float speed = 100f;
-    public Vector3 previusPosition;
+    private string moveDirection = "";
+    private float speed = 100f;
+    private Vector3 previusPosition;
 
 
     void Awake()
@@ -79,26 +92,22 @@ public class Dice : MonoBehaviour
 
                 if (moveDirection.Equals("up"))
                 {
-                    //auxGameObject.transform.RotateAround(pivot.transform.position, Vector3.right, 90);
                     diceCoorY++;
 
                 }
 
                 if (moveDirection.Equals("down"))
                 {
-                    //auxGameObject.transform.RotateAround(pivot.transform.position, Vector3.right, -90);
                     diceCoorY--;
                 }
 
                 if (moveDirection.Equals("right"))
                 {
-                    //auxGameObject.transform.RotateAround(pivot.transform.position, Vector3.forward, -90);
                     diceCoorX++;
                 }
 
                 if (moveDirection.Equals("left"))
                 {
-                    //auxGameObject.transform.RotateAround(pivot.transform.position, Vector3.forward, 90);
                     diceCoorX--;
                 }
                 
@@ -107,7 +116,6 @@ public class Dice : MonoBehaviour
 
 
                 levelManager.PlayerMovedDice();
-                //map.LoveMeLikeYouDo();
             }
         }
 
@@ -145,13 +153,8 @@ public class Dice : MonoBehaviour
 
             if (map.IsEmpty(xDest, yDest)) // If the destination cell is empty...
             {
-                //map.RemoveDice(this);
-
                 isMoving = true;
                 moveDirection = "right";
-
-                //auxGameObject.transform.position = player.transform.position;
-                //auxGameObject.transform.rotation = player.transform.rotation;
 
                 pivot.transform.position = new Vector3(transform.position.x + 0.5f, 0, transform.position.z);
             }
@@ -168,13 +171,8 @@ public class Dice : MonoBehaviour
 
             if (map.IsEmpty(xDest, yDest)) // If the destination cell is empty...
             {
-                //map.RemoveDice(this);
-
                 isMoving = true;
                 moveDirection = "left";
-
-                //auxGameObject.transform.position = player.transform.position;
-                //auxGameObject.transform.rotation = player.transform.rotation;
 
                 pivot.transform.position = new Vector3(transform.position.x - 0.5f, 0, transform.position.z);
             }
@@ -191,13 +189,8 @@ public class Dice : MonoBehaviour
 
             if (map.IsEmpty(xDest, yDest)) // If the destination cell is empty...
             {
-                //map.RemoveDice(this);
-
                 isMoving = true;
                 moveDirection = "down";
-
-                //auxGameObject.transform.position = player.transform.position;
-                //auxGameObject.transform.rotation = player.transform.rotation;
 
                 pivot.transform.position = new Vector3(transform.position.x, 0, transform.position.z - 0.5f);
             }
@@ -214,13 +207,8 @@ public class Dice : MonoBehaviour
 
             if (map.IsEmpty(xDest, yDest)) // If the destination cell is empty...
             {
-                //map.RemoveDice(this);
-
                 isMoving = true;
                 moveDirection = "up";
-
-                //auxGameObject.transform.position = player.transform.position;
-                //auxGameObject.transform.rotation = player.transform.rotation;
 
                 pivot.transform.position = new Vector3(transform.position.x, 0, transform.position.z + 0.5f);
             }

@@ -5,11 +5,16 @@ using System.Collections;
  
 public class MapGenerator : MonoBehaviour
 {
-    public GameObject mapUnityPrefab;
-    public Transform hierarchyParent;
+    [SerializeField]
+    private GameObject mapUnityPrefab;
+    [SerializeField]
+    private Transform hierarchyParent;
 
-    Map map;
-    int boardSize;
+    [SerializeField]
+    private Map map;
+
+    [SerializeField]
+    private int boardSize;
 
 	// Use this for initialization
 	void Start ()
@@ -20,7 +25,7 @@ public class MapGenerator : MonoBehaviour
     public void CreateMap()
     {
         map = GetComponent<Map>();
-        boardSize = map.boardSize;
+        boardSize = map.GetBoardSize();
 
         for (int i = 0; i < boardSize; i++)
         {
@@ -40,9 +45,4 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update ()
-    {
-	
-	}
 }

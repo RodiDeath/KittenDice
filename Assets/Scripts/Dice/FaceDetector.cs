@@ -4,16 +4,11 @@ using System;
 
 public class FaceDetector : MonoBehaviour {
 
-    Dice dice;
+    private Dice dice;
 	// Use this for initialization
 	void Start () {
 
         dice = this.transform.parent.GetComponentInParent<Dice>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 
     void OnTriggerEnter(Collider other)
@@ -33,7 +28,6 @@ public class FaceDetector : MonoBehaviour {
         switch (face)
         {
             case 1:
-                //dice.transform.Rotate(Vector3.right , -90);
                 dice.SetUpperFace(face);
 
                 switch(frontFace)
@@ -58,7 +52,6 @@ public class FaceDetector : MonoBehaviour {
                 break;
 
             case 2:
-                //dice.transform.Rotate(Vector3.right, 180);
                 dice.SetUpperFace(face);
 
                 switch (frontFace)
@@ -83,21 +76,17 @@ public class FaceDetector : MonoBehaviour {
                 break;
 
             case 3:
-                //dice.transform.Rotate(Vector3.forward, -90);
                 dice.SetUpperFace(face);
 
                 switch (frontFace)
                 {
                     case 1:
-                        //dice.transform.Rotate(Vector3.up, 180);
                         dice.transform.eulerAngles = new Vector3(0, 180, -90);
                         break;
                     case 2:
-                       // dice.transform.Rotate(Vector3.up, -90);
                         dice.transform.eulerAngles = new Vector3(0, -90, -90);
                         break;
                     case 5:
-                        //dice.transform.Rotate(Vector3.up, 90);
                         dice.transform.eulerAngles = new Vector3(0, 90, -90);
                         break;
                     case 6:
@@ -115,11 +104,9 @@ public class FaceDetector : MonoBehaviour {
                 switch (frontFace)
                 {
                     case 1:
-                        //dice.transform.Rotate(Vector3.up, 180);
                         dice.transform.eulerAngles = new Vector3(0, 180, 90);
                         break;
                     case 2:
-                        //dice.transform.Rotate(Vector3.up, 90);
                         dice.transform.eulerAngles = new Vector3(0, 90, 90);
                         break;
                     case 5:
@@ -140,15 +127,12 @@ public class FaceDetector : MonoBehaviour {
                 switch (frontFace)
                 {
                     case 1:
-                        //dice.transform.Rotate(Vector3.up, 180);
                         dice.transform.eulerAngles = new Vector3(0, 180, 0);
                         break;
                     case 3:
-                        //dice.transform.Rotate(Vector3.up, -90);
                         dice.transform.eulerAngles = new Vector3(0, -90, 0);
                         break;
                     case 4:
-                        //dice.transform.Rotate(Vector3.up, 90);
                         dice.transform.eulerAngles = new Vector3(0, 90, 0);
                         break;
                     case 6:
@@ -161,7 +145,6 @@ public class FaceDetector : MonoBehaviour {
                 break;
 
             case 6:
-                //dice.transform.Rotate(Vector3.right, 90);
                 dice.SetUpperFace(face);
 
                 switch (frontFace)
@@ -170,15 +153,12 @@ public class FaceDetector : MonoBehaviour {
                         dice.transform.eulerAngles = new Vector3(90, 0, 0);
                         break;
                     case 3:
-                        //dice.transform.Rotate(Vector3.up, -90);
                         dice.transform.eulerAngles = new Vector3(90, -90, 0);
                         break;
                     case 4:
-                        //dice.transform.Rotate(Vector3.up, 90);
                         dice.transform.eulerAngles = new Vector3(90, 90, 0);
                         break;
                     case 5:
-                        //dice.transform.Rotate(Vector3.up, 180);
                         dice.transform.eulerAngles = new Vector3(90, 180, 0);
                         break;
                     default:
