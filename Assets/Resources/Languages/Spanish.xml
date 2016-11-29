@@ -1,0 +1,6 @@
+<Strings>
+  <string name="welcome_text">Bienvenido</string>
+  <string name="you_lose">Has Perdido</string>
+  <string name="you_win">Has Ganado</string>
+  <string name="retry">Reintentar</string>
+</Strings>
