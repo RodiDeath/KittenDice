@@ -13,9 +13,12 @@ public class DiceCameraController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
-        focusedDice.transform.rotation = playerController.GetDiceBehind().transform.rotation;
+	void Update ()
+    {
+        if (playerController.GetDiceBehind() != null)
+        {
+            focusedDice.transform.rotation = playerController.GetDiceBehind().transform.rotation;
+        }
 
     }
 }
