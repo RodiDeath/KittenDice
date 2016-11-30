@@ -19,19 +19,20 @@ public class MapGenerator : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        CreateMap();
+        //CreateMap();
     }
 
-    public void CreateMap()
+    public void CreateMap(int height, int width)
     {
+        CleanMap();
         map = GetComponent<Map>();
         boardSize = map.GetBoardSize();
 
-        for (int i = 0; i < boardSize; i++)
+        for (int i = 0; i < height; i++)
         {
-            for (int j = 0; j < boardSize; j++)
+            for (int j = 0; j < width; j++)
             {
-                GameObject newMapUnity = Instantiate(mapUnityPrefab, new Vector3(i, -0.5f, j), Quaternion.identity) as GameObject;
+                GameObject newMapUnity = Instantiate(mapUnityPrefab, new Vector3(j, -0.5f, i), Quaternion.identity) as GameObject;
                 newMapUnity.transform.SetParent(hierarchyParent);
             }
         }

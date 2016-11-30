@@ -4,9 +4,17 @@ using System.Collections.Generic;
 
 public class Map : MonoBehaviour
 {
+    [SerializeField]
+    private LevelManager levelManager;
+
     private Dice[,] grid;
     [SerializeField]
     private int boardSize = 7;
+
+    [SerializeField]
+    private int boardHeight;
+    [SerializeField]
+    private int boardWidth;
 
     [SerializeField]
     private GameObject dicePrefab;
@@ -21,15 +29,24 @@ public class Map : MonoBehaviour
 
     void Awake()
     {
-        grid = new Dice[boardSize, boardSize];
+        
+    }
+
+    public void InitializeMap(int height, int width)
+    {
         ResetBoard();
+        boardHeight = width;
+        boardWidth = height;
+
+        grid = new Dice[width, height];
+        
     }
 
     public void PrintBoard() // Prints in Console the grid (only for debug purposes)
     {
-        for (int i = 0; i < boardSize; i++)
+        for (int i = 0; i < boardHeight; i++)
         {
-            for (int j = 0; j < boardSize; j++)
+            for (int j = 0; j < boardWidth; j++)
             {
                 if (grid[i,j] == null) Debug.Log("(" + i + "," + j + ") -> 0");
                 else Debug.Log("(" + i + "," + j + ") -> " + grid[i, j].GetUpperFace());
@@ -39,10 +56,11 @@ public class Map : MonoBehaviour
 
     public void ResetBoard() // Resets the board, all the cells to value 0
     {
-        for (int i = 0; i < boardSize; i++)
+        for (int i = 0; i < boardHeight; i++)
         {
-            for (int j = 0; j < boardSize; j++)
+            for (int j = 0; j < boardWidth; j++)
             {
+                //Debug.Log("i: " + i + ", j: " + j);
                 if (grid[i, j] != null)
                 {
                     Destroy(grid[i, j].gameObject);
@@ -57,6 +75,8 @@ public class Map : MonoBehaviour
 
     public int GetCellValue(int x, int y) // Returns the value of an especified board cell
     {
+        //Debug.Log("X: " + x + ", Y: " + y);
+        
         if (grid[x, y] == null)
         {
             return 0;
@@ -70,7 +90,7 @@ public class Map : MonoBehaviour
 
     public bool IsEmpty(int x, int y) // Returns true if the cell's value is 0 and false if it's other value or if the coordinates are out of range
     {
-        if (x < boardSize && y < boardSize && x >= 0 && y >= 0)
+        if (x < boardHeight && y < boardWidth && x >= 0 && y >= 0)
         {
             if (grid[x, y] == null) return true;
             else return false;
@@ -83,7 +103,7 @@ public class Map : MonoBehaviour
 
     public bool IsOutOfBounds(int x, int y)
     {
-        if (x < boardSize && y < boardSize && x >= 0 && y >= 0)
+        if (x < boardHeight && y < boardWidth && x >= 0 && y >= 0)
         {
             return false;
         }
@@ -113,9 +133,9 @@ public class Map : MonoBehaviour
 
     public bool IsFull()
     {
-        for (int i = 0; i < boardSize; i++)
+        for (int i = 0; i < boardHeight; i++)
         {
-            for (int j = 0; j < boardSize; j++)
+            for (int j = 0; j < boardWidth; j++)
             {
                 if (grid[i, j] == null) return false;
             }

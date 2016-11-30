@@ -567,6 +567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 1865326547}
+  mapGenerator: {fileID: 1865326549}
   player: {fileID: 1171440109}
   time: 0
   timerCount: 0
@@ -1206,8 +1207,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 1865326547}
+  levelManager: {fileID: 666885215}
   dicePrefab: {fileID: 1000012754361472, guid: 53c01df053cdb4e4f90482d86ea82c64, type: 2}
   DicesFolder: {fileID: 1175647974}
+  level: 2
 --- !u!4 &1672488286
 Transform:
   m_ObjectHideFlags: 0
@@ -1277,7 +1280,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09fb4064ce38064191b889c6934d982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManager: {fileID: 666885215}
   boardSize: 7
+  boardHeight: 0
+  boardWidth: 0
   dicePrefab: {fileID: 1000012754361472, guid: 53c01df053cdb4e4f90482d86ea82c64, type: 2}
   DicesFolder: {fileID: 1175647974}
   diceCount: 0

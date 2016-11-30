@@ -6,6 +6,9 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField]
     private Map map;
+    [SerializeField]
+    private MapGenerator mapGenerator;
+
     private TextAsset levelData;
     private TextAsset levelFrontFaces;
     private Dice dice;
@@ -32,6 +35,10 @@ public class LevelManager : MonoBehaviour
 
     private bool timerActivated = false;
 
+    // Map
+    int levelHeight;
+    int levelWidth;
+
     // UI
     [SerializeField]
     private Text textTime;
@@ -44,10 +51,39 @@ public class LevelManager : MonoBehaviour
     void Start ()
     {
         dice = GetComponent<Dice>();
-        LoadLevel(1);
+        //LoadLevel(1);
         textTime.text = timerCount.ToString("0");
         textMoves.text = movements.ToString();
         StartTimer();
+    }
+
+    public void CalculateMapSize(int lvl)
+    {
+        levelName = "Level " + lvl;
+        levelNumber = lvl;
+
+        textLevelName.text = levelName.ToString();
+
+        string levelPath = "Levels/7x7/Level" + lvl; // Path of the txt level file
+        levelData = (TextAsset)Resources.Load(levelPath, typeof(TextAsset)); // Stores the txt file in a TextAsset variable
+
+        string levelPathFrontFaces = "Levels/7x7/Level" + lvl + "FrontFaces"; // Path of the txt level front faces file
+        levelFrontFaces = (TextAsset)Resources.Load(levelPathFrontFaces, typeof(TextAsset)); // Stores the txt file in a TextAsset variable
+
+
+        string[] splitFile = new string[] { "\r\n", "\r", "\n" }; // Set the split parameter (\r\n -> New Line)
+        string[] levelLines = levelData.text.Split(splitFile, System.StringSplitOptions.None); // Stores in a string[] all the txt lines separately (the séparation)
+
+        string[] frontFacesLines = levelFrontFaces.text.Split(splitFile, System.StringSplitOptions.None);
+
+
+        Array.Reverse(levelLines); // Inverts the array because china
+        Array.Reverse(frontFacesLines); // Inverts the array because china
+
+        levelHeight = levelLines.Length - 1;
+        levelWidth = levelLines[1].Length;
+
+
     }
 
     public void LoadLevel(int lvl)
@@ -73,6 +109,11 @@ public class LevelManager : MonoBehaviour
 
         Array.Reverse(levelLines); // Inverts the array because china
         Array.Reverse(frontFacesLines); // Inverts the array because china
+
+        levelHeight = levelLines.Length - 1;
+        levelWidth = levelLines[1].Length;
+
+        mapGenerator.CreateMap(levelHeight, levelWidth); // Creates the map (ground)
 
 
         int i = 0;
@@ -181,15 +222,7 @@ public class LevelManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            LoadLevel(1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            LoadNextLevel();
-        }
+        
     }
 
     public void LoadNextLevel()
@@ -248,4 +281,7 @@ public class LevelManager : MonoBehaviour
     }
 
     public int GetLevelNumber() { return levelNumber; }
+
+    public int GetBoardHeight() { return levelHeight;}
+    public int GetBoardWidth() { return levelWidth; }
 }
