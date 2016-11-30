@@ -219,6 +219,11 @@ public class PlayerController : MonoBehaviour
         diceBehind = map.GetDice(x,y);
     }
 
+    public Dice GetDiceBehind()
+    {
+        return diceBehind;
+    }
+
     public void SetIsDead(bool isd) { isDead = isd; }
     public bool GetIsDead() { return isDead; }
     public bool GetWillWin() { return willWin; }
