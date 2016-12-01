@@ -39,7 +39,7 @@ public class Dice : MonoBehaviour
 
     //DIRECCION
     private string moveDirection = "";
-    private float speed = 100f;
+    public float speed = 100f;
     private Vector3 previusPosition;
 
 
@@ -52,7 +52,7 @@ public class Dice : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        degresAtATime = 5;
+        //degresAtATime = 5;
         player = this.gameObject;
 
         map = FindObjectOfType<Map>(); // Reference to the map (board)
@@ -62,7 +62,7 @@ public class Dice : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        degresAtATime = 5;
+        //degresAtATime = 5;
         if (active)
         {
             timerExplosion -= Time.deltaTime;
@@ -217,26 +217,27 @@ public class Dice : MonoBehaviour
         }
     }
 
-    private void Move(string direction) // Direction: up, down, left, right
+    private void Move(string direction) // Direction: up, down, left, right 
     {
+        // REVISAR
         if (direction.Equals("up"))
         {
-            player.transform.RotateAround(pivot.transform.position, Vector3.right * speed * Time.deltaTime, degresAtATime);
+            player.transform.RotateAround(pivot.transform.position, Vector3.right, degresAtATime * speed * Time.deltaTime);
         }
 
         if (direction.Equals("down"))
         {
-            player.transform.RotateAround(pivot.transform.position, Vector3.right * speed * Time.deltaTime, -degresAtATime);
+            player.transform.RotateAround(pivot.transform.position, Vector3.right, -degresAtATime * speed * Time.deltaTime);
         }
 
         if (direction.Equals("right"))
         {
-            player.transform.RotateAround(pivot.transform.position, Vector3.forward * speed * Time.deltaTime, -degresAtATime);
+            player.transform.RotateAround(pivot.transform.position, Vector3.forward, -degresAtATime * speed * Time.deltaTime);
         }
 
         if (direction.Equals("left"))
         {
-            player.transform.RotateAround(pivot.transform.position, Vector3.forward * speed * Time.deltaTime, degresAtATime);
+            player.transform.RotateAround(pivot.transform.position, Vector3.forward, degresAtATime * speed * Time.deltaTime);
         }
     }
 
