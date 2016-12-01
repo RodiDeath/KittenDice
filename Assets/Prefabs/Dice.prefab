@@ -422,14 +422,14 @@ MonoBehaviour:
   upperFace: 0
   frontFace: 0
   active: 0
+  timerExplosion: 0
+  animationSpeed: 0
   pivot: {fileID: 1000012323977748}
   player: {fileID: 0}
   auxGameObject: {fileID: 0}
   map: {fileID: 0}
+  levelManager: {fileID: 0}
   degresAtATime: 5
-  moveDirection: 
-  speed: 100
-  previusPosition: {x: 0, y: 0, z: 0}
 --- !u!135 &135000010448284178
 SphereCollider:
   m_ObjectHideFlags: 1

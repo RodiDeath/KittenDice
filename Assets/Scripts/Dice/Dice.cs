@@ -52,6 +52,7 @@ public class Dice : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        degresAtATime = 5;
         player = this.gameObject;
 
         map = FindObjectOfType<Map>(); // Reference to the map (board)
@@ -61,6 +62,7 @@ public class Dice : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        degresAtATime = 5;
         if (active)
         {
             timerExplosion -= Time.deltaTime;

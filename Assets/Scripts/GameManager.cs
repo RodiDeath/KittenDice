@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     int level;
 
+    [SerializeField]
+    private GameObject pausePanel;
+
 
     void Awake()
     {
@@ -27,6 +31,11 @@ public class GameManager : MonoBehaviour
 
         levelManager.LoadLevel(level);
 
+    }
+
+    void Start()
+    {
+        pausePanel.SetActive(false);
     }
 
    // Update is called once per frame
@@ -97,5 +106,26 @@ public class GameManager : MonoBehaviour
             newDice.transform.GetChild(1).transform.GetChild(0).GetComponent<FaceDetector>().TurnDiceTo(newUpperFace, Random.Range(1, 7));
             newDice.transform.SetParent(DicesFolder);
         }
+    }
+    public void Pause()
+    {
+        pausePanel.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void Continue()
+    {
+        pausePanel.SetActive(false);
+        Time.timeScale = 1;
+    }
+    public void Restart()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Game");
+    }
+    public void Exit()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenu");
     }
 }

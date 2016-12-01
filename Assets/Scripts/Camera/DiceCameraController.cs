@@ -5,7 +5,7 @@ public class DiceCameraController : MonoBehaviour {
     [SerializeField]
     private PlayerController playerController;
     [SerializeField]
-    private Dice focusedDice;
+    private Transform focusedDice;
     
 	// Use this for initialization
 	void Start () {
