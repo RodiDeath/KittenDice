@@ -322,7 +322,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012754361472}
-  m_Mesh: {fileID: 4300000, guid: 909193d3d402f5e49ab928052b6aaf15, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 7c8f84534ce579146874ff49eedc15c0, type: 3}
 --- !u!95 &95000011201255840
 Animator:
   serializedVersion: 3
@@ -429,7 +429,7 @@ MonoBehaviour:
   auxGameObject: {fileID: 0}
   map: {fileID: 0}
   levelManager: {fileID: 0}
-  degresAtATime: 5
+  degresAtATime: 6
 --- !u!135 &135000010448284178
 SphereCollider:
   m_ObjectHideFlags: 1

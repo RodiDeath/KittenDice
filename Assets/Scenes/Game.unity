@@ -1730,7 +1730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 666885215}
-  playerSpeed: 2.9
+  playerSpeed: 3
   diceBehind: {fileID: 0}
   map: {fileID: 1865326547}
   coorX: 0
