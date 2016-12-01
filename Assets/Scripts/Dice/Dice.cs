@@ -39,7 +39,7 @@ public class Dice : MonoBehaviour
 
     //DIRECCION
     private string moveDirection = "";
-    public float speed = 100f;
+    private float speed = 100f;
     private Vector3 previusPosition;
 
 
@@ -60,7 +60,7 @@ public class Dice : MonoBehaviour
     }
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
     {
         //degresAtATime = 5;
         if (active)
@@ -222,22 +222,22 @@ public class Dice : MonoBehaviour
         // REVISAR
         if (direction.Equals("up"))
         {
-            player.transform.RotateAround(pivot.transform.position, Vector3.right, degresAtATime * speed * Time.deltaTime);
+            player.transform.RotateAround(pivot.transform.position, Vector3.right, degresAtATime);
         }
 
         if (direction.Equals("down"))
         {
-            player.transform.RotateAround(pivot.transform.position, Vector3.right, -degresAtATime * speed * Time.deltaTime);
+            player.transform.RotateAround(pivot.transform.position, Vector3.right, -degresAtATime);
         }
 
         if (direction.Equals("right"))
         {
-            player.transform.RotateAround(pivot.transform.position, Vector3.forward, -degresAtATime * speed * Time.deltaTime);
+            player.transform.RotateAround(pivot.transform.position, Vector3.forward, -degresAtATime);
         }
 
         if (direction.Equals("left"))
         {
-            player.transform.RotateAround(pivot.transform.position, Vector3.forward, degresAtATime * speed * Time.deltaTime);
+            player.transform.RotateAround(pivot.transform.position, Vector3.forward, degresAtATime);
         }
     }
 
