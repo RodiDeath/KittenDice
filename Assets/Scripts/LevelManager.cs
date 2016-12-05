@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using System.IO;
 
 public class LevelManager : MonoBehaviour
 {
@@ -32,6 +34,12 @@ public class LevelManager : MonoBehaviour
     private string levelName = ""; // Name or number of the level
     [SerializeField]
     private int levelNumber = 1;
+    [SerializeField]
+    private int worldNumber = 1;
+    [SerializeField]
+    private int worldCount;
+    [SerializeField]
+    private int levelCount;
 
     private bool timerActivated = false;
 
@@ -55,19 +63,38 @@ public class LevelManager : MonoBehaviour
         textTime.text = timerCount.ToString("0");
         textMoves.text = movements.ToString();
         StartTimer();
+
+        GetAllLevelStrings(1);
     }
 
-    public void CalculateMapSize(int lvl)
+    public static List<string> GetAllLevelStrings(int world)
+    {
+        List<string> levelsList = new List<string>();
+
+        string [] allLevelsFiles = Directory.GetFiles(Application.dataPath + "/resources/Levels/World" + world);
+
+        foreach (var file in allLevelsFiles)
+        {
+            if (!file.Contains(".meta") && !file.Contains("FrontFaces"))
+            {
+                levelsList.Add(file.Split('\\')[file.Split('\\').Length-1].Split('.')[0]);
+            }
+        }
+
+        return levelsList;
+    }
+
+    public void CalculateMapSize(int world, int lvl)
     {
         levelName = "Level " + lvl;
         levelNumber = lvl;
 
         textLevelName.text = levelName.ToString();
 
-        string levelPath = "Levels/7x7/Level" + lvl; // Path of the txt level file
+        string levelPath = "Levels/World"+ world+"/Level" + lvl; // Path of the txt level file
         levelData = (TextAsset)Resources.Load(levelPath, typeof(TextAsset)); // Stores the txt file in a TextAsset variable
 
-        string levelPathFrontFaces = "Levels/7x7/Level" + lvl + "FrontFaces"; // Path of the txt level front faces file
+        string levelPathFrontFaces = "Levels/World" + world + "/Level" + lvl + "FrontFaces"; // Path of the txt level front faces file
         levelFrontFaces = (TextAsset)Resources.Load(levelPathFrontFaces, typeof(TextAsset)); // Stores the txt file in a TextAsset variable
 
 
@@ -86,7 +113,7 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    public void LoadLevel(int lvl)
+    public void LoadLevel(int world, int lvl)
     {
         map.ResetBoard(); // Resets the map to all null
         levelName = "Level " + lvl;
@@ -94,10 +121,10 @@ public class LevelManager : MonoBehaviour
 
         textLevelName.text = levelName.ToString();
 
-        string levelPath = "Levels/7x7/Level" + lvl; // Path of the txt level file
+        string levelPath = "Levels/World" + world + "/Level" + lvl; // Path of the txt level file
         levelData = (TextAsset)Resources.Load(levelPath, typeof(TextAsset)); // Stores the txt file in a TextAsset variable
 
-        string levelPathFrontFaces = "Levels/7x7/Level" + lvl + "FrontFaces"; // Path of the txt level front faces file
+        string levelPathFrontFaces = "Levels/World" + world + "/Level" + lvl + "FrontFaces"; // Path of the txt level front faces file
         levelFrontFaces = (TextAsset)Resources.Load(levelPathFrontFaces, typeof(TextAsset)); // Stores the txt file in a TextAsset variable
 
 
@@ -227,7 +254,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        LoadLevel(levelNumber + 1);
+        LoadLevel(worldNumber, levelNumber + 1);
     }
 
     public void PlayerWillWin()

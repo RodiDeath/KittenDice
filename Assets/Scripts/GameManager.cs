@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     int level;
+    [SerializeField]
+    int world;
 
     [SerializeField]
     private GameObject pausePanel;
@@ -26,10 +28,10 @@ public class GameManager : MonoBehaviour
     {
         if (level == 0) level = 1;
         // Get the starting level and then:
-        levelManager.CalculateMapSize(level);
+        levelManager.CalculateMapSize(world, level);
         map.InitializeMap(levelManager.GetBoardHeight(), levelManager.GetBoardWidth());
 
-        levelManager.LoadLevel(level);
+        levelManager.LoadLevel(world,level);
 
     }
 
@@ -49,12 +51,12 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            LoadLevel(1);
+            LoadLevel(1, 1);
         }
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            LoadLevel(2);
+            LoadLevel(1, 2);
         }
 
         //if (Input.GetKeyDown(KeyCode.P))
@@ -69,12 +71,12 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void LoadLevel(int lvl)
+    private void LoadLevel(int world, int lvl)
     {
-        levelManager.CalculateMapSize(lvl);
+        levelManager.CalculateMapSize(world, lvl);
         map.InitializeMap(levelManager.GetBoardHeight(), levelManager.GetBoardWidth());
 
-        levelManager.LoadLevel(lvl);
+        levelManager.LoadLevel(world, lvl);
     }
 
     private void CreateRandomDice()

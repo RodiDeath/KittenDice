@@ -1094,6 +1094,9 @@ MonoBehaviour:
   levelType: 
   levelName: 
   levelNumber: 1
+  worldNumber: 1
+  worldCount: 0
+  levelCount: 0
   textTime: {fileID: 1927035625}
   textMoves: {fileID: 34781762}
   textLevelName: {fileID: 722740873}
@@ -2688,7 +2691,8 @@ MonoBehaviour:
   levelManager: {fileID: 666885215}
   dicePrefab: {fileID: 1000012754361472, guid: 53c01df053cdb4e4f90482d86ea82c64, type: 2}
   DicesFolder: {fileID: 1175647974}
-  level: 0
+  level: 1
+  world: 1
   pausePanel: {fileID: 707936505}
 --- !u!4 &1672488286
 Transform:
