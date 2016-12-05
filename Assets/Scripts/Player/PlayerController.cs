@@ -29,11 +29,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private bool willWin = false;
 
+    //Android
+    [SerializeField]
+    private float minSwipeDistY;
+    [SerializeField]
+    private float minSwipeDistX;
+    private Vector2 startPos;
+
 
     // Use this for initialization
     void Start ()
     {
-        
         // TEST ONLY
         map = FindObjectOfType<Map>();
         
@@ -44,15 +50,74 @@ public class PlayerController : MonoBehaviour
         coorY = diceBehind.GetDiceCoorY();
         transform.position = new Vector3(coorX, transform.position.y, coorY);
     }
-	
-	// Update is called once per frame
-	void FixedUpdate ()
+
+    void CheckAndroidInput()
     {
         CheckWinLose();
 
         if (!isDead && !hasWinned && !willWin)
         {
+            if (!isMoving && !diceBehind.GetIsMoving())
+            {
 
+                if (Input.touchCount > 0)
+                {
+                    Touch touch = Input.touches[0];
+
+                    switch (touch.phase)
+                    {
+                        case TouchPhase.Began:
+
+                            startPos = touch.position;
+
+                            break;
+
+                        case TouchPhase.Ended:
+
+                            float swipeDistVertical = (new Vector3(0, touch.position.y, 0) - new Vector3(0, startPos.y, 0)).magnitude;
+
+                            if (swipeDistVertical > minSwipeDistY)
+                            {
+                                float swipeValue = Mathf.Sign(touch.position.y - startPos.y);
+
+                                if (swipeValue > 0)
+                                {
+                                    MoveUp();
+                                }
+                                else if (swipeValue < 0)
+                                {
+                                    MoveDown();
+                                }
+                            }
+                            float swipeDistHorizontal = (new Vector3(touch.position.x, 0, 0) - new Vector3(startPos.x, 0, 0)).magnitude;
+
+                            if (swipeDistHorizontal > minSwipeDistX)
+                            {
+                                float swipeValue = Mathf.Sign(touch.position.x - startPos.x);
+
+                                if (swipeValue > 0)
+                                {
+                                    MoveRight();
+                                }
+                                else if (swipeValue < 0)
+                                {
+                                    MoveLeft();
+                                }
+                            }
+                            break;
+                    }
+                }
+            }
+        }
+    }
+	
+	// Update is called once per frame
+	void FixedUpdate ()
+    {
+        CheckAndroidInput();
+
+        if (!isDead && !hasWinned && !willWin)
+        {
             if (!isMoving && !diceBehind.GetIsMoving())
             {
                 direction = new Vector3(0, 0, 0);
@@ -80,7 +145,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-
 
         if (isMoving)
         {
