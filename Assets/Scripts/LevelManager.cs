@@ -70,17 +70,16 @@ public class LevelManager : MonoBehaviour
     public static List<string> GetAllLevelStrings(int world)
     {
         List<string> levelsList = new List<string>();
+        
+        UnityEngine.Object[] allResources = Resources.LoadAll("Levels/World"+ world, typeof(TextAsset));
 
-        string [] allLevelsFiles = Directory.GetFiles(Application.dataPath + "/resources/Levels/World" + world);
-
-        foreach (var file in allLevelsFiles)
+        foreach (UnityEngine.Object obj in allResources)
         {
-            if (!file.Contains(".meta") && !file.Contains("FrontFaces"))
+            if (!obj.name.Contains(".meta") && !obj.name.Contains("FrontFaces"))
             {
-                levelsList.Add(file.Split('\\')[file.Split('\\').Length-1].Split('.')[0]);
+                levelsList.Add(obj.name.Split('.')[0]);
             }
         }
-
         return levelsList;
     }
 

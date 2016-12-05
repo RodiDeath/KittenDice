@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class LevelSelectorManager : MonoBehaviour
 {
@@ -10,12 +11,14 @@ public class LevelSelectorManager : MonoBehaviour
 
     [SerializeField]
     RectTransform panelLevel;
+
+    public static int world = 1;
     //private ScrolView
 
     // Use this for initialization
     void Start ()
     {
-        PopulateLevelSelector(1);
+        PopulateLevelSelector(world);
     }
 	
     void PopulateLevelSelector(int world)
@@ -25,11 +28,11 @@ public class LevelSelectorManager : MonoBehaviour
         List<string> levels = LevelManager.GetAllLevelStrings(world);
 
         // UI TEST ONLY /////////////////
-        for (int i = 0; i < 20; i++)
-        {
-            int levelN = i+3;
-            levels.Add("Level" + levelN);
-        }
+        //for (int i = 0; i < 20; i++)
+        //{
+        //    int levelN = i+3;
+        //    levels.Add("Level" + levelN);
+        //}
         ////////////////////////////////
 
         foreach (var level in levels)
@@ -40,7 +43,7 @@ public class LevelSelectorManager : MonoBehaviour
                 
 
                 RectTransform newPanelLevel = Instantiate(panelLevel, new Vector3(panelLevel.position.x, panelLevel.position.y, 1f), Quaternion.identity) as RectTransform;
-                newPanelLevel.name = level;
+                newPanelLevel.name = Regex.Match(level, @"\d+").Value;
                 newPanelLevel.GetComponentInChildren<Text>().text = level;
 
                 newPanelLevel.SetParent(contentScrollView);
@@ -52,7 +55,7 @@ public class LevelSelectorManager : MonoBehaviour
                 panelLevel = contentScrollView.GetChild(contentScrollView.childCount - 1).GetComponent<RectTransform>();
 
                 RectTransform newPanelLevel = Instantiate(panelLevel, new Vector3(panelLevel.position.x, panelLevel.position.y - panelLevel.rect.height, 1f), Quaternion.identity) as RectTransform;
-                newPanelLevel.name = level;
+                newPanelLevel.name = Regex.Match(level, @"\d+").Value;
                 newPanelLevel.GetComponentInChildren<Text>().text = level;
 
                 newPanelLevel.SetParent(contentScrollView);

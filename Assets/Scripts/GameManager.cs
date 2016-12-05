@@ -15,13 +15,16 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Transform DicesFolder;
 
-    [SerializeField]
-    int level;
-    [SerializeField]
-    int world;
+    //[SerializeField]
+    //int level;
+    //[SerializeField]
+    //int world;
 
     [SerializeField]
     private GameObject pausePanel;
+
+    public static int world = 1;
+    public static int level = 1;
 
 
     void Awake()

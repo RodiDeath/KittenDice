@@ -11,9 +11,9 @@ public class MainMenuManager : MonoBehaviour
 	    
 	}
 	
-	public void PlayPuzzle()
+	public void Play()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("LevelSelector");
     }
 
 }
