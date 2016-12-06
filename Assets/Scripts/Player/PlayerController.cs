@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
     void CheckAndroidInput()
     {
-        CheckWinLose();
+        //CheckWinLose();
 
         if (!isDead && !hasWinned && !willWin)
         {
@@ -125,6 +125,7 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate ()
     {
+        CheckWinLose();
         if (!usesPad) CheckAndroidInput();
 
         //if (!buttonPressed)
