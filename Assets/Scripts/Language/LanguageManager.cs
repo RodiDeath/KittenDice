@@ -1,19 +1,27 @@
 ﻿using UnityEngine;
 using System.Xml;
+using System.Collections.Generic;
 
 public class LanguageManager : MonoBehaviour
 {
     [SerializeField]
-    string language;
-    private TextAsset textAsset;
-    private XmlDocument xmlDoc;
+    static string language;
+    static private TextAsset textAsset;
+    static private XmlDocument xmlDoc;
     
     void Awake()
     {
+        DontDestroyOnLoad(this);
+        //if (FindObjectsOfType(GetType()).Length > 1)
+        //{
+        //    Destroy(gameObject);
+        //}
+
+        language = Storage.GetLanguage();
         LoadLanguageDocument(language);
     }
 
-    public void LoadLanguageDocument(string lang)
+    public static void LoadLanguageDocument(string lang)
     {
         textAsset = (TextAsset)Resources.Load("Languages/" + lang);
 
@@ -45,5 +53,21 @@ public class LanguageManager : MonoBehaviour
             }
         }
         return "";
+    }
+
+    public static List<string> GetAllLanguages()
+    {
+        List<string> languagesList = new List<string>();
+
+        Object[] allResources = Resources.LoadAll("Languages/", typeof(TextAsset));
+
+        foreach (Object obj in allResources)
+        {
+            if (!obj.name.Contains(".meta"))
+            {
+                languagesList.Add(obj.name.Split('.')[0]);
+            }
+        }
+        return languagesList;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class UISettingsManager : MonoBehaviour
 {
@@ -22,6 +23,9 @@ public class UISettingsManager : MonoBehaviour
     [SerializeField]
     Button btnSettings;
 
+    [SerializeField]
+    MainMenuLanguageManager MMLangManager;
+
     // Use this for initialization
     void Start ()
     {
@@ -40,7 +44,16 @@ public class UISettingsManager : MonoBehaviour
 
         sliderEffectsVol.value = Storage.GetEffectsVolume();
         sliderMusicVol.value = Storage.GetMusicVolume();
-        //dropdownLanguage.value = dropdownLanguage.options
+
+        List<string> allLanguages = LanguageManager.GetAllLanguages();
+
+        dropdownLanguage.options.Clear();
+        foreach (string lang in allLanguages)
+        {
+            dropdownLanguage.options.Add(new Dropdown.OptionData() { text = lang });
+        }
+
+        dropdownLanguage.value = allLanguages.IndexOf(Storage.GetLanguage());
 
         Debug.Log("SettingsLoaded");
 
@@ -53,7 +66,12 @@ public class UISettingsManager : MonoBehaviour
         
         Storage.SaveEffectsVolume(sliderEffectsVol.value);
         Storage.SaveMusicVolume(sliderMusicVol.value);
-        //Storage.SaveLanguage();
+
+        Storage.SaveLanguage(dropdownLanguage.options[dropdownLanguage.value].text);
+
+        LanguageManager.LoadLanguageDocument(Storage.GetLanguage());
+
+        MMLangManager.LoadLangStrings();
 
         Debug.Log("Settings Stored");
 

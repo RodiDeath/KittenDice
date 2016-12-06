@@ -1,10 +1,10 @@
 <Strings>
-  <string name="play">Jugar</string>
-  <string name="settings">Opciones</string>
-  <string name="controls">Controles</string>
+  <string name="play">Xogar</string>
+  <string name="settings">Opcións</string>
+  <string name="controls">Controis</string>
   <string name="music_volume">Volumen Música</string>
   <string name="effects_volume">Volumen Efectos</string>
   <string name="cancel">Cancelar</string>
   <string name="ok">Ok</string>
-  <string name="language">Idioma</string>
+  <string name="language">Lingua</string>
 </Strings>

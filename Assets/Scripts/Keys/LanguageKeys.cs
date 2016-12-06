@@ -3,6 +3,6 @@ using System.Collections;
 
 public class LanguageKeys : MonoBehaviour
 {
-    public static string English { get { return "english"; } }
+    public static string English { get { return "English"; } }
 
 }
