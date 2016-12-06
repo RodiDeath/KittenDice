@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -30,16 +31,26 @@ public class PlayerController : MonoBehaviour
     private bool willWin = false;
 
     //Android
+    private static bool usesPad = false;
+    [SerializeField]
+    private Transform pad;
+
     [SerializeField]
     private float minSwipeDistY;
     [SerializeField]
     private float minSwipeDistX;
     private Vector2 startPos;
 
+    // Test Flag
+    //public bool buttonPressed = false;
+
 
     // Use this for initialization
     void Start ()
     {
+        if (Storage.GetControls().Equals(StorageKeys.Pad)) usesPad = true;
+        else usesPad = false;
+
         // TEST ONLY
         map = FindObjectOfType<Map>();
         
@@ -114,34 +125,41 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-        CheckAndroidInput();
+        if (!usesPad) CheckAndroidInput();
 
-        if (!isDead && !hasWinned && !willWin)
+        //if (!buttonPressed)
         {
-            if (!isMoving && !diceBehind.GetIsMoving())
+            if (!isDead && !hasWinned && !willWin)
             {
-                direction = new Vector3(0, 0, 0);
-                if (Input.GetKey(KeyCode.W))
+                if (!isMoving /*&& !diceBehind.GetIsMoving()*/)
                 {
-                    MoveUp();
-                }
-                else
+                    if (!diceBehind.GetIsMoving())
+                    {
 
-                if (Input.GetKey(KeyCode.S))
-                {
-                    MoveDown();
-                }
-                else
+                        direction = new Vector3(0, 0, 0);
+                        if (Input.GetKey(KeyCode.W))
+                        {
+                            MoveUp();
+                        }
+                        else
 
-                if (Input.GetKey(KeyCode.A))
-                {
-                    MoveLeft();
-                }
-                else
+                        if (Input.GetKey(KeyCode.S))
+                        {
+                            MoveDown();
+                        }
+                        else
 
-                if (Input.GetKey(KeyCode.D))
-                {
-                    MoveRight();
+                        if (Input.GetKey(KeyCode.A))
+                        {
+                            MoveLeft();
+                        }
+                        else
+
+                        if (Input.GetKey(KeyCode.D))
+                        {
+                            MoveRight();
+                        }
+                    }
                 }
             }
         }
@@ -193,6 +211,11 @@ public class PlayerController : MonoBehaviour
 
                 isMoving = false;
 
+                foreach (Transform arrow in pad)
+                {
+                    arrow.GetComponent<Button>().interactable = true;
+                }
+                //buttonPressed = false;
 
             }
         }
@@ -201,20 +224,30 @@ public class PlayerController : MonoBehaviour
 
     public void MoveRight()
     {
-        if (!isDead && !hasWinned && !willWin)
+        //if (!buttonPressed)
         {
-
-            if (!isMoving && !diceBehind.GetIsMoving())
+            //buttonPressed = true;
+            foreach (Transform arrow in pad)
             {
-                if (!map.IsOutOfBounds(coorX + 1, coorY))
-                {
-                    direction += Vector3.right;
-                    moveDirection = "right";
-                    isMoving = true;
+                arrow.GetComponent<Button>().interactable = false;
+            }
 
-                    if (map.IsEmpty(coorX + 1, coorY))
+        
+            if (!isDead && !hasWinned && !willWin)
+            {
+
+                if (!isMoving && !diceBehind.GetIsMoving())
+                {
+                    if (!map.IsOutOfBounds(coorX + 1, coorY))
                     {
-                        diceBehind.MoveRight();
+                        direction += Vector3.right;
+                        moveDirection = "right";
+                        isMoving = true;
+
+                        if (map.IsEmpty(coorX + 1, coorY))
+                        {
+                            diceBehind.MoveRight();
+                        }
                     }
                 }
             }
@@ -223,20 +256,29 @@ public class PlayerController : MonoBehaviour
 
     public void MoveLeft()
     {
-        if (!isDead && !hasWinned && !willWin)
+        //if (!buttonPressed)
         {
-
-            if (!isMoving && !diceBehind.GetIsMoving())
+            //buttonPressed = true;
+            foreach (Transform arrow in pad)
             {
-                if (!map.IsOutOfBounds(coorX - 1, coorY))
-                {
-                    direction -= Vector3.right;
-                    moveDirection = "left";
-                    isMoving = true;
+                arrow.GetComponent<Button>().interactable = false;
+            }
 
-                    if (map.IsEmpty(coorX - 1, coorY))
+            if (!isDead && !hasWinned && !willWin)
+            {
+
+                if (!isMoving && !diceBehind.GetIsMoving())
+                {
+                    if (!map.IsOutOfBounds(coorX - 1, coorY))
                     {
-                        diceBehind.MoveLeft();
+                        direction -= Vector3.right;
+                        moveDirection = "left";
+                        isMoving = true;
+
+                        if (map.IsEmpty(coorX - 1, coorY))
+                        {
+                            diceBehind.MoveLeft();
+                        }
                     }
                 }
             }
@@ -245,22 +287,32 @@ public class PlayerController : MonoBehaviour
 
     public void MoveDown()
     {
-        if (!isDead && !hasWinned && !willWin)
+        //if (!buttonPressed)
         {
-
-            if (!isMoving && !diceBehind.GetIsMoving())
+            //buttonPressed = true;
+            foreach (Transform arrow in pad)
             {
-                if (!map.IsOutOfBounds(coorX, coorY - 1))
+                arrow.GetComponent<Button>().interactable = false;
+            }
+
+            if (!isDead && !hasWinned && !willWin)
+            {
+
+                if (!isMoving && !diceBehind.GetIsMoving())
                 {
-                    direction -= Vector3.forward;
-                    moveDirection = "down";
-                    isMoving = true;
-
-                    if (map.IsEmpty(coorX, coorY - 1))
+                    if (!map.IsOutOfBounds(coorX, coorY - 1))
                     {
+                        direction -= Vector3.forward;
+                        moveDirection = "down";
+                        isMoving = true;
 
-                        diceBehind.MoveDown();
+                        if (map.IsEmpty(coorX, coorY - 1))
+                        {
+
+                            diceBehind.MoveDown();
+                        }
                     }
+
                 }
             }
         }
@@ -268,20 +320,29 @@ public class PlayerController : MonoBehaviour
 
     public void MoveUp()
     {
-        if (!isDead && !hasWinned && !willWin)
+        //if (!buttonPressed)
         {
-
-            if (!isMoving && !diceBehind.GetIsMoving())
+            //buttonPressed = true;
+            foreach (Transform arrow in pad)
             {
-                if (!map.IsOutOfBounds(coorX, coorY + 1))
-                {
-                    direction += Vector3.forward;
-                    moveDirection = "up";
-                    isMoving = true;
+                arrow.GetComponent<Button>().interactable = false;
+            }
 
-                    if (map.IsEmpty(coorX, coorY + 1))
+            if (!isDead && !hasWinned && !willWin)
+            {
+
+                if (!isMoving && !diceBehind.GetIsMoving())
+                {
+                    if (!map.IsOutOfBounds(coorX, coorY + 1))
                     {
-                        diceBehind.MoveUp();
+                        direction += Vector3.forward;
+                        moveDirection = "up";
+                        isMoving = true;
+
+                        if (map.IsEmpty(coorX, coorY + 1))
+                        {
+                            diceBehind.MoveUp();
+                        }
                     }
                 }
             }

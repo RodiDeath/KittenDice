@@ -30,7 +30,7 @@ public class LevelSelectorManager : MonoBehaviour
         // UI TEST ONLY /////////////////
         //for (int i = 0; i < 20; i++)
         //{
-        //    int levelN = i+3;
+        //    int levelN = i + 3;
         //    levels.Add("Level" + levelN);
         //}
         ////////////////////////////////
@@ -45,6 +45,7 @@ public class LevelSelectorManager : MonoBehaviour
                 RectTransform newPanelLevel = Instantiate(panelLevel, new Vector3(panelLevel.position.x, panelLevel.position.y, 1f), Quaternion.identity) as RectTransform;
                 newPanelLevel.name = Regex.Match(level, @"\d+").Value;
                 newPanelLevel.GetComponentInChildren<Text>().text = level;
+                //newPanelLevel.localScale = new Vector3(1,1,1);
 
                 newPanelLevel.SetParent(contentScrollView);
                 Destroy(contentScrollView.GetChild(0).gameObject);
@@ -57,6 +58,7 @@ public class LevelSelectorManager : MonoBehaviour
                 RectTransform newPanelLevel = Instantiate(panelLevel, new Vector3(panelLevel.position.x, panelLevel.position.y - panelLevel.rect.height, 1f), Quaternion.identity) as RectTransform;
                 newPanelLevel.name = Regex.Match(level, @"\d+").Value;
                 newPanelLevel.GetComponentInChildren<Text>().text = level;
+                //newPanelLevel.localScale = new Vector3(1, 1, 1);
 
                 newPanelLevel.SetParent(contentScrollView);
             }
