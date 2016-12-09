@@ -32,8 +32,6 @@ public class PlayerController : MonoBehaviour
 
     //Android
     private static bool usesPad = false;
-    [SerializeField]
-    private Transform pad;
 
     [SerializeField]
     private float minSwipeDistY;
@@ -212,12 +210,6 @@ public class PlayerController : MonoBehaviour
 
                 isMoving = false;
 
-                foreach (Transform arrow in pad)
-                {
-                    arrow.GetComponent<Button>().interactable = true;
-                }
-                //buttonPressed = false;
-
             }
         }
         
@@ -225,129 +217,104 @@ public class PlayerController : MonoBehaviour
 
     public void MoveRight()
     {
-        //if (!buttonPressed)
+        if (!isDead && !hasWinned && !willWin)
         {
-            //buttonPressed = true;
-            foreach (Transform arrow in pad)
-            {
-                arrow.GetComponent<Button>().interactable = false;
-            }
 
-        
-            if (!isDead && !hasWinned && !willWin)
+            if (!isMoving && !diceBehind.GetIsMoving())
             {
-
-                if (!isMoving && !diceBehind.GetIsMoving())
+                if (!map.IsOutOfBounds(coorX + 1, coorY))
                 {
-                    if (!map.IsOutOfBounds(coorX + 1, coorY))
-                    {
-                        direction += Vector3.right;
-                        moveDirection = "right";
-                        isMoving = true;
+                    direction = new Vector3(0, 0, 0);
 
-                        if (map.IsEmpty(coorX + 1, coorY))
-                        {
-                            diceBehind.MoveRight();
-                        }
+                    direction += Vector3.right;
+                    moveDirection = "right";
+                    isMoving = true;
+
+                    if (map.IsEmpty(coorX + 1, coorY))
+                    {
+                        diceBehind.MoveRight();
                     }
                 }
             }
         }
+        
     }
 
     public void MoveLeft()
     {
-        //if (!buttonPressed)
+        if (!isDead && !hasWinned && !willWin)
         {
-            //buttonPressed = true;
-            foreach (Transform arrow in pad)
-            {
-                arrow.GetComponent<Button>().interactable = false;
-            }
 
-            if (!isDead && !hasWinned && !willWin)
+            if (!isMoving && !diceBehind.GetIsMoving())
             {
-
-                if (!isMoving && !diceBehind.GetIsMoving())
+                if (!map.IsOutOfBounds(coorX - 1, coorY))
                 {
-                    if (!map.IsOutOfBounds(coorX - 1, coorY))
-                    {
-                        direction -= Vector3.right;
-                        moveDirection = "left";
-                        isMoving = true;
+                    direction = new Vector3(0, 0, 0);
 
-                        if (map.IsEmpty(coorX - 1, coorY))
-                        {
-                            diceBehind.MoveLeft();
-                        }
+                    direction -= Vector3.right;
+                    moveDirection = "left";
+                    isMoving = true;
+
+                    if (map.IsEmpty(coorX - 1, coorY))
+                    {
+                        diceBehind.MoveLeft();
                     }
                 }
             }
         }
+        
     }
 
     public void MoveDown()
     {
-        //if (!buttonPressed)
+        if (!isDead && !hasWinned && !willWin)
         {
-            //buttonPressed = true;
-            foreach (Transform arrow in pad)
-            {
-                arrow.GetComponent<Button>().interactable = false;
-            }
 
-            if (!isDead && !hasWinned && !willWin)
+            if (!isMoving && !diceBehind.GetIsMoving())
             {
-
-                if (!isMoving && !diceBehind.GetIsMoving())
+                if (!map.IsOutOfBounds(coorX, coorY - 1))
                 {
-                    if (!map.IsOutOfBounds(coorX, coorY - 1))
+                    direction = new Vector3(0, 0, 0);
+
+                    direction -= Vector3.forward;
+                    moveDirection = "down";
+                    isMoving = true;
+
+                    if (map.IsEmpty(coorX, coorY - 1))
                     {
-                        direction -= Vector3.forward;
-                        moveDirection = "down";
-                        isMoving = true;
 
-                        if (map.IsEmpty(coorX, coorY - 1))
-                        {
-
-                            diceBehind.MoveDown();
-                        }
+                        diceBehind.MoveDown();
                     }
-
                 }
+
             }
         }
+        
     }
 
     public void MoveUp()
     {
-        //if (!buttonPressed)
+        if (!isDead && !hasWinned && !willWin)
         {
-            //buttonPressed = true;
-            foreach (Transform arrow in pad)
-            {
-                arrow.GetComponent<Button>().interactable = false;
-            }
 
-            if (!isDead && !hasWinned && !willWin)
+            if (!isMoving && !diceBehind.GetIsMoving())
             {
-
-                if (!isMoving && !diceBehind.GetIsMoving())
+                if (!map.IsOutOfBounds(coorX, coorY + 1))
                 {
-                    if (!map.IsOutOfBounds(coorX, coorY + 1))
-                    {
-                        direction += Vector3.forward;
-                        moveDirection = "up";
-                        isMoving = true;
+                    direction = new Vector3(0, 0, 0);
 
-                        if (map.IsEmpty(coorX, coorY + 1))
-                        {
-                            diceBehind.MoveUp();
-                        }
+                    direction += Vector3.forward;
+                    moveDirection = "up";
+                    isMoving = true;
+
+                    if (map.IsEmpty(coorX, coorY + 1))
+                    {
+                        diceBehind.MoveUp();
                     }
                 }
             }
         }
+        
     }
 
     public void CheckWinLose()
