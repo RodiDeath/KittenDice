@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
+using UnityEngine.SceneManagement;
 
 public class LevelSelectorManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class LevelSelectorManager : MonoBehaviour
 
     [SerializeField]
     RectTransform panelLevel;
+
+    private Vector3 levelScale;
 
     public static int world = 1;
     //private ScrolView
@@ -28,11 +31,11 @@ public class LevelSelectorManager : MonoBehaviour
         List<string> levels = LevelManager.GetAllLevelStrings(world);
 
         // UI TEST ONLY /////////////////
-        //for (int i = 0; i < 20; i++)
-        //{
-        //    int levelN = i + 3;
-        //    levels.Add("Level" + levelN);
-        //}
+        for (int i = 0; i < 20; i++)
+        {
+            int levelN = i + 3;
+            levels.Add("Level" + levelN);
+        }
         ////////////////////////////////
 
         foreach (var level in levels)
@@ -46,6 +49,7 @@ public class LevelSelectorManager : MonoBehaviour
                 newPanelLevel.name = Regex.Match(level, @"\d+").Value;
                 newPanelLevel.GetComponentInChildren<Text>().text = level;
                 //newPanelLevel.localScale = new Vector3(1,1,1);
+                levelScale = newPanelLevel.localScale;
 
                 newPanelLevel.SetParent(contentScrollView);
                 Destroy(contentScrollView.GetChild(0).gameObject);
@@ -58,7 +62,7 @@ public class LevelSelectorManager : MonoBehaviour
                 RectTransform newPanelLevel = Instantiate(panelLevel, new Vector3(panelLevel.position.x, panelLevel.position.y - panelLevel.rect.height, 1f), Quaternion.identity) as RectTransform;
                 newPanelLevel.name = Regex.Match(level, @"\d+").Value;
                 newPanelLevel.GetComponentInChildren<Text>().text = level;
-                //newPanelLevel.localScale = new Vector3(1, 1, 1);
+                newPanelLevel.localScale = levelScale;
 
                 newPanelLevel.SetParent(contentScrollView);
             }
@@ -66,5 +70,10 @@ public class LevelSelectorManager : MonoBehaviour
         }
 
         contentScrollView.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical , (panelLevel.rect.height * levels.Count) + 10);
+    }
+
+    public void Back()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
