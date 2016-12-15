@@ -19,9 +19,12 @@ public class LifesManager : MonoBehaviour
     public int minutesRemaining;
     float secondsCount = 0;
 
+    bool dataCollected = false;
+
     void Start()
     {
         GetLifeDta();
+        dataCollected = true;
     }
 
     private void GetLifeDta()
@@ -99,9 +102,9 @@ public class LifesManager : MonoBehaviour
         }
     }
 
-#if UNITY_EDITOR
     void OnDestroy()
     {
+        dataCollected = false;
         if (lifes < maxLifes)
         {
             int totalSecondsRemaining = (minutesRemaining * 60) + Convert.ToInt32(secondsCount) - 60;
@@ -117,13 +120,12 @@ public class LifesManager : MonoBehaviour
         
     }
 
-#endif
-
 
     void OnApplicationPause(bool pauseStatus)
     {
         if (pauseStatus)
         {
+            dataCollected = false;
             if (lifes < maxLifes)
             {
                 int totalSecondsRemaining = (minutesRemaining * 60) + Convert.ToInt32(secondsCount) - 60;
@@ -139,7 +141,11 @@ public class LifesManager : MonoBehaviour
         }
         else
         {
-            GetLifeDta();
+            if (!dataCollected)
+            {
+                GetLifeDta();
+                dataCollected = true;
+            }
         }
     }
 
