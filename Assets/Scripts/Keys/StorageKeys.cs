@@ -12,4 +12,8 @@ public class StorageKeys
 
     public static string Pad { get { return "pad"; } }
     public static string Swipe { get { return "swipe"; } }
+
+    public static string Lifes { get { return "lifes"; } }
+    public static string DateLastConection { get { return "date_last_con"; } }
+    public static string SecondsPassed { get { return "seconds_passed"; } }
 }

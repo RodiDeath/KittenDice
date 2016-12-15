@@ -8,14 +8,22 @@ public class LanguageManager : MonoBehaviour
     static string language;
     static private TextAsset textAsset;
     static private XmlDocument xmlDoc;
-    
+
+    void OnDestroy()
+    {
+        if (FindObjectsOfType(GetType()).Length == 0) // Saving last connection time when destroying this script   
+        {                                             //because at this time is the only one with DonDestroyonLoad() statement.
+            Storage.SaveDateLastConnection();
+        }
+    }
+
     void Awake()
     {
         DontDestroyOnLoad(this);
-        //if (FindObjectsOfType(GetType()).Length > 1)
-        //{
-        //    Destroy(gameObject);
-        //}
+        if (FindObjectsOfType(GetType()).Length > 1)
+        {
+            Destroy(gameObject);
+        }
 
         language = Storage.GetLanguage();
         LoadLanguageDocument(language);
