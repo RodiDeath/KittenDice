@@ -347,7 +347,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.5441177, g: 0.08823532, b: 1, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -494,7 +494,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 589215171}
   m_HandleRect: {fileID: 589215170}
   m_Direction: 0
-  m_Value: 0.000030517578
+  m_Value: 0
   m_Size: 0.99822694
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1410,7 +1410,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 502897959}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.78433347
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1481,7 +1481,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -281.5, y: 64.69998}
+  m_AnchoredPosition: {x: -281.50003, y: 64.69998}
   m_SizeDelta: {x: 564, y: 64.7}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1830949431

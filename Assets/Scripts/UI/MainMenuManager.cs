@@ -21,7 +21,7 @@ public class MainMenuManager : MonoBehaviour
 	
 	public void Play()
     {
-        SceneManager.LoadScene("LevelSelector");
+        SceneManager.LoadScene("WorldSelector");
     }
 
     public void Settings()
