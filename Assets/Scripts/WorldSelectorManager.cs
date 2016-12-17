@@ -83,6 +83,7 @@ public class WorldSelectorManager : MonoBehaviour
         contentPosX = content.GetComponent<RectTransform>().offsetMin.x;
 
         contentPosIndex = Convert.ToInt32(contentPosX / worldButtons[0].rect.width);
+
         if (contentPosIndex < ((content.transform.childCount - 1) * -1))
         {
             contentPosIndex = content.transform.childCount - 1;
@@ -94,17 +95,17 @@ public class WorldSelectorManager : MonoBehaviour
 
         contentPosIndex = Math.Abs(contentPosIndex);
 
-        for (int i = 0; i < worldButtons.Length; i++)
-        {
-            if (i == contentPosIndex)
-            {
-                worldButtons[i].localScale = new Vector3(1, 1, 1);
-            }
-            else
-            {
-                worldButtons[i].localScale = new Vector3(0.8f, 0.8f, 0.8f);
-            }
-        }
+        //for (int i = 0; i < worldButtons.Length; i++)
+        //{
+        //    if (i == contentPosIndex)
+        //    {
+        //        worldButtons[i].localScale = new Vector3(1, 1, 1);
+        //    }
+        //    else
+        //    {
+        //        worldButtons[i].localScale = new Vector3(0.8f, 0.8f, 0.8f);
+        //    }
+        //}
 
         if (Math.Abs(VelocityX) < 50)
         {
