@@ -10,6 +10,8 @@ public class LevelManager : MonoBehaviour
     private Map map;
     [SerializeField]
     private MapGenerator mapGenerator;
+    [SerializeField]
+    private GameManager gameManager;
 
     private TextAsset levelData;
     private TextAsset levelFrontFaces;
@@ -263,12 +265,14 @@ public class LevelManager : MonoBehaviour
 
     public void PlayerDied()
     {
+        gameManager.GameOver();
         Debug.Log("Game Over - Lost");
         StopTimer();
     }
 
     public void PlayerWins()
     {
+        gameManager.Completed();
         Debug.Log("GameOver - Win");
         StopTimer();
     }

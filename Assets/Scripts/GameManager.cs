@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private GameObject pausePanel;
+    [SerializeField]
+    private GameObject gameOverPanel;
+    [SerializeField]
+    private GameObject completedPanel;
+
 
     public static int world = 1;
     public static int level = 1;
@@ -41,6 +46,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         pausePanel.SetActive(false);
+        gameOverPanel.SetActive(false);
+        completedPanel.SetActive(false);
     }
 
    // Update is called once per frame
@@ -114,10 +121,27 @@ public class GameManager : MonoBehaviour
     }
     public void Pause()
     {
-        pausePanel.SetActive(true);
+        if (!pausePanel.activeSelf)
+        {
+            pausePanel.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else if (pausePanel.activeSelf)
+        {
+            pausePanel.SetActive(false);
+            Time.timeScale = 1;
+        }
+    }
+    public void GameOver()
+    {
+        gameOverPanel.SetActive(true);
         Time.timeScale = 0;
     }
-
+    public void Completed()
+    {
+        completedPanel.SetActive(true);
+        Time.timeScale = 0;
+    }
     public void Continue()
     {
         pausePanel.SetActive(false);
@@ -132,5 +156,12 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
+    }
+    public void NextLevel()
+    {
+        world = 1; //calcular si es el ultimo nivel del mundo
+        level = level+1;
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Game");
     }
 }
