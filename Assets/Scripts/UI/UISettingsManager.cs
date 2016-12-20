@@ -24,6 +24,21 @@ public class UISettingsManager : MonoBehaviour
     Button btnSettings;
 
     [SerializeField]
+    Button btnProfile;
+
+    [SerializeField]
+    Button btnStatistics;
+
+    [SerializeField]
+    Button btnShop;
+
+    [SerializeField]
+    Button btnFacebook;
+
+    [SerializeField]
+    Button btnTwitter;
+
+    [SerializeField]
     MainMenuLanguageManager MMLangManager;
 
     // Use this for initialization
@@ -75,9 +90,7 @@ public class UISettingsManager : MonoBehaviour
 
         Debug.Log("Settings Stored");
 
-        btnPlay.interactable = true;
-        btnSettings.interactable = true;
-        gameObject.SetActive(false);
+        Cancel();
     }
 
     private static void SaveDefaultValues()
@@ -95,6 +108,11 @@ public class UISettingsManager : MonoBehaviour
     {
         btnPlay.interactable = true;
         btnSettings.interactable = true;
+        btnProfile.interactable = true;
+        btnStatistics.interactable = true;
+        btnShop.interactable = true;
+        btnFacebook.interactable = true;
+        btnTwitter.interactable = true;
         gameObject.SetActive(false);
     }
 }

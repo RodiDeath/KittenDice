@@ -4249,6 +4249,7 @@ MonoBehaviour:
   levelManager: {fileID: 666885215}
   dicePrefab: {fileID: 1000012754361472, guid: 53c01df053cdb4e4f90482d86ea82c64, type: 2}
   DicesFolder: {fileID: 1175647974}
+  pauseButton: {fileID: 84032233}
   pausePanel: {fileID: 707936505}
   gameOverPanel: {fileID: 1245004794}
   completedPanel: {fileID: 1681332187}

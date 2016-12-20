@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private Transform DicesFolder;
+
+    [SerializeField]
+    Button pauseButton;
 
     //[SerializeField]
     //int level;
@@ -136,11 +140,13 @@ public class GameManager : MonoBehaviour
     {
         gameOverPanel.SetActive(true);
         Time.timeScale = 0;
+        pauseButton.interactable = false;
     }
     public void Completed()
     {
         completedPanel.SetActive(true);
         Time.timeScale = 0;
+        pauseButton.interactable = false;
     }
     public void Continue()
     {
