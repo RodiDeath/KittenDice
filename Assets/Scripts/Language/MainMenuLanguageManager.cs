@@ -34,8 +34,8 @@ public class MainMenuLanguageManager : MonoBehaviour
     {
         languageManager = FindObjectOfType<LanguageManager>();
 
-        btnPlay.GetComponentInChildren<Text>().text = languageManager.GetString("play");
-        btnSettings.GetComponentInChildren<Text>().text = languageManager.GetString("settings");
+        //btnPlay.GetComponentInChildren<Text>().text = languageManager.GetString("play");
+        //btnSettings.GetComponentInChildren<Text>().text = languageManager.GetString("settings");
         btnCancelSettings.GetComponentInChildren<Text>().text = languageManager.GetString("cancel");
         btnOKSettings.GetComponentInChildren<Text>().text = languageManager.GetString("ok");
 
