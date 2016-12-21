@@ -7,7 +7,7 @@ public class LifesManager : MonoBehaviour
 {
     LanguageManager languageManager;
 
-    static int lifes;
+    public static int lifes;
     Text textLifes;
     Text textTimeRemaining;
 
@@ -167,7 +167,4 @@ public class LifesManager : MonoBehaviour
             minutesRemaining += minutesForLife;
         }
     }
-
-
-
 }

@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     private LevelManager levelManager;
 
     [SerializeField]
+    private LifesManager lifesManager;
+
+    [SerializeField]
     private GameObject dicePrefab;
 
     [SerializeField]
@@ -18,6 +21,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     Button pauseButton;
+
+    [SerializeField]
+    Button restartButton;
+    [SerializeField]
+    Button restartGameOverButton;
 
     //[SerializeField]
     //int level;
@@ -129,6 +137,14 @@ public class GameManager : MonoBehaviour
         {
             pausePanel.SetActive(true);
             Time.timeScale = 0;
+            if (LifesManager.lifes < 1)
+            {
+                restartButton.interactable = false;
+            }
+            else
+            {
+                restartButton.interactable = true;
+            }
         }
         else if (pausePanel.activeSelf)
         {
@@ -137,10 +153,19 @@ public class GameManager : MonoBehaviour
         }
     }
     public void GameOver()
-    {
+    {   if (LifesManager.lifes < 1)
+        {
+            restartGameOverButton.interactable = false;
+        }
+        else
+        {
+            restartGameOverButton.interactable = true;
+        }
         gameOverPanel.SetActive(true);
         Time.timeScale = 0;
         pauseButton.interactable = false;
+
+        lifesManager.LoseLife();
     }
     public void Completed()
     {
@@ -157,11 +182,13 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("Game");
+        lifesManager.LoseLife();
     }
     public void Exit()
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
+        lifesManager.LoseLife();
     }
     public void NextLevel()
     {
