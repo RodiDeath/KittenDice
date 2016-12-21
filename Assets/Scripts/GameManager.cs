@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     private GameObject completedPanel;
 
 
-    public static int world = 1;
+    public static string world = "Air";
     public static int level = 1;
 
 
@@ -65,12 +65,12 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            LoadLevel(1, 1);
+            LoadLevel("Air", 1);
         }
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            LoadLevel(1, 2);
+            LoadLevel("Air", 2);
         }
 
         //if (Input.GetKeyDown(KeyCode.P))
@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void LoadLevel(int world, int lvl)
+    private void LoadLevel(string world, int lvl)
     {
         levelManager.CalculateMapSize(world, lvl);
         map.InitializeMap(levelManager.GetBoardHeight(), levelManager.GetBoardWidth());
@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
     }
     public void NextLevel()
     {
-        world = 1; //calcular si es el ultimo nivel del mundo
+        world = "Air"; //calcular si es el ultimo nivel del mundo
         level = level+1;
         Time.timeScale = 1;
         SceneManager.LoadScene("Game");

@@ -17,7 +17,7 @@ public class LevelSelectorManager : MonoBehaviour
 
     private Vector3 levelScale;
 
-    public static int world = 1;
+    public static string world = "Air";
     int levelsPerRow = 3;
     int levelsShowed = 0;
     string[,] levelDataTable;
@@ -29,7 +29,7 @@ public class LevelSelectorManager : MonoBehaviour
     void Start ()
     {
         GetLevelsData();
-        PopulateLevelSelector(world);
+        PopulateLevelSelector(GameManager.world);
         
     }
 
@@ -55,7 +55,7 @@ public class LevelSelectorManager : MonoBehaviour
 
     }
 	
-    void PopulateLevelSelector(int world)
+    void PopulateLevelSelector(string world)
     {
         bool modelPanelDeleted = false;
         float startPositionX = -280f;

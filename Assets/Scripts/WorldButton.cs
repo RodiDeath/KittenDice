@@ -9,9 +9,12 @@ public class WorldButton : MonoBehaviour
     {
         Debug.Log("WorldSelected: " + transform.name);
 
+        GameManager.world = transform.name;
+
+
         WorldSelectorManager.WorldSelected = transform.name;
 
-        if (transform.name.Equals("Air"))
+        if (transform.name.Equals("Air") || transform.name.Equals("Earth")) // PARCHE CHUNGO TEST ONLY
         {
             SceneManager.LoadScene("LevelSelector");
         }

@@ -66,10 +66,10 @@ public class LevelManager : MonoBehaviour
         textMoves.text = movements.ToString();
         StartTimer();
 
-        GetAllLevelStrings(1);
+        GetAllLevelStrings("Air");
     }
 
-    public static List<string> GetAllLevelStrings(int world)
+    public static List<string> GetAllLevelStrings(string world)
     {
         List<string> levelsList = new List<string>();
         
@@ -85,7 +85,7 @@ public class LevelManager : MonoBehaviour
         return levelsList;
     }
 
-    public void CalculateMapSize(int world, int lvl)
+    public void CalculateMapSize(string world, int lvl)
     {
         levelName = "Level " + lvl;
         levelNumber = lvl;
@@ -114,7 +114,7 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    public void LoadLevel(int world, int lvl)
+    public void LoadLevel(string world, int lvl)
     {
         map.ResetBoard(); // Resets the map to all null
         levelName = "Level " + lvl;
@@ -253,10 +253,10 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    public void LoadNextLevel()
-    {
-        LoadLevel(worldNumber, levelNumber + 1);
-    }
+    //public void LoadNextLevel()
+    //{
+    //    LoadLevel(worldNumber, levelNumber + 1);
+    //}
 
     public void PlayerWillWin()
     {
