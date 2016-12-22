@@ -7,7 +7,7 @@ public class WorldButton : MonoBehaviour
 {
     public void LoadLevelSelector()
     {
-        Debug.Log("WorldSelected: " + transform.name);
+        //Debug.Log("WorldSelected: " + transform.name);
 
         GameManager.world = transform.name;
 

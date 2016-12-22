@@ -20,7 +20,7 @@ public class LevelSelectorManager : MonoBehaviour
     public static string world = "Air";
     int levelsPerRow = 3;
     int levelsShowed = 0;
-    string[,] levelDataTable;
+    string[] levelsData;
 
     //private ScrolView
 
@@ -28,31 +28,16 @@ public class LevelSelectorManager : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        GetLevelsData();
+        LevelsDataManager.SaveLevelData("Air", 1, 17000,3);
+        LevelsDataManager.SaveLevelData("Air", 2, 17500, 2);
+        LevelsDataManager.SaveLevelData("Air", 3, 18000, 1);
+        LevelsDataManager.SaveLevelData("Earth", 1, 25000, 0);
+        LevelsDataManager.SaveLevelData("Earth", 2, 60000, 3);
+
+        //Debug.Log("World: " + GameManager.world);
+        levelsData = LevelsDataManager.GetLevelsData(GameManager.world);
         PopulateLevelSelector(GameManager.world);
         
-    }
-
-    public void GetLevelsData()
-    {
-        string levelDataPath = "Levels/LevelsData"; // Path of the txt level data file
-        TextAsset levelData = (TextAsset)Resources.Load(levelDataPath, typeof(TextAsset)); // Stores the txt file in a TextAsset variable
-
-        string[] splitFile = new string[] { "\r\n", "\r", "\n" }; // Set the split parameter (\r\n -> New Line)
-        string[] levelDataLines = levelData.text.Split(splitFile, System.StringSplitOptions.None); // Stores in a string[] all the txt lines separately (the séparation)
-
-        levelDataTable = new string[levelDataLines.Length, levelDataLines[0].Split('*').Length];
-
-        for (int i = 0; i < levelDataLines.Length; i++)
-        {
-            for (int j = 0; j < levelDataLines[0].Split('*').Length; j++)
-            {
-                levelDataTable[i,j] = levelDataLines[i].Split('*')[j];
-                //Debug.Log(levelDataTable[i,j]);
-            }
-        }
-
-
     }
 	
     void PopulateLevelSelector(string world)
@@ -107,7 +92,9 @@ public class LevelSelectorManager : MonoBehaviour
                 // Score
                 int levelIndex = Convert.ToInt32(newPanelLevel.name);
                 Transform paneScore = newPanelLevel.transform.GetChild(2);
-                paneScore.GetComponent<Text>().text = levelDataTable[levelIndex - 1, 3];
+                //paneScore.GetComponent<Text>().text = levelDataTable[levelIndex - 1, 3];
+                //Debug.Log("LevelData: " + levelsData[levelIndex - 1]);
+                paneScore.GetComponent<Text>().text = levelsData[levelIndex - 1].Split('*')[1];
 
 
                 levelsShowed++;
@@ -137,7 +124,8 @@ public class LevelSelectorManager : MonoBehaviour
                 // Score
                 int levelIndex = Convert.ToInt32(newPanelLevel.name);
                 Transform paneScore = newPanelLevel.transform.GetChild(2);
-                paneScore.GetComponent<Text>().text = levelDataTable[levelIndex - 1, 3];
+                //paneScore.GetComponent<Text>().text = levelDataTable[levelIndex - 1, 3];
+                paneScore.GetComponent<Text>().text = levelsData[levelIndex - 1].Split('*')[1];
 
 
                 levelsShowed++;
@@ -164,7 +152,9 @@ public class LevelSelectorManager : MonoBehaviour
 
 
         int c = 0;
-        switch (levelDataTable[levelIndex - 1, 2])
+
+        //switch (levelDataTable[levelIndex - 1, 2])
+        switch (levelsData[levelIndex - 1].Split('*')[0])
         {
             case "0":
                 c = 0;

@@ -108,7 +108,7 @@ public class LifesManager : MonoBehaviour
         if (lifes < maxLifes)
         {
             int totalSecondsRemaining = (minutesRemaining * 60) + Convert.ToInt32(secondsCount) - 60;
-            Debug.Log("Seconds Remaining: " + totalSecondsRemaining);
+            //Debug.Log("Seconds Remaining: " + totalSecondsRemaining);
 
             LocalNotification.CancelNotification(1);
             LocalNotification.SendNotification(1, totalSecondsRemaining, "Kitten Dice", "Your mana is full!!", new Color32(0xff, 0x44, 0x44, 255));
