@@ -136,6 +136,9 @@ public class GameManager : MonoBehaviour
         if (!pausePanel.activeSelf)
         {
             pausePanel.SetActive(true);
+
+            ScoreManager.UpdateDataLevelInPanel(pausePanel.transform.GetChild(0), pausePanel.transform.GetChild(1).GetComponent<Text>());
+
             Time.timeScale = 0;
             if (LifesManager.lifes < 1)
             {
@@ -149,11 +152,13 @@ public class GameManager : MonoBehaviour
         else if (pausePanel.activeSelf)
         {
             pausePanel.SetActive(false);
+            
             Time.timeScale = 1;
         }
     }
     public void GameOver()
-    {   if (LifesManager.lifes < 1)
+    {
+        if (LifesManager.lifes < 1)
         {
             restartGameOverButton.interactable = false;
         }
@@ -162,34 +167,41 @@ public class GameManager : MonoBehaviour
             restartGameOverButton.interactable = true;
         }
         gameOverPanel.SetActive(true);
+        ScoreManager.UpdateDataLevelInPanel(gameOverPanel.transform.GetChild(0), gameOverPanel.transform.GetChild(1).GetComponent<Text>());
         Time.timeScale = 0;
         pauseButton.interactable = false;
 
         lifesManager.LoseLife();
     }
+
     public void Completed()
     {
         completedPanel.SetActive(true);
+        ScoreManager.UpdateDataLevelInPanel(completedPanel.transform.GetChild(0), completedPanel.transform.GetChild(1).GetComponent<Text>());
         Time.timeScale = 0;
         pauseButton.interactable = false;
     }
+
     public void Continue()
     {
         pausePanel.SetActive(false);
         Time.timeScale = 1;
     }
+
     public void Restart()
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("Game");
         lifesManager.LoseLife();
     }
+
     public void Exit()
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
         lifesManager.LoseLife();
     }
+
     public void NextLevel()
     {
         world = "Air"; //calcular si es el ultimo nivel del mundo

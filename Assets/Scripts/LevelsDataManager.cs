@@ -40,40 +40,14 @@ public class LevelsDataManager : MonoBehaviour
         return levelsData;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    public static string[,] GetLevelsDataasdfsdf(string world)
+    public static string[] GetLevelData(string world, int level)
     {
-        string[,] levelDataTable;
+        string []levelsData;
 
-        string levelDataPath = "Levels/LevelsData" + world; // Path of the txt level data file
-        TextAsset levelData = (TextAsset)Resources.Load(levelDataPath, typeof(TextAsset)); // Stores the txt file in a TextAsset variable
+        
+        levelsData = PlayerPrefs.GetString(world + "*" + level).Split('*');
 
-        string[] splitFile = new string[] { "\r\n", "\r", "\n" }; // Set the split parameter (\r\n -> New Line)
-        string[] levelDataLines = levelData.text.Split(splitFile, System.StringSplitOptions.None); // Stores in a string[] all the txt lines separately (the séparation)
-
-        levelDataTable = new string[levelDataLines.Length, levelDataLines[0].Split('*').Length];
-
-        for (int i = 0; i < levelDataLines.Length; i++)
-        {
-            for (int j = 0; j < levelDataLines[0].Split('*').Length; j++)
-            {
-                levelDataTable[i, j] = levelDataLines[i].Split('*')[j];
-                //Debug.Log(levelDataTable[i,j]);
-            }
-        }
-
-        return levelDataTable;
+        return levelsData;
     }
 
 }
