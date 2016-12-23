@@ -50,4 +50,29 @@ public class LevelsDataManager : MonoBehaviour
         return levelsData;
     }
 
+    public static int[] GetAllStarsFromWorld(string world)
+    {
+        int[] allStars = new int[2]; // [0] -> Owned Stars //[1] -> Max Stars
+        allStars[0] = 0;
+        allStars[1] = 0;
+
+        int levelCount = LevelManager.GetAllLevelStrings(world).Count; // Number of levels in World
+        allStars[1] = levelCount * 3; // Each level has 3 max stars
+
+        for (int i = 1; i <= levelCount; i++)
+        {
+            if (PlayerPrefs.HasKey(world+ "*" + i))
+            {
+                allStars[0] += System.Convert.ToInt32(PlayerPrefs.GetString(world + "*" + i).Split('*')[0]);
+            }
+            else
+            {
+                PlayerPrefs.SetString(world+i, "0*0");
+                allStars[0] += System.Convert.ToInt32(PlayerPrefs.GetString(world + "*" + i).Split('*')[0]);
+            }
+        }
+
+        return allStars;
+    }
+
 }

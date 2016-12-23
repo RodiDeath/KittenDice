@@ -367,6 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3535c55a8e84446a1d5606c99b2878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textAllStars: {fileID: 1242349630}
 --- !u!114 &84524325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -907,7 +908,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 262138267}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1390,6 +1391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3535c55a8e84446a1d5606c99b2878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textAllStars: {fileID: 1556970697}
 --- !u!114 &333981798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1747,7 +1749,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1919011679}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.44341367
+  m_Size: 0.44341376
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2500,6 +2502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3535c55a8e84446a1d5606c99b2878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textAllStars: {fileID: 126053601}
 --- !u!1 &776885225
 GameObject:
   m_ObjectHideFlags: 0
@@ -3817,6 +3820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3535c55a8e84446a1d5606c99b2878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textAllStars: {fileID: 1999957601}
 --- !u!114 &1267385219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4176,6 +4180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3535c55a8e84446a1d5606c99b2878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textAllStars: {fileID: 1371592696}
 --- !u!114 &1328169069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5091,6 +5096,11 @@ MonoBehaviour:
   dropdownLanguage: {fileID: 710210807}
   btnPlay: {fileID: 0}
   btnSettings: {fileID: 0}
+  btnProfile: {fileID: 0}
+  btnStatistics: {fileID: 0}
+  btnShop: {fileID: 0}
+  btnFacebook: {fileID: 0}
+  btnTwitter: {fileID: 0}
   MMLangManager: {fileID: 0}
 --- !u!1 &1620271447
 GameObject:
@@ -5258,6 +5268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3535c55a8e84446a1d5606c99b2878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textAllStars: {fileID: 1790695489}
 --- !u!114 &1626483741
 MonoBehaviour:
   m_ObjectHideFlags: 0

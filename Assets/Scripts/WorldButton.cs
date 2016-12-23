@@ -2,9 +2,20 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.UI;
 
 public class WorldButton : MonoBehaviour
 {
+    [SerializeField]
+    Text textAllStars;
+
+    void Start()
+    {
+        // Show all stars owned
+        int[] allStars = LevelsDataManager.GetAllStarsFromWorld(transform.name);
+        textAllStars.text = allStars[0] + " / " + allStars[1];
+    }
+
     public void LoadLevelSelector()
     {
         //Debug.Log("WorldSelected: " + transform.name);
