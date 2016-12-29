@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
 
     //Android
     private static bool usesPad = false;
+    private bool padPulsed = false;
+    private string mDir = "";
 
     [SerializeField]
     private float minSwipeDistY;
@@ -210,13 +212,26 @@ public class PlayerController : MonoBehaviour
 
                 isMoving = false;
 
+                if (padPulsed)
+                {
+                    if (mDir.Equals("up")) MoveUp();
+                    if (mDir.Equals("down")) MoveDown();
+                    if (mDir.Equals("right")) MoveRight();
+                    if (mDir.Equals("left")) MoveLeft();
+                }
+
             }
         }
         
     }
 
+    public void PulsedPad() { padPulsed = true; }
+    public void ReleasedPad() { padPulsed = false; }
+
     public void MoveRight()
     {
+        mDir = "right";
+        PulsedPad();
         if (!isDead && !hasWinned && !willWin)
         {
 
@@ -242,6 +257,8 @@ public class PlayerController : MonoBehaviour
 
     public void MoveLeft()
     {
+        mDir = "left";
+        PulsedPad();
         if (!isDead && !hasWinned && !willWin)
         {
 
@@ -267,6 +284,8 @@ public class PlayerController : MonoBehaviour
 
     public void MoveDown()
     {
+        mDir = "down";
+        PulsedPad();
         if (!isDead && !hasWinned && !willWin)
         {
 
@@ -294,6 +313,8 @@ public class PlayerController : MonoBehaviour
 
     public void MoveUp()
     {
+        mDir = "up";
+        PulsedPad();
         if (!isDead && !hasWinned && !willWin)
         {
 
