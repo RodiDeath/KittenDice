@@ -1,22 +1,40 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using System.Collections.Generic;
 using System;
 
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField]
-    Text textScore;
-    
+    static Text textActualScore;
+
+    [SerializeField]
+    Text textActualScoreAux;
+
+    [SerializeField]
+    Text textRecordScore;
+
+    static Dictionary<int, int> potencialScoreList;
+    static int potencialScoreId = 0;
+
+    public static int scoreRecord = 0;
+    public static int starsRecord = 0;
 
     public static int score = 0;
-    public static int stars = 0;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
-        stars = Convert.ToInt32(LevelsDataManager.GetLevelData(GameManager.world, GameManager.level)[0]);
-        score = Convert.ToInt32(LevelsDataManager.GetLevelData(GameManager.world, GameManager.level)[1]);
+        textActualScore = textActualScoreAux;
+
+        potencialScoreList = new Dictionary<int, int>();
+        potencialScoreId = 0;
+
+        starsRecord = Convert.ToInt32(LevelsDataManager.GetLevelData(GameManager.world, GameManager.level)[0]);
+        scoreRecord = Convert.ToInt32(LevelsDataManager.GetLevelData(GameManager.world, GameManager.level)[1]);
+
+        textRecordScore.text = scoreRecord.ToString();
+        textActualScore.text = "0";
     }
 	
 	// Update is called once per frame
@@ -26,6 +44,25 @@ public class ScoreManager : MonoBehaviour
         //UpdateStarsPanel();
 	}
 
+    public static void AddScore(int potId)
+    {
+        if (potencialScoreList.ContainsKey(potId))
+        {
+            score += potencialScoreList[potId];
+            textActualScore.text = score.ToString();
+
+            potencialScoreList.Remove(potId);
+        }
+    }
+
+    public static int AddPotencialScore(int potencialScore)
+    {
+        potencialScoreId++;
+        potencialScoreList.Add(potencialScoreId, potencialScore);
+
+        return potencialScoreId;
+    }
+
     public static void UpdateDataLevelInPanel(Transform panelStars, Text textScore)
     {
         UpdateStarsPanel(panelStars);
@@ -34,7 +71,7 @@ public class ScoreManager : MonoBehaviour
 
     private static void UpdateTextScore(Text txtScore)
     {
-        txtScore.text = score.ToString();
+        txtScore.text = scoreRecord.ToString();
     }
 
     private static void UpdateStarsPanel(Transform panelStars)
@@ -43,7 +80,7 @@ public class ScoreManager : MonoBehaviour
         Debug.Log("Funcion para: " + panelStars.name);
 
         //switch (levelDataTable[levelIndex - 1, 2])
-        switch (stars)
+        switch (starsRecord)
         {
             case 0:
                 c = 0;

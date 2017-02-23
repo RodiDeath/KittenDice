@@ -42,6 +42,8 @@ public class Dice : MonoBehaviour
     private float speed = 100f;
     private Vector3 previusPosition;
 
+    private int potencialScoreId = 0;
+
 
     void Awake()
     {
@@ -136,6 +138,15 @@ public class Dice : MonoBehaviour
         GetComponent<Animator>().SetTrigger("Activated");
         animationSpeed = upperFace;
         
+    }
+
+    void OnDestroy()
+    {
+        Debug.Log("Talolg: " + potencialScoreId);
+
+        ScoreManager.AddScore(potencialScoreId);
+
+
     }
 
     public void ResetTimerExplosion()
@@ -286,4 +297,7 @@ public class Dice : MonoBehaviour
 
     public bool GetActive() { return this.active; }
     public void SetActive(bool active) { this.active = active; }
+
+    public void SetPotencialScoreId(int id){ potencialScoreId = id;}
+    public int SetPotencialScoreId() { return potencialScoreId; }
 }

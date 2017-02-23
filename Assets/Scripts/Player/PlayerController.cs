@@ -212,6 +212,7 @@ public class PlayerController : MonoBehaviour
 
                 isMoving = false;
 
+#if !UNITY_EDITOR
                 if (padPulsed)
                 {
                     if (mDir.Equals("up")) MoveUp();
@@ -219,6 +220,7 @@ public class PlayerController : MonoBehaviour
                     if (mDir.Equals("right")) MoveRight();
                     if (mDir.Equals("left")) MoveLeft();
                 }
+#endif
 
             }
         }

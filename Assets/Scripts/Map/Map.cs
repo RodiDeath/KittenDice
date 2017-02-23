@@ -191,8 +191,20 @@ public class Map : MonoBehaviour
                 dice.Activate();
                 dice.ResetTimerExplosion();
             }
-        }
+           // Debug.Log("Hay " + diceList.Count + " dados de cara " + diceList[0].GetUpperFace().ToString());
 
+            /***********************************/
+            // Calcualte SCORE !!!!!!!!!!!!!!!
+            /***************************************/
+            int score = diceList.Count * diceList[0].GetUpperFace();
+
+            int potId = ScoreManager.AddPotencialScore(score);
+
+            foreach (var dice in diceList)
+            {
+                dice.SetPotencialScoreId(potId);
+            }
+        }
         
     }
 
