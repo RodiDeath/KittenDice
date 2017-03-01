@@ -21,6 +21,10 @@ public class ScoreManager : MonoBehaviour
     public static int starsRecord = 0;
 
     public static int score = 0;
+    public static int stars = 0;
+
+    private static int numberOfDice = 0;
+    private int maxScore = 0;
 
     // Use this for initialization
     void Start ()
@@ -34,6 +38,22 @@ public class ScoreManager : MonoBehaviour
         scoreRecord = Convert.ToInt32(LevelsDataManager.GetLevelData(GameManager.world, GameManager.level)[1]);
 
         textRecordScore.text = scoreRecord.ToString();
+        textActualScore.text = "0";
+
+        numberOfDice = FindObjectsOfType<Dice>().Length;
+        numberOfDice--;
+        maxScore = numberOfDice * 6 * 6;
+    }
+
+    public static bool IsNewRecord()
+    {
+        if (score > scoreRecord) return true;
+        else return false;
+    }
+
+    public static void ResetActualScore()
+    {
+        score = 0;
         textActualScore.text = "0";
     }
 	
@@ -52,6 +72,24 @@ public class ScoreManager : MonoBehaviour
             textActualScore.text = score.ToString();
 
             potencialScoreList.Remove(potId);
+
+
+            if (score >= numberOfDice * 5 * 5 * 100)
+            {
+                stars = 3;
+            }
+            else if (score >= numberOfDice * 3 * 3 * 100)
+            {
+                stars = 2;
+            }else
+            {
+                stars = 1;
+            }
+
+            if (stars > starsRecord) starsRecord = stars;
+
+            Debug.Log("Stars: " + stars);
+            Debug.Log("StarsRecord: " + starsRecord);
         }
     }
 
@@ -71,7 +109,7 @@ public class ScoreManager : MonoBehaviour
 
     private static void UpdateTextScore(Text txtScore)
     {
-        txtScore.text = scoreRecord.ToString();
+        txtScore.text = score.ToString();
     }
 
     private static void UpdateStarsPanel(Transform panelStars)

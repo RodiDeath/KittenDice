@@ -31,13 +31,21 @@ public class LevelSelectorManager : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        // TEST ONLY //
-        LevelsDataManager.SaveLevelData("Air", 1, 17000,3);
-        LevelsDataManager.SaveLevelData("Air", 2, 17500, 2);
-        LevelsDataManager.SaveLevelData("Air", 3, 18000, 1);
-        LevelsDataManager.SaveLevelData("Earth", 1, 25000, 0);
-        LevelsDataManager.SaveLevelData("Earth", 2, 60000, 3);
-        /**********************************************************/
+        //// TEST ONLY //
+        //LevelsDataManager.SaveLevelData("Air", 1, 17000,3);
+        //LevelsDataManager.SaveLevelData("Air", 2, 17500, 2);
+        //LevelsDataManager.SaveLevelData("Air", 3, 18000, 1);
+        //LevelsDataManager.SaveLevelData("Earth", 1, 25000, 0);
+        //LevelsDataManager.SaveLevelData("Earth", 2, 60000, 3);
+        ///**********************************************************/
+
+        //// TEST ONLY //
+        //LevelsDataManager.SaveLevelData("Air", 1, 0, 0);
+        //LevelsDataManager.SaveLevelData("Air", 2, 0, 0);
+        //LevelsDataManager.SaveLevelData("Air", 3, 0, 0);
+        //LevelsDataManager.SaveLevelData("Earth", 1, 0, 0);
+        //LevelsDataManager.SaveLevelData("Earth", 2, 0, 0);
+        ///**********************************************************/
 
 
         // Show all stars owned

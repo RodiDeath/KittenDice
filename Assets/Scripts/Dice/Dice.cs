@@ -145,8 +145,6 @@ public class Dice : MonoBehaviour
         Debug.Log("Talolg: " + potencialScoreId);
 
         ScoreManager.AddScore(potencialScoreId);
-
-
     }
 
     public void ResetTimerExplosion()

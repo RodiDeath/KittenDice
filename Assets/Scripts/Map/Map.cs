@@ -196,7 +196,8 @@ public class Map : MonoBehaviour
             /***********************************/
             // Calcualte SCORE !!!!!!!!!!!!!!!
             /***************************************/
-            int score = diceList.Count * diceList[0].GetUpperFace();
+            int score = diceList.Count * diceList[0].GetUpperFace() * diceList[0].GetUpperFace() * 100;
+
 
             int potId = ScoreManager.AddPotencialScore(score);
 

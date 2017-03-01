@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
     private GameObject gameOverPanel;
     [SerializeField]
     private GameObject completedPanel;
+    [SerializeField]
+    private GameObject newRecordMedal;
 
 
     public static string world = "Air";
@@ -177,6 +179,17 @@ public class GameManager : MonoBehaviour
     public void Completed()
     {
         completedPanel.SetActive(true);
+
+        if (ScoreManager.IsNewRecord())
+        {
+            newRecordMedal.SetActive(true);
+            LevelsDataManager.SaveLevelData(world, level, ScoreManager.score, ScoreManager.starsRecord);
+        }
+        else 
+        { 
+            newRecordMedal.SetActive(false);
+        }
+
         ScoreManager.UpdateDataLevelInPanel(completedPanel.transform.GetChild(0), completedPanel.transform.GetChild(1).GetComponent<Text>());
         Time.timeScale = 0;
         pauseButton.interactable = false;
@@ -191,6 +204,7 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1;
+        ScoreManager.ResetActualScore();
         SceneManager.LoadScene("Game");
         //lifesManager.LoseLife();
     }
@@ -198,6 +212,7 @@ public class GameManager : MonoBehaviour
     public void RestartLosingLife()
     {
         Time.timeScale = 1;
+        ScoreManager.ResetActualScore();
         SceneManager.LoadScene("Game");
         lifesManager.LoseLife();
     }
@@ -205,6 +220,7 @@ public class GameManager : MonoBehaviour
     public void Exit()
     {
         Time.timeScale = 1;
+        ScoreManager.ResetActualScore();
         SceneManager.LoadScene("MainMenu");
         lifesManager.LoseLife();
     }
@@ -214,6 +230,7 @@ public class GameManager : MonoBehaviour
         world = "Air"; //calcular si es el ultimo nivel del mundo
         level = level+1;
         Time.timeScale = 1;
+        ScoreManager.ResetActualScore();
         SceneManager.LoadScene("Game");
     }
 }

@@ -48,6 +48,11 @@ public class LevelsDataManager : MonoBehaviour
         levelsData = PlayerPrefs.GetString(world + "*" + level).Split('*');
 
         return levelsData;
+        //[0] -> World
+        //[1] -> Level
+        //[2] -> Score
+        //[3] -> Stars
+
     }
 
     public static int[] GetAllStarsFromWorld(string world)
@@ -73,6 +78,11 @@ public class LevelsDataManager : MonoBehaviour
         }
 
         return allStars;
+    }
+
+    public static void ResetAllScores()
+    {
+
     }
 
 }
