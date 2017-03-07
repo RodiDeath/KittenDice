@@ -45,6 +45,29 @@ public class PlayerController : MonoBehaviour
     //public bool buttonPressed = false;
 
 
+    public void RandomiceDiceBehind() // Magia 
+    {
+        int newUpperFace = diceBehind.GetUpperFace();
+        int newFrontFace = diceBehind.GetFrontFace();
+
+        while (newUpperFace == diceBehind.GetUpperFace())
+        {
+            newUpperFace = Random.Range(1, 7);
+        }
+
+        
+
+        while ((newFrontFace == diceBehind.GetFrontFace()) || (7 - newFrontFace == newUpperFace) || (newFrontFace == newUpperFace))
+        {
+            newFrontFace = Random.Range(1,7);
+        }
+
+
+        diceBehind.GetComponentInChildren<FaceDetector>().TurnDiceTo(newUpperFace, newFrontFace);
+
+        map.DetectEquals(diceBehind);
+    }
+
     // Use this for initialization
     void Start ()
     {
