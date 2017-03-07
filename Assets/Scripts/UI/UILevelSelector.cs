@@ -10,16 +10,16 @@ public class UILevelSelector : MonoBehaviour
 
     public void LoadLevel()
     {
-        if (LifesManager.lifes >= 1)
+        //if (LifesManager.lifes >= 1)
         {
             //GameManager.world = 1;
             GameManager.level = Convert.ToInt16(transform.name);
 
             SceneManager.LoadScene("Game");
         }
-        else
-        {
-            Debug.Log("No creeeo ehhh");
-        }
+        //else
+        //{
+        //    Debug.Log("No creeeo ehhh");
+        //}
     }
 }

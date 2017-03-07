@@ -73,7 +73,7 @@ public class Dice : MonoBehaviour
             {
                 map.RemoveDice(this);
                 map.DiceDestroyed();
-                Destroy(this.gameObject);
+                DestroyDice();
             }
 
             GetComponent<Animator>().speed = ((4 * animationSpeed) - timerExplosion) / 2;
@@ -140,11 +140,18 @@ public class Dice : MonoBehaviour
         
     }
 
-    void OnDestroy()
+    public void DestroyDice()
     {
         Debug.Log("Talolg: " + potencialScoreId);
-
         ScoreManager.AddScore(potencialScoreId);
+
+        Destroy(this.gameObject);
+
+    }
+
+    void OnDestroy()
+    {
+        
     }
 
     public void ResetTimerExplosion()

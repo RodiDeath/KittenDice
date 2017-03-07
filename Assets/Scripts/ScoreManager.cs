@@ -66,13 +66,14 @@ public class ScoreManager : MonoBehaviour
 
     public static void AddScore(int potId)
     {
+        
         if (potencialScoreList.ContainsKey(potId))
         {
             score += potencialScoreList[potId];
             textActualScore.text = score.ToString();
 
             potencialScoreList.Remove(potId);
-
+            
 
             if (score >= numberOfDice * 5 * 5 * 100)
             {

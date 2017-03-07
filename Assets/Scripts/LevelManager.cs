@@ -43,6 +43,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private int levelCount;
 
+    private bool infiniteTime = false;
+    private bool infiniteMoves = false;
+
     private bool timerActivated = false;
 
     // Map
@@ -57,13 +60,20 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private Text textLevelName;
 
+    [SerializeField]
+    private GameObject infiniteIconMoves;
+    [SerializeField]
+    private GameObject infiniteIconTime;
+
     // Use this for initialization
     void Start ()
     {
+        
+
         dice = GetComponent<Dice>();
         //LoadLevel(1);
-        textTime.text = timerCount.ToString("0");
-        textMoves.text = movements.ToString();
+        //textTime.text = timerCount.ToString("0");
+        //textMoves.text = movements.ToString();
         StartTimer();
 
         GetAllLevelStrings("Air");
@@ -116,6 +126,9 @@ public class LevelManager : MonoBehaviour
 
     public void LoadLevel(string world, int lvl)
     {
+        infiniteIconTime.SetActive(false);
+        infiniteIconMoves.SetActive(false);
+
         map.ResetBoard(); // Resets the map to all null
         levelName = "Level " + lvl;
         levelNumber = lvl;
@@ -218,9 +231,25 @@ public class LevelManager : MonoBehaviour
                 movements = Convert.ToInt32(levelDataString[4]);
                 movesCount = movements;
 
-                player.MoveTo(startPositionX, startPositionY);
                 textTime.text = timerCount.ToString("0");
                 textMoves.text = movesCount.ToString();
+
+                if (movements == 0)
+                {
+                    infiniteMoves = true;
+                    textMoves.text = "";
+                    infiniteIconMoves.SetActive(true);
+                }
+
+                if (time == 0)
+                {
+                    infiniteTime = true;
+                    textTime.text = "";
+                    infiniteIconTime.SetActive(true);
+                }
+
+                player.MoveTo(startPositionX, startPositionY);
+                
                 player.SetIsDead(false);
                 player.SetHasWinned(false);
                 player.SetWillWin(false);
@@ -236,7 +265,7 @@ public class LevelManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (timerActivated)
+        if (timerActivated && !infiniteTime)
         {
             timerCount -= Time.deltaTime;
             textTime.text = timerCount.ToString("0");
@@ -279,17 +308,21 @@ public class LevelManager : MonoBehaviour
 
     public bool PlayerMovedDice()
     {
-        movesCount--;
-        textMoves.text = movesCount.ToString();
-        if (movesCount <= 0)
+        if (!infiniteMoves)
         {
-            player.CheckWinLose();
+            movesCount--;
+            textMoves.text = movesCount.ToString();
 
-            if (!player.GetWillWin())
+            if (movesCount <= 0)
             {
-                PlayerDied();
-                player.SetIsDead(true);
-                return false;
+                player.CheckWinLose();
+
+                if (!player.GetWillWin())
+                {
+                    PlayerDied();
+                    player.SetIsDead(true);
+                    return false;
+                }
             }
         }
 
