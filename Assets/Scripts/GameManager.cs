@@ -221,8 +221,16 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         ScoreManager.ResetActualScore();
-        SceneManager.LoadScene("MainMenu");
         lifesManager.LoseLife();
+        SceneManager.LoadScene("MainMenu");
+        
+    }
+
+    public void ExitCompleted()
+    {
+        Time.timeScale = 1;
+        ScoreManager.ResetActualScore();
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void NextLevel()

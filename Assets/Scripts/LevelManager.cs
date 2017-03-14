@@ -23,6 +23,10 @@ public class LevelManager : MonoBehaviour
     private int startPositionX = 0, startPositionY = 0; // Start Position of the player
 
     [SerializeField]
+    private float timerSlowTime = 20.0f; // Time to finish the magic
+    [SerializeField]
+    private float timerSlowTimeCount = 0.0f; 
+    [SerializeField]
     private float time = 0.0f; // Time to finish the level
     [SerializeField]
     private float timerCount = 0.0f;
@@ -42,6 +46,15 @@ public class LevelManager : MonoBehaviour
     private int worldCount;
     [SerializeField]
     private int levelCount;
+    [SerializeField]
+    private Animator animMusic;
+
+    private bool timeSlowed = false;
+    private bool movesFrozen = false;
+    [SerializeField]
+    private int movesFrozenTotal = 10;
+    [SerializeField]
+    private int movesFrozenCount = 0;
 
     private bool infiniteTime = false;
     private bool infiniteMoves = false;
@@ -65,15 +78,21 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private GameObject infiniteIconTime;
 
+    [SerializeField]
+    private GameObject iceCubeTimeIcon;
+    [SerializeField]
+    private GameObject iceCubeMovesIcon;
+
     // Use this for initialization
     void Start ()
     {
-        
-
         dice = GetComponent<Dice>();
         //LoadLevel(1);
         //textTime.text = timerCount.ToString("0");
         //textMoves.text = movements.ToString();
+
+        iceCubeMovesIcon.SetActive(false);
+        iceCubeTimeIcon.SetActive(false);
         StartTimer();
 
         GetAllLevelStrings("Air");
@@ -267,7 +286,21 @@ public class LevelManager : MonoBehaviour
     {
         if (timerActivated && !infiniteTime)
         {
-            timerCount -= Time.deltaTime;
+            if (!timeSlowed)
+            {
+                timerCount -= Time.deltaTime;
+            }
+            else
+            {
+                timerCount -= (Time.deltaTime / 4);
+                timerSlowTimeCount += Time.deltaTime;
+                if (timerSlowTimeCount >= timerSlowTime)
+                {
+                    NormalizeTime();
+                    timerSlowTimeCount = 0.0f;
+                }
+            }
+
             textTime.text = timerCount.ToString("0");
 
             if (timerCount <= 0)
@@ -310,7 +343,20 @@ public class LevelManager : MonoBehaviour
     {
         if (!infiniteMoves)
         {
-            movesCount--;
+            if (!movesFrozen)
+            {
+                movesCount--;
+            }
+            else
+            {
+                movesFrozenCount++;
+
+                if (movesFrozenCount >= movesFrozenTotal)
+                {
+                    UnFreezeMoves();
+                }
+            }
+
             textMoves.text = movesCount.ToString();
 
             if (movesCount <= 0)
@@ -327,6 +373,44 @@ public class LevelManager : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void SlowTime()
+    {
+        if (!timeSlowed)
+        {
+            timeSlowed = true;
+            animMusic.SetTrigger("SlowTime");
+            iceCubeTimeIcon.SetActive(true);
+        }
+        //else
+        //{
+        //    timeSlowed = false;
+        //    animMusic.SetTrigger("NormalTime");
+        //}
+    }
+
+    public void NormalizeTime()
+    {
+        timeSlowed = false;
+        animMusic.SetTrigger("NormalTime");
+        iceCubeTimeIcon.SetActive(false);
+    }
+
+    public void FreezeMoves()
+    {
+        if (!movesFrozen)
+        {
+            movesFrozen = true;
+            iceCubeMovesIcon.SetActive(true);
+        }
+    }
+
+    public void UnFreezeMoves()
+    {
+        movesFrozen = false;
+        iceCubeMovesIcon.SetActive(false);
+        movesFrozenCount = 0;
     }
 
     public void StartTimer() { timerActivated = true; }
@@ -347,4 +431,6 @@ public class LevelManager : MonoBehaviour
 
     public int GetBoardHeight() { return levelHeight;}
     public int GetBoardWidth() { return levelWidth; }
+    public bool GetTimeSlowed() { return timeSlowed; }
+    public void SetTimeSlowed(bool ts) { timeSlowed = ts; }
 }

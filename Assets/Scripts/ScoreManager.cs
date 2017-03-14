@@ -26,6 +26,7 @@ public class ScoreManager : MonoBehaviour
     private static int numberOfDice = 0;
     private int maxScore = 0;
 
+
     // Use this for initialization
     void Start ()
     {
@@ -97,6 +98,7 @@ public class ScoreManager : MonoBehaviour
     public static int AddPotencialScore(int potencialScore)
     {
         potencialScoreId++;
+        
         potencialScoreList.Add(potencialScoreId, potencialScore);
 
         return potencialScoreId;
