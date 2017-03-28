@@ -20,6 +20,12 @@ public class PlayerController : MonoBehaviour
     private int coorX, coorY;
     private int destX, destY;
 
+    [SerializeField]
+    GameObject panelChangeDiceValue;
+    [SerializeField]
+    Button[] buttonsDiceFace;
+
+    private bool cantMove = false;
     private bool isMoving = false;
     private string moveDirection = "";
 
@@ -71,11 +77,55 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void ShowPanelChangeDiceValue() // Magia
+    {
+        if (!isMoving && !diceBehind.GetIsMoving())
+        {
+            cantMove = true;
+            foreach (var face in buttonsDiceFace)
+            {
+                face.interactable = true;
+            }
+            buttonsDiceFace[diceBehind.GetUpperFace()-1].interactable = false;
+            panelChangeDiceValue.SetActive(true);
+        }
+    }
+
+    public void ClosePanelChangeDiceValue()
+    {
+        cantMove = false;
+       
+        panelChangeDiceValue.SetActive(false);
+    }
+
+    public void TransformDiceBehind(int value) // Magia 
+    {
+        if (!isMoving && !diceBehind.GetIsMoving())
+        {
+            int newUpperFace = value;
+            int newFrontFace = diceBehind.GetFrontFace();
+
+            while ((newFrontFace == diceBehind.GetFrontFace()) || (7 - newFrontFace == newUpperFace) || (newFrontFace == newUpperFace))
+            {
+                newFrontFace = Random.Range(1, 7);
+            }
+
+            diceBehind.GetComponentInChildren<FaceDetector>().TurnDiceTo(newUpperFace, newFrontFace);
+
+            map.DetectEquals(diceBehind);
+
+            panelChangeDiceValue.SetActive(false);
+            cantMove = false;
+        }
+    }
+
     // Use this for initialization
     void Start ()
     {
         if (Storage.GetControls().Equals(StorageKeys.Pad)) usesPad = true;
         else usesPad = false;
+
+        panelChangeDiceValue.SetActive(false);
 
         // TEST ONLY
         map = FindObjectOfType<Map>();
@@ -156,7 +206,7 @@ public class PlayerController : MonoBehaviour
 
         //if (!buttonPressed)
         {
-            if (!isDead && !hasWinned && !willWin)
+            if (!isDead && !hasWinned && !willWin && !cantMove)
             {
                 if (!isMoving /*&& !diceBehind.GetIsMoving()*/)
                 {
