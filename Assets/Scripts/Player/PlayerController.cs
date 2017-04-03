@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void ClosePanelChangeDiceValue()
+    public void ClosePanelChangeDiceValue() // Magia
     {
         cantMove = false;
        

@@ -375,19 +375,22 @@ public class LevelManager : MonoBehaviour
         return true;
     }
 
-    public void SlowTime()
+    public bool SlowTime()
     {
         if (!timeSlowed)
         {
             timeSlowed = true;
             animMusic.SetTrigger("SlowTime");
             iceCubeTimeIcon.SetActive(true);
+            textTime.color = new Color(60f/255f,200f/255f,1f, 1f);
+            return true;
         }
-        //else
-        //{
+        else
+        {
+            return false;
         //    timeSlowed = false;
         //    animMusic.SetTrigger("NormalTime");
-        //}
+        }
     }
 
     public void NormalizeTime()
@@ -395,15 +398,23 @@ public class LevelManager : MonoBehaviour
         timeSlowed = false;
         animMusic.SetTrigger("NormalTime");
         iceCubeTimeIcon.SetActive(false);
+        textTime.color = new Color(1f, 1f, 1f, 1f);
     }
 
-    public void FreezeMoves()
+    public bool FreezeMoves()
     {
         if (!movesFrozen)
         {
             movesFrozen = true;
             iceCubeMovesIcon.SetActive(true);
+            textMoves.color = new Color(60f / 255f, 200f / 255f, 1f, 1f);
+            return true;
         }
+        else
+        {
+            return false;
+        }
+
     }
 
     public void UnFreezeMoves()
@@ -411,6 +422,7 @@ public class LevelManager : MonoBehaviour
         movesFrozen = false;
         iceCubeMovesIcon.SetActive(false);
         movesFrozenCount = 0;
+        textMoves.color = new Color(1f, 1f, 1f, 1f);
     }
 
     public void StartTimer() { timerActivated = true; }
