@@ -22,6 +22,9 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     Button btnTwitter;
 
+    [SerializeField]
+    GameObject panelShop;
+
     // Use this for initialization
     void Start ()
     {
@@ -46,6 +49,17 @@ public class MainMenuManager : MonoBehaviour
 
         panelSettings.SetActive(true);
         panelSettings.GetComponent<UISettingsManager>().LoadSettings();
+    }
+
+
+    public void ShowShop()
+    {
+        panelShop.SetActive(true);
+    }
+
+    public void HideShop()
+    {
+        panelShop.SetActive(false);
     }
 
 }

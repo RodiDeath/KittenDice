@@ -21,6 +21,14 @@ public class MagicSpellManager : MonoBehaviour
         magicSpell = GetComponent<MagicSpell>();
     }
 
+    
+
+
+
+
+
+
+
     public void RandomiceDiceBehind()
     {
         if (CanBuy())
@@ -77,6 +85,6 @@ public class MagicSpellManager : MonoBehaviour
 
     private void ChargeCost()
     {
-        currencyManager.QuitCrystals(magicSpell.GetCost());
+        magicSpell.ChargeSpell();
     }
 }
