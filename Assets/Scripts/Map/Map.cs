@@ -151,7 +151,18 @@ public class Map : MonoBehaviour
     public void CreateDice(Dice dice)
     {
         GameObject newDice = Instantiate(dicePrefab, new Vector3(dice.GetDiceCoorX(), 0.5f, dice.GetDiceCoorY()), Quaternion.identity) as GameObject;
+
+        if (dice.GetInamovible())
+        {
+            Material iSkin = (Material)Resources.Load("Materials/Inamovible") as Material;
+            newDice.gameObject.GetComponent<Renderer>().material = iSkin;
+        }
+
+
         Dice newDiceScript = newDice.GetComponent<Dice>();
+
+        newDiceScript.SetInamovible(dice.GetInamovible());
+
         newDiceScript.SetDiceCoorX(dice.GetDiceCoorX());
         newDiceScript.SetDiceCoorY(dice.GetDiceCoorY());
         

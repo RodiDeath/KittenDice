@@ -215,6 +215,11 @@ public class LevelManager : MonoBehaviour
                         case '6':
                             dice.SetUpperFace(6);
                             break;
+
+                        case 'i':
+                            dice.SetUpperFace(1);
+                            dice.SetInamovible(true);
+                            break;
                     }
                     
 

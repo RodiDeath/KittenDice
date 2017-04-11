@@ -16,7 +16,7 @@ public class MagicSpell : MonoBehaviour
 
     private int amount = 0;
 
-    private int totalSpells = 4;
+    private static int totalSpells = 4;
 
     private static bool init = false;
 
@@ -90,7 +90,30 @@ public class MagicSpell : MonoBehaviour
     }
 
 
+    public static void AddSpell(int spellIndex, int amountSpells)
+    {
+        int amountBefore;
 
+        string[] spellsString = PlayerPrefs.GetString("spells").Split('#');
+
+        amountBefore = Int32.Parse( spellsString[spellIndex]);// = amount.ToString();
+        amountBefore += amountSpells;
+
+        spellsString[spellIndex] = amountBefore.ToString();
+
+        string newSpellString = "";
+
+        for (int i = 0; i < spellsString.Length; i++)
+        {
+            newSpellString += spellsString[i];
+
+            if (i <= totalSpells - 2) newSpellString += "#";
+        }
+
+        PlayerPrefs.SetString("spells", newSpellString);
+
+
+    }
 
     public void SetCost(int c) { cost = c; }
     public int GetCost() { return cost; }

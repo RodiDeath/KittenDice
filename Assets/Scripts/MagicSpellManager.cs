@@ -77,7 +77,7 @@ public class MagicSpellManager : MonoBehaviour
 
     private bool CanBuy()
     {
-        if (currencyManager.HasEnoughCrystals(magicSpell.GetCost()))
+        if (magicSpell.GetAmount() > 0)
             return true;
         else
             return false;

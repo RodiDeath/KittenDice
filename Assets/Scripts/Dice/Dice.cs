@@ -45,6 +45,10 @@ public class Dice : MonoBehaviour
     private int potencialScoreId = 0;
 
 
+    // Type
+    [SerializeField]
+    private bool inamovible = false;
+
     void Awake()
     {
         diceCoorX = 0;
@@ -305,4 +309,7 @@ public class Dice : MonoBehaviour
 
     public void SetPotencialScoreId(int id){ potencialScoreId = id;}
     public int SetPotencialScoreId() { return potencialScoreId; }
+
+    public bool GetInamovible() { return inamovible; }
+    public void SetInamovible(bool i) { inamovible = i; }
 }
