@@ -217,7 +217,7 @@ public class LevelManager : MonoBehaviour
                             break;
 
                         case 'i':
-                            dice.SetUpperFace(1);
+                            dice.SetUpperFace(7);
                             dice.SetInamovible(true);
                             break;
                     }

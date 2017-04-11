@@ -120,7 +120,11 @@ public class Map : MonoBehaviour
         {
             grid[dice.GetDiceCoorX(), dice.GetDiceCoorY()] = dice;
             DetectEquals(dice);
-            diceCount++;
+
+            if (!dice.GetInamovible())
+            {
+                diceCount++;
+            }
 
         }
     }
