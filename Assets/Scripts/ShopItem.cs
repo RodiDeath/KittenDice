@@ -67,16 +67,52 @@ public class ShopItem : MonoBehaviour
                     case 1: // Crystals
                         break;
                     case 2: // Spell 0
+                        if (currencyManager.HasEnoughCoins(cost))
+                        {
+                            currencyManager.QuitCoins(cost);
+                            MagicSpell.AddSpell(0, amountBought);
+                            Debug.Log("Cobrados " + cost + " monedas.");
+                        }
                         break;
                     case 3: // Spell 1
+                        if (currencyManager.HasEnoughCoins(cost))
+                        {
+                            currencyManager.QuitCoins(cost);
+                            MagicSpell.AddSpell(1, amountBought);
+                            Debug.Log("Cobrados " + cost + " monedas.");
+                        }
                         break;
                     case 4: // Spell 2
+                        if (currencyManager.HasEnoughCoins(cost))
+                        {
+                            currencyManager.QuitCoins(cost);
+                            MagicSpell.AddSpell(2, amountBought);
+                            Debug.Log("Cobrados " + cost + " monedas.");
+                        }
                         break;
                     case 5: // Spell 3
+                        if (currencyManager.HasEnoughCoins(cost))
+                        {
+                            currencyManager.QuitCoins(cost);
+                            MagicSpell.AddSpell(3, amountBought);
+                            Debug.Log("Cobrados " + cost + " monedas.");
+                        }
                         break;
                     case 6: // Spell 4
+                        if (currencyManager.HasEnoughCoins(cost))
+                        {
+                            currencyManager.QuitCoins(cost);
+                            MagicSpell.AddSpell(4, amountBought);
+                            Debug.Log("Cobrados " + cost + " monedas.");
+                        }
                         break;
                     case 7: // Spell 5
+                        if (currencyManager.HasEnoughCoins(cost))
+                        {
+                            currencyManager.QuitCoins(cost);
+                            MagicSpell.AddSpell(5, amountBought);
+                            Debug.Log("Cobrados " + cost + " monedas.");
+                        }
                         break;
                 }
                 break;
@@ -102,14 +138,44 @@ public class ShopItem : MonoBehaviour
                         }
                         break;
                     case 3: // Spell 1
+                        if (currencyManager.HasEnoughCrystals(cost))
+                        {
+                            currencyManager.QuitCrystals(cost);
+                            MagicSpell.AddSpell(1, amountBought);
+                            Debug.Log("Cobrados " + cost + " cristales.");
+                        }
                         break;
                     case 4: // Spell 2
+                        if (currencyManager.HasEnoughCrystals(cost))
+                        {
+                            currencyManager.QuitCrystals(cost);
+                            MagicSpell.AddSpell(2, amountBought);
+                            Debug.Log("Cobrados " + cost + " cristales.");
+                        }
                         break;
                     case 5: // Spell 3
+                        if (currencyManager.HasEnoughCrystals(cost))
+                        {
+                            currencyManager.QuitCrystals(cost);
+                            MagicSpell.AddSpell(3, amountBought);
+                            Debug.Log("Cobrados " + cost + " cristales.");
+                        }
                         break;
                     case 6: // Spell 4
+                        if (currencyManager.HasEnoughCrystals(cost))
+                        {
+                            currencyManager.QuitCrystals(cost);
+                            MagicSpell.AddSpell(4, amountBought);
+                            Debug.Log("Cobrados " + cost + " cristales.");
+                        }
                         break;
                     case 7: // Spell 5
+                        if (currencyManager.HasEnoughCrystals(cost))
+                        {
+                            currencyManager.QuitCrystals(cost);
+                            MagicSpell.AddSpell(5, amountBought);
+                            Debug.Log("Cobrados " + cost + " cristales.");
+                        }
                         break;
                 }
                 break;
